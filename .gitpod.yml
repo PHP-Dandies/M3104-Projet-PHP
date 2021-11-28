@@ -4,3 +4,6 @@ ports:
 tasks:
 - name: LAMP
   init: docker run -p "8080:80" -v ${PWD}/www:/app mattrayner/lamp:latest-2004-php8
+
+- name: perms
+  init: sudo chmod 777 -R www
