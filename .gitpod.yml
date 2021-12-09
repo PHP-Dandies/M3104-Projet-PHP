@@ -1,3 +1,4 @@
+
 ports:
 - port: 8080
   onOpen: open-preview
@@ -7,3 +8,7 @@ tasks:
 
 - name: perms
   init: sudo chmod 777 -R www
+
+vscode:
+  extensions:
+    - hansuxdev.bootstrap5-snippets
