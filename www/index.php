@@ -3,6 +3,7 @@ include 'utils.inc.php';
 start_page();
 ?>
 
+
 <h1>Voici les idées actuelles.</h1>
 		<p>Exemples uwu :</p>
        
@@ -57,6 +58,8 @@ start_page();
   </div>
   <img src="http://ekladata.com/pEGj8d3WVbJc-8gEahiQ03t2TLY.png" class="card-img-bottom" alt="...">
 </div>
+
+
 <?php
     end_page();
 ?>
