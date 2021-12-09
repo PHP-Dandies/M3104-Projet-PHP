@@ -6,7 +6,7 @@ start_page();
 <h1>Voici les idées actuelles.</h1>
 		<p>Exemples uwu :</p>
        
-<div class="card">
+<div class="card" name="card1">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -23,7 +23,7 @@ start_page();
   </div>
   <img src="http://ekladata.com/pEGj8d3WVbJc-8gEahiQ03t2TLY.png" class="card-img-bottom" alt="...">
 </div>
-<div class="card">
+<div class="card" name="card2">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -40,7 +40,7 @@ start_page();
   </div>
   <img src="http://ekladata.com/pEGj8d3WVbJc-8gEahiQ03t2TLY.png" class="card-img-bottom" alt="...">
 </div>
-<div class="card">
+<div class="card" name="card3">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
