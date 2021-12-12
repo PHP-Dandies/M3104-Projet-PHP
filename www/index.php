@@ -5,7 +5,7 @@ start_page();
 
 
 <h1>Voici les idées actuelles.</h1>
-		<p>Exemples uwu :</p>
+		<p>Exemples uwu et awa:</p>
        
 <div class="card" name="card1">
   <div class="card-body">
