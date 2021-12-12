@@ -7,5 +7,6 @@ Lien du site web auto-updaté (toutes les 10 minutes) : [php.ozeliurs.com](https
 ## Mysql
 Accès a la base de données mysql:
  - hostname : ludan.ddns.net
+ - nom de la base a utiliser : PHP
  - user : PHP
  - password : Gca7gPeAU9bU
