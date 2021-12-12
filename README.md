@@ -2,4 +2,8 @@
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/PHP-Dandies/M3104-Projet-PHP)
 
-Lien du site web auto-updaté : [projet-php-dut.herokuapp.com](https://projet-php-dut.herokuapp.com/)
+Lien du site web auto-updaté (toutes les 10 minutes) : [php.ozeliurs.com](https://php.ozeliurs.com/)
+Accès a la base de données mysql:
+ - hostname : ludan.ddns.net
+ - user : PHP
+ - password : Gca7gPeAU9bU
