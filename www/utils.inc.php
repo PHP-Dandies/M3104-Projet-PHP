@@ -39,7 +39,7 @@ function start_page()
         </li>
       </ul>
       <form class="d-flex">
-        <button class="btn btn-outline-success" type="submit" href="" target "_blank">Login</button>
+        <button class="btn btn-outline-success" type="submit" href="login.php" target "_blank">Login</button>
       </form>
     </div>
   </div>
