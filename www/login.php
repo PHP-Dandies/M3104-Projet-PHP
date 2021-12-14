@@ -1,3 +1,7 @@
+<?php
+include 'utils.inc.php';
+start_page();
+?>
 <h3>oh faut créer un compte ta mère là :<h3>
 
 <div class="input-group mb-3">
