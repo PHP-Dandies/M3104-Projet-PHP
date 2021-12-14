@@ -4,6 +4,9 @@
 
 Lien du site web auto-updaté (toutes les 10 minutes) : [php.ozeliurs.com](https://php.ozeliurs.com/)
 
+[Validation du HTML](https://validator.w3.org/nu/?doc=https%3A%2F%2Fphp.ozeliurs.com%2F)
+[Validation du CSS](http://jigsaw.w3.org/css-validator/validator?uri=php.ozeliurs.com)
+
 ## Mysql
 Accès a la base de données mysql:
  - hostname : ludan.ddns.net
