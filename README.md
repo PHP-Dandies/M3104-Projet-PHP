@@ -10,3 +10,6 @@ Accès a la base de données mysql:
  - nom de la base a utiliser : PHP
  - user : PHP
  - password : Gca7gPeAU9bU
+
+ - user : test
+ - password : password
