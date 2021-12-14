@@ -2,8 +2,6 @@
 include 'utils.inc.php';
 start_page();
 ?>
-
-
 <h1>Voici les idées actuelles.</h1>
 		<p>Exemples uwu et awa:</p>
        
