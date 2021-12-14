@@ -1,6 +1,7 @@
 <?php
 include 'utils.inc.php';
 start_page();
+nav_bar();
 ?>
 <h1>Voici les idées actuelles.</h1>
 		<p>Exemples uwu et awa:</p>
