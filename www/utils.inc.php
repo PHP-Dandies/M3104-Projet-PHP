@@ -40,7 +40,7 @@ function nav_bar()
           </ul>
       </ul>
       <form class="d-flex">
-        <button class="btn btn-outline-success" type="submit" href="login.php" target"_blank">Login</button>
+        <button class="btn btn-outline-success" type="submit" href="###">Login</button>
       </form>
     </div>
   </div>
