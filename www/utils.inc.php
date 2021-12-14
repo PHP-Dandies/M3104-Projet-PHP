@@ -33,10 +33,6 @@ function start_page()
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Link</a>
-        </li>
       </ul>
       <form class="d-flex">
         <button class="btn btn-outline-success" type="submit" onclick="window.location.href = "login.php">Login</button>
