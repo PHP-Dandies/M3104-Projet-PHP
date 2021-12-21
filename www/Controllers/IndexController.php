@@ -28,6 +28,7 @@ class IndexController extends Controller
     public function update()
     {
         return 'update';
+
     }
 
     public function delete()
