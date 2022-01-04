@@ -1,15 +1,22 @@
 <?php
+
+define('PROJECT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+define('SITE_URL', $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+
+var_dump(PROJECT_PATH);
+var_dump(SITE_URL);
+
 require_once 'utils.inc.php';
 
 start_page();
 
-include 'AutoLoader.php';
+include 'Utils/AutoLoader.php';
 
 $action = $_GET['action'] ?? null;
-$controllerName = $_GET['controller'] ?? 'index' . 'Controller';
+$controllerName = $_GET['controller'] ?? 'Index' . 'Controller';
 
 if (!class_exists($controllerName)) {
-    $controllerName = 'indexController';
+    $controllerName = 'IndexController';
 }
 
 $response = null;
@@ -25,11 +32,9 @@ try {
     };
 
 } catch (Exception $ex) {
-    echo $ex->getMessage();
+    echo 'prout' . $ex->getMessage();
     die();
 }
-
-var_dump($response);
 
 end_page();
 

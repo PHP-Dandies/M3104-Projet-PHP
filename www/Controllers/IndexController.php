@@ -1,7 +1,6 @@
 <?php
 include 'AutoLoader.php';
 
-
 class IndexController extends Controller
 {
     public function create()
@@ -16,13 +15,21 @@ class IndexController extends Controller
 
     public function read()
     {
-        $books = array(
-            new book('title1', 'at1', 'A', 23),
-            new book('title2', 'at2', 'B', 21),
-            new book('title3', 'at3', 'C', 231),
-            new book('title4', 'at4', 'D', 12414)
+        $utilisateur = 'caca';
+
+        return ViewHelper::display(
+            $this,
+            'read',
+            array('utilisateur', $utilisateur)
         );
-        return $books;
+        /*
+        return array(
+            new Book('title1', 'at1', 'A', 23),
+            new Book('title2', 'at2', 'B', 21),
+            new Book('title3', 'at3', 'C', 231),
+            new Book('title4', 'at4', 'D', 12414)
+        );
+        */
     }
 
     public function update()
