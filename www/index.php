@@ -1,64 +1,23 @@
 <?php
-include 'utils.inc.php';
-start_page();
-nav_bar();
-?>
-<h1>Voici les idées actuelles.</h1>
-		<p>Exemples uwu et awa:</p>
-       
-<div class="card" name="card1">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">An item</li>
-    <li class="list-group-item">A second item</li>
-    <li class="list-group-item">A third item</li>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div>
-  <img src="http://ekladata.com/pEGj8d3WVbJc-8gEahiQ03t2TLY.png" class="card-img-bottom" alt="...">
-</div>
-<div class="card" name="card2">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">An item</li>
-    <li class="list-group-item">A second item</li>
-    <li class="list-group-item">A third item</li>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div>
-  <img src="http://ekladata.com/pEGj8d3WVbJc-8gEahiQ03t2TLY.png" class="card-img-bottom" alt="...">
-</div>
-<div class="card" name="card3">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">An item</li>
-    <li class="list-group-item">A second item</li>
-    <li class="list-group-item">A third item</li>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div>
-  <img src="http://ekladata.com/pEGj8d3WVbJc-8gEahiQ03t2TLY.png" class="card-img-bottom" alt="...">
-</div>
+require 'cache.php';
 
+// On instancie un nouvel objet cache et on lui passe en paramètre
+// le nom de la page. Ce nom doit être unique pour chaque page car il va
+// générer un fichier du même nom.
+$cache = new Cache('index');
 
-<?php
-    end_page();
+// Si le cache est à jour, la méthode cacheView() l'affiche et le reste du
+// code est ignoré.
+$cache->cache_view();
+
+// La méthode startBuffer(), enregistre tout ce qui suit en mémoire tampon.
+$cache->start_buffer();
+
+// Ici on affiche le code de la page, les requêtes SQL, etc.
+echo 'Le corps de ma page';
+
+// La page est finie, on enregistre tout le contenu qu'elle génère.
+$cache->end_buffer();
+
+echo 'Version sans cache !';
 ?>
