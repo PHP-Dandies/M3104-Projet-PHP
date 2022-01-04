@@ -2,11 +2,11 @@
 
 abstract class Controller
 {
-    public abstract function create();
+    abstract public function create();
 
-    public abstract function read();
+    abstract public function read();
 
-    public abstract function update();
+    abstract public function update();
 
-    public abstract function delete();
+    abstract public function delete();
 }
