@@ -24,7 +24,7 @@ navbar();
                         <div class="inputBox">
                             <input type="submit" value="Login">
                         </div>
-                        <p class="forget">Mot de passe oublié ? <a href="#">Clique Ici</a> </p>
+                        <p class="forget">Mot de passe oublié ? <a href="PasswordChangeView.php">Clique Ici</a> </p>
                     </form>
                 </div>
             </div>
