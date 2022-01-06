@@ -25,14 +25,13 @@ navbar();
                         </div><br>
                         <label>Confirmation du mot de passe</label>
                         <div class="inputBox">
-                            <input type="password"placeholder="Confirmation du mot de passe">
+                            <input type="password" placeholder="Confirmation du mot de passe">
                         </div>
                         <div class="inputBox">
                             <input type="submit" value="Change">
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </section>
