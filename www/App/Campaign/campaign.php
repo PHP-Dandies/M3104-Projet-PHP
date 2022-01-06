@@ -27,14 +27,6 @@ class campaign {
     }
 
     /**
-     * @param mixed $id
-     */
-    public function set_id(string $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return string
      */
     public function get_name(): string
