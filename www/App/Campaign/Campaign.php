@@ -5,7 +5,7 @@ const NAME = 'TITLE';
 const BEG_DATE = 'BEG_DATE';
 const END_DATE = 'END_DATE';
 
-class campaign {
+class Campaign {
     private string $id;
     private string $name;
     private string $beg_date;
@@ -21,31 +21,39 @@ class campaign {
     /**
      * @return string
      */
-    public function get_id(): string
+    public function getId(): string
     {
         return $this->id;
     }
 
     /**
+     * @param string $id
+     */
+    public function setId(string $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return string
      */
-    public function get_name(): string
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
-    public function set_name(mixed $name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function get_beg_date(): string
+    public function getBegDate(): string
     {
         return $this->beg_date;
     }
@@ -53,7 +61,7 @@ class campaign {
     /**
      * @param string $beg_date
      */
-    public function set_beg_date(string $beg_date): void
+    public function setBegDate(string $beg_date): void
     {
         $this->beg_date = $beg_date;
     }
@@ -61,7 +69,7 @@ class campaign {
     /**
      * @return string
      */
-    public function get_end_date(): string
+    public function getEndDate(): string
     {
         return $this->end_date;
     }
@@ -69,7 +77,7 @@ class campaign {
     /**
      * @param string $end_date
      */
-    public function set_end_date(string $end_date): void
+    public function setEndDate(string $end_date): void
     {
         $this->end_date = $end_date;
     }
