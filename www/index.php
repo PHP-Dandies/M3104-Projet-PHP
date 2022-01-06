@@ -1,40 +1,23 @@
 <?php
+require 'cache.php';
 
-define('PROJECT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
-define('SITE_URL', $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+// On instancie un nouvel objet cache et on lui passe en paramètre
+// le nom de la page. Ce nom doit être unique pour chaque page car il va
+// générer un fichier du même nom.
+$cache = new Cache('index');
 
-var_dump(PROJECT_PATH);
-var_dump(SITE_URL);
+// Si le cache est à jour, la méthode cacheView() l'affiche et le reste du
+// code est ignoré.
+$cache->cache_view();
 
-require_once 'utils.inc.php';
+// La méthode startBuffer(), enregistre tout ce qui suit en mémoire tampon.
+$cache->start_buffer();
 
-start_page();
+// Ici on affiche le code de la page, les requêtes SQL, etc.
+echo 'Le corps de ma page';
 
-include 'Utils/AutoLoader.php';
+// La page est finie, on enregistre tout le contenu qu'elle génère.
+$cache->end_buffer();
 
-$action = $_GET['action'] ?? null;
-$controllerName = $_GET['controller'] ?? 'Index' . 'Controller';
-
-if (!class_exists($controllerName)) {
-    $controllerName = 'IndexController';
-}
-
-$response = null;
-
-try {
-    $controller = new $controllerName();
-
-    $response = match ($action) {
-        'create' => $controller->create(),
-        'update' => $controller->update(),
-        'delete' => $controller->delete(),
-        default => $controller->read()
-    };
-
-} catch (Exception $ex) {
-    echo 'prout' . $ex->getMessage();
-    die();
-}
-
-end_page();
-
+echo 'Version sans cache !';
+?>
