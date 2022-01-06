@@ -1,12 +1,12 @@
 <?php
-
 function start_page($title)
 {
     echo '<!DOCTYPE html>'.PHP_EOL;
-    echo '<html lang="en">'.PHP_EOL;
+    echo '<html lang="fr">'.PHP_EOL;
     echo '<head>'.PHP_EOL;
     echo '    <meta charset="UTF-8">'.PHP_EOL;
     echo '    <link rel="stylesheet" href="https://unpkg.com/chota@latest">'.PHP_EOL;
+    echo '    <link rel="stylesheet" href="/PhP_Dandies/www/style.css" type="text/css" media="all">'.PHP_EOL;
     echo '    <title>'.$title.'</title>'.PHP_EOL;
     echo '</head>'.PHP_EOL;
     echo '<body style="min-height: 100vh">'.PHP_EOL;

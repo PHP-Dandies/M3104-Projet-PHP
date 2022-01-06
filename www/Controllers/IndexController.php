@@ -1,5 +1,20 @@
 <?php
 <<<<<<< HEAD
+    class IndexController {
+        public function __construct()
+        {
+        }
+
+        public function index(){
+            $db = new Database();
+            $sql = "SELECT * FROM user WHERE LOGIN = 'TEST ABC' AND PASSWORD = 'TEST'";
+            $result = $db->execQuery($sql);
+            $utlisateur = new UserModel($result[0]['LOGIN']);
+
+            return ViewHelper::Display($this,'Index', array('utilisateur' => $utlisateur));
+        }
+    }
+=======
 include 'AutoLoader.php';
 
 class IndexController extends Controller
@@ -44,11 +59,7 @@ class IndexController extends Controller
         return 'delete';
     }
 }
-=======
-    class IndexController {
-        public function __construct()
-        {
-        }
+>>>>>>> Charriot
 
         public function index(){
             $db = new Database();
