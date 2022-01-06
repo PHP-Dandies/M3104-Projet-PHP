@@ -27,14 +27,9 @@ $campaigns = array(array('CAMPAIGN_ID'  => 1,'TITLE' => 'JSP', 'BEG_DATE' => '20
         <details class="text-center" class=dropdown>
             <summary  class="button success">Créer une nouvelle Campagne  ↓ </summary>
             <div class=card>
-                <p><a>
-                        <input type="text" placeholder="Entrez le nom de votre nouvelle campagne">
-                    </a></p>
-                <p><a class="text-success">Date du début de cette nouvelle campagne :<?php
-                        $date = date (Y-m-d);
-                        echo '$date';
-                        ?></a></p>
-                <p><a class="text-error">Date fin de cette nouvelle campagne : DateFin</a></p>
+                <p><input type="text" maxlength="25" placeholder="Entrez le nom de votre nouvelle campagne"></p>
+                <p class="text-success"> Sélectionner le début de la campagne : <input type="date" class="text-success" ></p>
+                <p class="text-error">Sélectionner la fin de la campagne : <input type="date" class="text-error"></p>
                 <p><a>
                         <button class="button success" >Enregistrer</button>
                     </a></p>
