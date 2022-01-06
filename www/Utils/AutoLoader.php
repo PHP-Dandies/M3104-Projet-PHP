@@ -2,6 +2,12 @@
 spl_autoload_register(function ($name) {
     $project_dir = dirname(__DIR__);
 
+    foreach (glob("./Utils/*.php") as $file_name) {
+        if (strpos($file_name, 'CustomAutoLoad.php') <= 0) {
+            include_once $file_name;
+        }
+    }
+
     $file_name = "";
 
     var_dump($name);

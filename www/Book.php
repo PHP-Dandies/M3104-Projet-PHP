@@ -1,5 +1,7 @@
 <?php
-class book
+namespace App\Library;
+
+class Book
 {
     private $title;
     private $author;
@@ -57,7 +59,7 @@ class book
         $this->nb_pages = $nb_pages;
     }
 
-    public function to_string()
+    public function to_string(): string
     {
         return 'Book={title=\'' . $this->title . '\', author=\'' . $this->author
             . '\', editor=\'' . $this->editor . '\', nbPages=' . $this->nb_pages . '}';
