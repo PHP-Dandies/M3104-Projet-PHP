@@ -11,7 +11,6 @@
 
 # Classes
 #TODO Classe Utilisateur
-#TODO Classe Campagne
 #TODO Classe Idée
 
 # Fonctionnalitées
