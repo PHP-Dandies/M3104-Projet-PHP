@@ -5,6 +5,7 @@ start_page("test");
 navbar();
 ?>
     <div class="container" style="margin-top: 5px">
+<<<<<<< HEAD
         <h2>Utilisateurs</h2>
         <table class="striped">
             <thead>
@@ -28,6 +29,9 @@ navbar();
             </tr>
             </tbody>
         </table>
+=======
+
+>>>>>>> Ozeliurs
     </div>
 <?php
 end_page();
