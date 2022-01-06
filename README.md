@@ -1,6 +1,10 @@
 # M3104-Projet-PHP
 
-# UTILISER DU CAMEL CASE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# UTILISER DU CAMEL CASE pour les variables !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+exemple variableNumeroUn
+
+# UTILISER DU PASCAL CASE pour les fichiers !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+exemple MonFichierNumeroUn.txt
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/PHP-Dandies/M3104-Projet-PHP)
 
