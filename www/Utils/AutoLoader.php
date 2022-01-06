@@ -10,18 +10,16 @@ spl_autoload_register(function ($name) {
 
     $fileName = "";
 
-    var_dump($name);
-
     if (str_contains($name, "Controller")) {
-        $fileName = $projectDir . '/www/Controllers/'. $name;
+        $fileName = $projectDir . '/Controllers/'. $name;
     }
-    else if (str_contains($name, "Models")) {
-        $fileName = $projectDir . '/www/Models/'. $name;
+    else if (str_contains($name, "Model")) {
+        $fileName = $projectDir . '/Models/'. $name;
     }
     else if (str_contains($name, "View")) {
-        $fileName = $projectDir . '/www/Views/'. $name;
+        $fileName = $projectDir . '/Views/'. $name;
     } else {
-        $fileName = $projectDir . '/www/' . $name;
+        $fileName = $projectDir . $name;
     }
 
     $fileName .= '.php';
