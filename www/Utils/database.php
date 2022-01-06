@@ -21,7 +21,6 @@ class database
     }
 
     // for inserting, updating and deleting
-
     /**
      * @throws Exception
      */
@@ -37,7 +36,6 @@ class database
     }
 
     // for any other query
-
     /**
      * @throws Exception
      */
