@@ -94,7 +94,7 @@ section .color {
     letter-spacing: 1px;
     margin-bottom: 40px;
 }
-.form h2::before{
+.form h2::before {
     content: '';
     position: absolute;
     left: 0;
@@ -107,8 +107,7 @@ section .color {
     width: 100%;
     margin-top: 20px;
 }
-.form .inputBox input
-{
+.form .inputBox input {
     width: 100%;
     background: rgba(255,255,255,0.2);
     border: none;
@@ -126,7 +125,7 @@ section .color {
 .form .inputBox input::placeholder {
     color: #747B7E;
 }
-.form .inputBox input[type="submit"]{
+.form .inputBox input[type="submit"] {
     background: #fff;
     color: #666;
     max-width: 100px;
