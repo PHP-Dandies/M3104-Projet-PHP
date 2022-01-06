@@ -30,10 +30,13 @@ $campaigns = array(array('CAMPAIGN_ID'  => 1,'TITLE' => 'JSP', 'BEG_DATE' => '20
                 <p><a>
                         <input type="text" placeholder="Entrez le nom de votre nouvelle campagne">
                     </a></p>
-                <p><a class="text-success">Date du début de cette nouvelle campagne : DateDeb</a></p>
+                <p><a class="text-success">Date du début de cette nouvelle campagne :<?php
+                        $date = date (Y-m-d);
+                        echo '$date';
+                        ?></a></p>
                 <p><a class="text-error">Date fin de cette nouvelle campagne : DateFin</a></p>
                 <p><a>
-                        <button class="button success">Enregistrer</button>
+                        <button class="button success" >Enregistrer</button>
                     </a></p>
             </div>
         </details>
