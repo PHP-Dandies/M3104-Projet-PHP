@@ -6,7 +6,7 @@ class Idea
     private string $title;
     private string $description;
     private int $goal;
-    private int $total_votes
+    private int $total_votes;
     private int $total_points;
     private string $picture;
     private int $user_id;
