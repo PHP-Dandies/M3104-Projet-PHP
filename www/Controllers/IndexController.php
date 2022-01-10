@@ -1,4 +1,4 @@
-<?php
+<?php ?>
 <<<<<<< HEAD
     class IndexController {
         public function __construct()

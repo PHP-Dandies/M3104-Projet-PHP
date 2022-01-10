@@ -23,18 +23,14 @@ $Result = database::execute_query($query);
             </tr>
             </thead>
             <tbody>
+            <?php foreach ($Result as $res){?>
             <tr>
-                <td><?php echo $Result[0]['TITLE']?></td>
+                <td><?php echo $res['TITLE']?> </td>
                 <td><a class="button outline primary">Voir</a></td>
                 <td><a class="button outline primary">Mettre en oeuvre</a></td>
                 <td><a class="button outline">Abandonner</a></td>
             </tr>
-            <tr>
-                <td><?php echo $Result[1]['TITLE']?></td>
-                <td><a class="button outline primary">Voir</a></td>
-                <td><a class="button outline primary">Mettre en oeuvre</a></td>
-                <td><a class="button outline">Abandonner</a></td>
-            </tr>
+            <?php }?>
             </tbody>
         </table>
         <br>
@@ -51,14 +47,12 @@ $Result = database::execute_query($query);
             </tr>
             </thead>
             <tbody>
+            <?php foreach ($Result as $res){?>
             <tr>
                 <td>Idée 1</td>
                 <td><a class="button outline primary">Voir</a></td>
             </tr>
-            <tr>
-                <td>Idée 2</td>
-                <td><a class="button outline primary">Voir</a></td>
-            </tr>
+            <?php }?>
             </tbody>
         </table>
     </div>
