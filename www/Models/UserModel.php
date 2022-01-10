@@ -1,81 +1,46 @@
 <?php
-// Models/UserModel.php
-class User {
-    public int $id;
-    public string $username;
-    public string $password;
-    public string $role;
-    public int $availablePoints;
-    public string $email;
-
-    function __construct($id, $username, $password, $role, $availablePoints, $email)
+$doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
+include $doc_root.'/Classes/User/User.php';
+class UserModel
+{
+    function getAllUsers()
     {
-        $this->id = $id;
-        $this->username = $username;
-        $this->password = $password;
-        $this->role = $role;
-        $this->availablePoints = $availablePoints;
-        $this->email = $email;
+        $query = database::executeQuery('SELECT * FROM USER;');
+        $userList = NAN;
+
+        foreach ($query as $user)
+        {
+            $userList[] = new User($user['USER_ID'],
+                $user['USERNAME'],
+                $user['PASSWORD'],
+                $user['ROLE'],
+                $user['AVAILABLE_POINTS'],
+                $user['EMAIL']);
+        }
+        return $userList;
     }
 
-    public function getId(): int
+    function getUserWithId($id): User
     {
-        return $this->id;
+        $query = database::executeQuery('SELECT * FROM USER WHERE USER_ID='.$id.';')[0];
+        $user = new User($query['USER_ID'],
+            $query['USERNAME'],
+            $query['PASSWORD'],
+            $query['ROLE'],
+            $query['AVAILABLE_POINTS'],
+            $query['EMAIL']);
+        return $user;
     }
 
-    public function setId(int $id): void
+    function getUserByUsername ($username): User
     {
-        $this->id = $id;
+        $query = database::executeQuery('SELECT * FROM USER WHERE USERNAME='.$username.';')[0];
+        $user = new User($query['USER_ID'],
+            $query['USERNAME'],
+            $query['PASSWORD'],
+            $query['ROLE'],
+            $query['AVAILABLE_POINTS'],
+            $query['EMAIL']);
+        return $user;
     }
-
-    public function getUsername(): string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): void
-    {
-        $this->username = $username;
-    }
-
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): void
-    {
-        $this->password = $password;
-    }
-
-    public function getRole(): string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): void
-    {
-        $this->role = $role;
-    }
-
-    public function getAvailablePoints(): int
-    {
-        return $this->availablePoints;
-    }
-
-    public function setAvailablePoints(int $availablePoints): void
-    {
-        $this->availablePoints = $availablePoints;
-    }
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
-    }
-
 }
