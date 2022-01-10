@@ -1,18 +1,18 @@
 <?php
 
-const DB_HOST = "localhost";
-const DB_LOGIN = "root";
-const DB_PASS = "root";
-const DB_NAME = "eevent_io";
+const DB_HOST = "ludan.ddns.net";
+const DB_LOGIN = "PHP";
+const DB_PASS = "Gca7gPeAU9bU";
+const DB_NAME = "PHP";
 
-class database
+class Database
 {
     private static $connection;
 
     /**
      * @throws Exception
      */
-    public static function open_connection(): void
+    public static function openConnection(): void
     {
         self::$connection = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASS)
         or throw new Exception('Erreur connexion au serveur : ' . mysqli_connect_error(), 1);
@@ -21,14 +21,13 @@ class database
     }
 
     // for inserting, updating and deleting
-
     /**
      * @throws Exception
      */
-    public static function execute_update($query): bool
+    public static function executeUpdate($query): bool
     {
         if (!self::$connection) {
-            self::open_connection();
+            self::openConnection();
         }
 
         //var_dump(self::$connection);
@@ -37,25 +36,24 @@ class database
     }
 
     // for any other query
-
     /**
      * @throws Exception
      */
-    public static function execute_query($query): array
+    public static function executeQuery($query): array
     {
         if (preg_match_all('/INSERT|UPDATE|DELETE/i', $query) > 0) {
-            self::close_connection();
+            self::closeConnection();
             throw new \RuntimeException("For any modification of the base use database::mysqli_update");
         }
 
         if (!self::$connection) {
-            self::open_connection();
+            self::openConnection();
         }
 
         $db_result = mysqli_query(self::$connection, $query);
 
         if (!$db_result) {
-            self::close_connection();
+            self::closeConnection();
             throw new \RuntimeException('Something went wrong with query : ' . $query . PHP_EOL, 2);
         }
 
@@ -71,10 +69,10 @@ class database
     /**
      * @throws Exception
      */
-    public static function close_connection(): void
+    public static function closeConnection(): void
     {
         if (!self::$connection) {
-            self::open_connection();
+            self::openConnection();
         }
 
         mysqli_close(self::$connection);
