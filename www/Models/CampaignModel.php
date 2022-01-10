@@ -1,13 +1,13 @@
 <?php
 
-include_once('../Utils/Database.php');
+require_once('../Utils/Database.php');
 
 class CampaignModel {
     /**
      * @throws Exception
      */
     public static function get_campaigns() : array {
-        $query = 'SELECT * FROM CAMPAIGNS;';
+        $query = 'SELECT * FROM CAMPAIGN;';
         return Database::executeQuery($query);
     }
 }

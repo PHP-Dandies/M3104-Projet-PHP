@@ -20,10 +20,10 @@ function navbar()
     echo '            <a>Link 2</a>'.PHP_EOL;
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-center">'.PHP_EOL;
-    echo '            <a class="brand" href="/">E-Event.io</a>'.PHP_EOL;
+    echo '            <a class="brand" href="/">E-Event.io</a>' .PHP_EOL;
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-right">'.PHP_EOL;
-    echo '              <a class="button primary" href="/?a=login">Login</a>'.PHP_EOL;
+    echo '              <a class="button primary" href="/?a=login">Login</a>' .PHP_EOL;
     echo '        </div>'.PHP_EOL;
     echo '    </nav>'.PHP_EOL;
 }
