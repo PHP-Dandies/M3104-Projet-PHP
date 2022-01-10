@@ -1,9 +1,18 @@
 <?php
 
-class IdeaModel
-{
-    function __construct()
-    {
+require_once('../Utils/Database.php');
 
+class IdeaModel {
+     private $_ideas;
+
+    public function __construct($ideas){
+        $this->_ideas = $ideas;
+    }
+    /**
+     * @throws Exception
+     */
+    public static function get_ideas($campaign_id) : array {
+        $query = 'SELECT * FROM IDEA WHERE ID = ' . $id;
+        return Database::executeQuery($query);
     }
 }
