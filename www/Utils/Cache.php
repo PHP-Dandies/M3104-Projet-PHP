@@ -1,5 +1,5 @@
 <?php
-class cache {
+class Cache {
     public $page;
     public $expiration;
     public $buffer;
