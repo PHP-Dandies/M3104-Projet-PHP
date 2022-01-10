@@ -16,7 +16,7 @@ class IdeaModel
     public static function get_idea_by_id(int $id): ?Idea {
         $ideas = self::get_ideas();
         foreach ($ideas as $idea){
-            if ($idea->getIdeaId = $id){
+            if ($idea->getIdeaId == $id){
                 return $idea;
             }
         }
@@ -26,7 +26,7 @@ class IdeaModel
     public static function get_idea_by_title(int $title): ?Idea {
         $ideas = self::get_ideas();
         foreach ($ideas as $idea){
-            if ($idea->getTitle = $title){
+            if ($idea->getTitle == $title){
                 return $idea;
             }
         }
