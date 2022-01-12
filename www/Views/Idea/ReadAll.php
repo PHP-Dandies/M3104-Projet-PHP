@@ -1,6 +1,6 @@
 <?php
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include $doc_root.'/HelperUtils.php';
+include substr($doc_root, 0, -6).'/Utils/AutoLoader.php';
 start_page("test");
 navbar();
 ?>
