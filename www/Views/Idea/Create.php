@@ -15,9 +15,9 @@
 
             <div class="container2">
                 <form action method="post">
-                    <h1><strong>Votre image</strong>avec votre idée</h1>
+                    <h1>Votre Idée</h1>
                     <div class="group">
-                        <label for="title">Titre <span>Utilisez les majuscules pour obtenir un meilleur résultat</span></label>
+                        <label for="title">Titre <span>En majuscule</span></label>
                         <input type="text" name="title" id="title" class="controll"/>
                     </div>
                     <div class="group">
@@ -27,7 +27,8 @@
                     
                     <div class="group file_area">
                         <label for="images">Images <span>Une image lisible s'il vous plait</span></label>
-                        <input type="file" name="images" id="images" required="required" multiple="multiple">
+                        <input type="file" name="images" id="images" required="required" multiple="multiple"/>
+
                         <div class="dummy">
                             <div class="succes">Parfait, votre image a été enregistré. Continuez</div>
                             <div class="default">Sélectionner votre image</div>
@@ -35,7 +36,7 @@
                     </div>
 
                     <div class="group">
-                        <button type="submit">Enregistrer</button>
+                        <input type="submit" name="test" value="Enregister">
                     </div>
                 </form>
             </div>
