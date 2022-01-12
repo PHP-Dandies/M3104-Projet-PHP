@@ -16,7 +16,11 @@ try {
         $controller->read();
     } else if ($url[0] === 'campaign' && !empty($url[1])) {
         echo 'Campagne numéro ' . $url[1];
-    } else {
+    }
+    else if ($url[0] === 'Registration'){
+        $PasswordController = new PasswordChangeController();
+    }
+    else {
         echo '404';
     }
 } catch (Exception $e) {
