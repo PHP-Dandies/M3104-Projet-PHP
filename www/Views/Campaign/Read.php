@@ -1,10 +1,10 @@
 <?php
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include $doc_root.'/HelperUtils.php';
+include substr($doc_root, 0, -6).'/Utils/AutoLoader.php';
 start_page("test");
 navbar();
+$campaigns = $data;
 ?>
-    ?>
     <div class="container" style="margin-top: 5px">
         <h1 class="text-center"> Campagnes en cours </h1>
         <?php
@@ -14,7 +14,7 @@ navbar();
             echo'            <td>'.$campaign["TITLE"].'</td>'.PHP_EOL;
             echo'            <td>'.$campaign["BEG_DATE"].'</td>'.PHP_EOL;
             echo'            <td>'.$campaign["END_DATE"].'</td>'.PHP_EOL;
-            echo'            <td><button class="button error">Interrompre</button></td>'.PHP_EOL;
+            echo'            <td><a href="ideas" class="button error">Voir les idées</a></td>'.PHP_EOL;
             echo'        </tr>'.PHP_EOL;
         }
         echo'    </table>'.PHP_EOL;
@@ -27,9 +27,10 @@ navbar();
                 <p><input type="text" maxlength="25" placeholder="Entrez le nom de votre nouvelle campagne"></p>
                 <p class="text-success"> Sélectionner le début de la campagne : <input type="date" class="text-success" ></p>
                 <p class="text-error">Sélectionner la fin de la campagne : <input type="date" class="text-error"></p>
-                <p><a>
-                        <button class="button success" >Enregistrer</button>
-                    </a></p>
+                <p>
+                <a>
+                    <button class="button success" >Enregistrer</button>
+                </a></p>
             </div>
         </details>
     </div>

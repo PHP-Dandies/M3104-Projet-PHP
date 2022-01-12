@@ -2,21 +2,21 @@
 
 require_once('../Utils/AutoLoader.php');
 
-class CampaignController {
+class IdeaController {
     /**
      * @throws Exception
      */
-    public function read() : void{
-        $campaigns = CampaignModel::get_campaigns();
+    public function read($campaign_id) {
+        'SELECT * FROM IDEA WHERE CAMPAIGN_ID = ' . $campaign_id;
+        $ideas = IdeaModel::get_ideas($campaign_id);
         ViewHelper::display(
             $this,
-            'Read',
-            $campaigns
+            'ReadAll',
+            $ideas
         );
     }
 
-    public function create(): void
-    {
+    public function create() {
         ViewHelper::display(
             $this,
             'Create',
