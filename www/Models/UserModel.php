@@ -27,7 +27,7 @@ class UserModel
 
     function getUserWithId($id): User
     {
-        $query = database::executeQuery('SELECT * FROM USER WHERE USER_ID='.$id.';')[0];
+        $query = database::executeQuery("SELECT * FROM USER WHERE USER_ID='$id';")[0];
         $user = new User($query['USER_ID'],
             $query['USERNAME'],
             $query['PASSWORD'],
@@ -39,7 +39,7 @@ class UserModel
 
     function getUserByUsername ($username): User
     {
-        $query = database::executeQuery('SELECT * FROM USER WHERE USERNAME='.$username.';')[0];
+        $query = database::executeQuery("SELECT * FROM USER WHERE USERNAME = '$username' ;")[0];
         $user = new User($query['USER_ID'],
             $query['USERNAME'],
             $query['PASSWORD'],
@@ -47,5 +47,25 @@ class UserModel
             $query['AVAILABLE_POINTS'],
             $query['EMAIL']);
         return $user;
+
     }
+    function isExist ($username, $password): bool
+    {
+        return database::executeCount("SELECT COUNT(*) FROM USER WHERE USERNAME = '$username' AND PASSWORD='$password';") >= 1;
+    }
+
+    function getPassword ($username, $password) : User
+    {
+        $query = database::executeQuery("SELECT * FROM USER WHERE USERNAME='$username' AND PASSWORD='$password';")[0];
+        $user = new User($query['USER_ID'],
+            $query['USERNAME'],
+            $query['PASSWORD'],
+            $query['ROLE'],
+            $query['AVAILABLE_POINTS'],
+            $query['EMAIL']);
+        var_dump($user);
+        return $user;
+    }
+
+
 }

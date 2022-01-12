@@ -1,7 +1,7 @@
 <?php
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
 include $doc_root . '/Utils/HelperUtils.php';
-include $doc_root . '/Controllers/UuserManagement/UserController.php';
+include $doc_root . '/Controllers/UserManagement/UserController.php';
 start_page("test");
 navbar();
 ?>
@@ -15,7 +15,7 @@ navbar();
             <div class="container2">
                 <div class="form">
                     <h2>Login</h2>
-                    <form action=<?php $doc_root?>"/Controllers/UserManagement/LoginController.php">
+                    <form action="../../Controllers/LoginController.php" method="post">
                         <div class="inputBox">
                             <input type="text" name="login" placeholder="Identifiant">
                         </div>

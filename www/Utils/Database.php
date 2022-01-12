@@ -6,8 +6,8 @@ const DB_PASS = "Gca7gPeAU9bU";
 const DB_NAME = "PHP";
 */
 const DB_HOST = "localhost";
-const DB_LOGIN = "admin";
-const DB_PASS = "admin";
+const DB_LOGIN = "root";
+const DB_PASS = "root";
 const DB_NAME = "eevent_io";
 
 class Database
@@ -40,6 +40,28 @@ class Database
         return mysqli_query(self::$connection, $query);
     }
 
+
+    public static function executeCount($query): int
+    {
+        if (preg_match_all('/INSERT|UPDATE|DELETE/i', $query) > 0) {
+            self::closeConnection();
+            throw new \RuntimeException("For any modification of the base use database::mysqli_update");
+        }
+
+        if (!self::$connection) {
+            self::openConnection();
+        }
+
+        $db_result = mysqli_query(self::$connection, $query);
+        if (!$db_result) {
+            self::closeConnection();
+            throw new \RuntimeException('Something went wrong with query : ' . $query . PHP_EOL, 2);
+        }
+
+        return intval(mysqli_fetch_assoc($db_result)["COUNT(*)"]);
+    }
+
+
     // for any other query
     /**
      * @throws Exception
@@ -56,7 +78,6 @@ class Database
         }
 
         $db_result = mysqli_query(self::$connection, $query);
-
         if (!$db_result) {
             self::closeConnection();
             throw new \RuntimeException('Something went wrong with query : ' . $query . PHP_EOL, 2);

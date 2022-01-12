@@ -1,12 +1,11 @@
 <?php
 
-class Controller
+abstract class Controller
 {
-    public function __construct()
-    {
+    public abstract function __construct();
 
-    }
     //Instancie un Model choisit en paramètre
+
     public function loadModel(string $model)
     {
         $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
