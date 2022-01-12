@@ -1,9 +1,10 @@
 <?php
-
+/*
 const DB_HOST = "ludan.ddns.net";
 const DB_LOGIN = "PHP";
 const DB_PASS = "Gca7gPeAU9bU";
 const DB_NAME = "PHP";
+*/
 const DB_HOST = "localhost";
 const DB_LOGIN = "admin";
 const DB_PASS = "admin";

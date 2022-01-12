@@ -12,7 +12,7 @@ class IdeaModel {
      * @throws Exception
      */
     public static function get_ideas($campaign_id) : array {
-        $query = 'SELECT * FROM IDEA WHERE ID = ' . $id;
+        $query = 'SELECT * FROM IDEA WHERE ID = ' . $campaign_id;
         return Database::executeQuery($query);
     }
 }
