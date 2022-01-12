@@ -11,7 +11,7 @@ class IdeaController {
         $ideas = IdeaModel::get_ideas($campaign_id);
         ViewHelper::display(
             $this,
-            'Read',
+            'ReadAll',
             $ideas
         );
     }

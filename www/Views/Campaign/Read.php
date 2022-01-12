@@ -14,7 +14,7 @@ $campaigns = $data;
             echo'            <td>'.$campaign["TITLE"].'</td>'.PHP_EOL;
             echo'            <td>'.$campaign["BEG_DATE"].'</td>'.PHP_EOL;
             echo'            <td>'.$campaign["END_DATE"].'</td>'.PHP_EOL;
-            echo'            <td><button class="button error">Interrompre</button></td>'.PHP_EOL;
+            echo'            <td><a href="ideas" class="button error">Voir les idées</a></td>'.PHP_EOL;
             echo'        </tr>'.PHP_EOL;
         }
         echo'    </table>'.PHP_EOL;
