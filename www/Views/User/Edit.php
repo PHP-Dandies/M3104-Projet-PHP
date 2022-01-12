@@ -29,8 +29,8 @@ $user = $data[0];
                     <input name="password" type="password" placeholder="Nouveau mot de passe">
                 </label>
             </div>
-            <label for="pet-select"></label>
-            <select name="role" id="pet-select">
+            <label for="role-select"></label>
+            <select name="role" id="role-select">
                 <option value="">Choisissez une option</option>
                 <option value="admin">Admin</option>
                 <option value="event">Proposeur d'event</option>
