@@ -6,12 +6,21 @@ class CampaignController {
     /**
      * @throws Exception
      */
-    public function read() {
+    public function read() : void{
         $campaigns = CampaignModel::get_campaigns();
         ViewHelper::display(
             $this,
             'Read',
             $campaigns
+        );
+    }
+
+    public function create(): void
+    {
+        ViewHelper::display(
+            $this,
+            'Create',
+            array()
         );
     }
 }
