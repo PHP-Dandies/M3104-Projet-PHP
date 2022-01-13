@@ -1,7 +1,5 @@
 <?php
 
-var_dump($_POST);
-
 include ('../Utils/Database.php');
 
 $id = $_GET['id'];
@@ -24,5 +22,5 @@ if ($username !== '' || $password !== '' || $role !== '') {
     }
 }
 
-header('Location: ../users/modify/'. $id);
+header('Location: ../users');
 exit;
