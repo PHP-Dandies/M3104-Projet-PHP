@@ -80,6 +80,21 @@ section .color {
     border-right: 1px solid rgba(255,255,255,0.2);
     border-bottom: 1px solid rgba(255,255,255,0.2);
 }
+.container3{
+    position: relative;
+    width: 600px;
+    min-height: 600px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-right: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
 .form {
     position: relative;
     width: 100%;
@@ -140,4 +155,75 @@ section .color {
 .forget a {
     color: black;
     font-weight: 600;
+}
+
+.form h2 .test {
+    position: relative;
+    color: #747B7E;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+}
+
+.form h2 .test::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 80px;
+    height: 4px;
+    background: grey;
+}
+.inputBox input[type="submit"]{
+    background: #fff;
+    color: #666;
+    max-width: 100px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.form .box3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.box3 select {
+    background-color: #747B7E;
+    color: white;
+    padding: 12px;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    -webkit-appearance: button;
+    outline: none;
+}
+
+.box3::before {
+    content: "\f13a";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(255,255,255,0.1);
+    background-color: rgba(255,255,255,0.5);
+    pointer-events: none;
+}
+
+.box3:hover::before {
+    color: rgba(255,255,255,0.6);
+    background-color: rgba(255,255,255,0.2);
+}
+
+.box3 select option {
+    padding: 30px;
 }
