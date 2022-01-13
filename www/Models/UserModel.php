@@ -49,6 +49,7 @@ class UserModel
         return $user;
 
     }
+
     function isExist ($username, $password): bool
     {
         return database::executeCount("SELECT COUNT(*) FROM USER WHERE USERNAME = '$username' AND PASSWORD='$password';") >= 1;
