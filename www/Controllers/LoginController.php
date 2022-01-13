@@ -10,10 +10,13 @@ if($userControlller->isSubmite($login, $password))
 {
 
     session_start();
-//  $_SESSION["id"] = session_id();
-    echo 'Autehntification réussite';
+    session_reset();
+    $_SESSION["suid"] = session_id();
+    header('Location: ../Views/User/ModificationReussie.php');
+    exit();
 }
 else
 {
-    echo'Raté';
+    header('Location: ../Views/User/LoginView.php');
+    exit();
 }

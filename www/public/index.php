@@ -15,7 +15,12 @@ try {
 
     if ($url === '') {
         echo 'acceuil';
-    } else if ($url[0] === 'users' && !isset($url[1])) {
+    } else if($url[0] === 'jury' && !isset($url[1])){
+        $controller = new IdeaController();
+        if()
+        $controller->read();
+    }
+    else if ($url[0] === 'users' && !isset($url[1])) {
         $controller = new UserController();
         $controller->read();
     } else if (isset($url[1], $url[2]) && $url[0] === 'users' && $url[1] === 'modify' && is_numeric($url[2])) {

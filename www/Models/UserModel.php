@@ -57,7 +57,7 @@ class UserModel
 
     function isPassword ($username, $password): bool
     {
-        return password_verify($password, database::executeQuery("SELECT PASSWORD FROM USER WHERE USERNAME='$username';"));
+        return password_verify($password, database::executeQuery("SELECT PASSWORD FROM USER WHERE USERNAME='$username';")[0]["PASSWORD"]);
     }
 
 

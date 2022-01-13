@@ -8,14 +8,19 @@ class UserController
     public function __construct(){
     }
 
-    public function isSubmite($login, $password)
+    public function isSubmite($login, $password) : bool
     {
         $model = new UserModel();
         if ($model->isLogin($login))
         {
+
             if($model->isPassword($login, $password))
+            {
                 return true;
+            }
+
         }
+
         return false;
     }
 
@@ -48,7 +53,4 @@ class UserController
             $user
         );
     }
-
-    //$this->render('DOSSIER', 'Fichier', ['articles' => $articles]); ou $this->render('index', compact('articles'));
-    //Sert a envoyer les données à la vue
 }
