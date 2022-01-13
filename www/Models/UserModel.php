@@ -50,22 +50,14 @@ class UserModel
 
     }
 
-    function isExist ($username, $password): bool
+    function isLogin ($username): bool
     {
-        return database::executeCount("SELECT COUNT(*) FROM USER WHERE USERNAME = '$username' AND PASSWORD='$password';") >= 1;
+        return database::executeCount("SELECT COUNT(*) FROM USER WHERE USERNAME = '$username';") >= 1;
     }
 
-    function getPassword ($username, $password) : User
+    function isPassword ($username, $password): bool
     {
-        $query = database::executeQuery("SELECT * FROM USER WHERE USERNAME='$username' AND PASSWORD='$password';")[0];
-        $user = new User($query['USER_ID'],
-            $query['USERNAME'],
-            $query['PASSWORD'],
-            $query['ROLE'],
-            $query['AVAILABLE_POINTS'],
-            $query['EMAIL']);
-        var_dump($user);
-        return $user;
+        return password_verify($password, database::executeQuery("SELECT PASSWORD FROM USER WHERE USERNAME='$username';"));
     }
 
 

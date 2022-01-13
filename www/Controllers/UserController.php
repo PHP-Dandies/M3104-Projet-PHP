@@ -11,8 +11,11 @@ class UserController
     public function isSubmite($login, $password)
     {
         $model = new UserModel();
-        if ($model->isExist($login, $password))
-            return true;
+        if ($model->isLogin($login))
+        {
+            if($model->isPassword($login, $password))
+                return true;
+        }
         return false;
     }
 

@@ -10,7 +10,7 @@ if($userControlller->isSubmite($login, $password))
 {
 
     session_start();
-    $_SESSION["id"] = session_id();
+//  $_SESSION["id"] = session_id();
     echo 'Autehntification réussite';
 }
 else
