@@ -1,6 +1,7 @@
 <?php
 require_once('../Utils/AutoLoader.php');
 
+
 try {
     $url = '';
 
@@ -12,7 +13,6 @@ try {
         }
         $url = explode('/', $url);
     }
-
     if ($url === '') {
         echo 'acceuil';
     } else if ($url[0] === 'users' && !isset($url[1])) {
@@ -21,6 +21,11 @@ try {
     } else if (isset($url[1], $url[2]) && $url[0] === 'users' && $url[1] === 'modify' && is_numeric($url[2])) {
         $controller = new UserController();
         $controller->editUser($url[2]);
+
+    } else if ($url[0] ==='admin' && !isset($url[1])) {
+        $controller = new AdminController();
+        $controller->read();
+
     } else if ($url[0] === 'campaigns') {
         $controller = new CampaignController();
         $controller->read();
