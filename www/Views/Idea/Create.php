@@ -14,7 +14,7 @@ navbar();
             <div class="square" style="--i:4;"></div>
 
             <div class="container2">
-                <form action="../../Scripts/AddIdeaToDb.php" method="post">
+                <form action="../../Scripts/AddIdeaToDb.php" method="post" style="margin: 20px">
                     <h1>Votre Idée</h1>
                     <div class="group">
                         <label for="title">Titre</label>
