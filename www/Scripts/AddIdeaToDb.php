@@ -24,7 +24,7 @@ $query = "INSERT INTO IDEA(TITLE, DESCRIPTION, GOAL, PICTURE, USER_ID, CAMPAIGN_
 
 try {
     Database::executeUpdate($query);
-    header("Location: /orga/ideas")
+    header("Location: /orga/ideas");
 } catch (Exception $e) {
     echo $e->getMessage();
     die();
