@@ -28,7 +28,7 @@ navbar();
                         <label for="goal">Goal</label>
                         <input type="number" name="goal" id="goal" required/>
                     </div>
-                    <div class="group file_area">
+                    <div class="group file_area" style="margin-bottom: 5px">
                         <label for="image">Image</label>
                         <input type="file" name="image" id="image" required/>
                     </div>
