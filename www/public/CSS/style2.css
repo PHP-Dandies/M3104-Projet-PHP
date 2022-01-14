@@ -116,7 +116,45 @@ label span {
     margin-top: 5px;
 }
 
-.container-privet {
- color: rebeccapurple;
-    cursor: pointer;
+h1{
+    text-align: center;
+    margin: 50px auto;
+    font-weight: 100;
+    text-shadow: 2px 4px 3px grey;
+}
+.row100-head {
+    font-size: 18px;
+    color: white;
+    background-color: #6c7ae0;
+    border-radius: 30px 5%;
+}
+.cell100-row1 #username_input {
+    font-family: inherit;
+    padding: 0.8rem 1rem;
+    border: 1px solid #6c7ae0;
+    font-size: 1em;
+    display: block;
+    align-items: center;
+    transition: all .2s ease;
+    width: 100%;
+}
+.cell100-row1 #password_input {
+    font-family: inherit;
+    padding: 0.8rem 1rem;
+    border: 1px solid #6c7ae0;
+    font-size: 1em;
+    display: block;
+    align-items: center;
+    transition: all .2s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.te input[type=submit]{
+    color: #ffffff;
+    z-index: 1;
+    background-color: grey;
+    position: relative;
+    left: 50%;
+    display: block;
 }
