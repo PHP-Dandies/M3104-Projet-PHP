@@ -14,7 +14,6 @@ try {
     }
 
     if ($url === '') {
-        var_dump($_GET['url']);
         echo 'acceuil';
     } else if ($url[0] === 'jury' && !isset($url[1])) {
         JuryController::read();
