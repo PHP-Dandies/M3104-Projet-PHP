@@ -14,27 +14,28 @@ navbar();
             <div class="square" style="--i:4;"></div>
 
             <div class="container2">
-                <form action="../../Scripts/AddIdeaToDb.php" method="post" style="margin: 20px">
+                <form enctype="multipart/form-data" action="../../Scripts/AddIdeaToDb.php" method="post" style="margin: 20px">
                     <h1>Votre Idée</h1>
                     <div class="group">
                         <label for="title">Titre</label>
-                        <input type="text" name="title" id="title" required/>
+                        <input type="text" name="title" required/>
                     </div>
                     <div class="group">
                         <label for="caption">Description</label>
-                        <textarea name="caption" id="caption" required></textarea>
+                        <textarea name="caption" required></textarea>
                     </div>
                     <div class="group">
                         <label for="goal">Goal</label>
-                        <input type="number" name="goal" id="goal" required/>
+                        <input type="number" name="goal" required/>
                     </div>
                     <div class="group file_area" style="margin-bottom: 5px">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="100000000" />
                         <label for="image">Image</label>
-                        <input type="file" name="image" id="image" required/>
+                        <input type="file" name="image" required/>
                     </div>
 
                     <div class="group">
-                        <input type="submit" name="test" value="Enregister">
+                        <input type="submit" value="Enregister">
                     </div>
                 </form>
             </div>
