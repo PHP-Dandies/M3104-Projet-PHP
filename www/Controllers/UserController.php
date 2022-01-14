@@ -59,4 +59,11 @@ class UserController
             array()
         );
     }
+    public function userManagement() : void
+    {
+        ViewHelper::display(
+            $this,
+            'UserManagementView',
+        );
+    }
 }
