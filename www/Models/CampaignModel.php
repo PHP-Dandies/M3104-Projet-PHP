@@ -10,4 +10,6 @@ class CampaignModel {
         $query = 'SELECT * FROM CAMPAIGN;';
         return Database::executeQuery($query);
     }
+
+
 }
