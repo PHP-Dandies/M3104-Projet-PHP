@@ -18,9 +18,7 @@ class UserController
             {
                 return true;
             }
-
         }
-
         return false;
     }
 

@@ -1,17 +1,27 @@
 <?php
-
+include '../Utils/Database.php';
+include('../Utils/AutoLoader.php');
 // une fois les sessions faites, récupérer l'id de l'utilisateur dans le session et lui enlever les points si il en a
-
-$id = $_GET["id"];
-$userId = $_GET["user_id"];
-$pts = $_POST["pts"];
-
-Database::executeUpdate("UPDATE IDEA SET TOTAL_POINTS = TOTAL_POINTS + '$pts' WHERE IDEA_ID = $id");
-
-if(Database::executeUpdate("UPDATE USER SET AVAILABLE_POINTS = AVAILABLE_POINTS - '$pts' WHERE IDEA_ID = $id"))
+session_start();
+var_dump($_SESSION['user']);
+die();
+if(!isset($_SESSION["suid"]))
 {
-    Database::executeUpdate("UPDATE USER SET AVAILABLE_POINTS = AVAILABLE_POINTS - '$pts' WHERE USER_ID = $userId");
+    $id = $_GET["id"];
+    $pts = $_POST["pts"];
+
+    Database::executeUpdate("UPDATE IDEA SET TOTAL_POINTS = TOTAL_POINTS + '$pts' WHERE IDEA_ID = $id");
+
+    var_dump(Database::executeUpdate("UPDATE USER SET AVAILABLE_POINTS = AVAILABLE_POINTS - '$pts' WHERE USERNAME = $_SESSION['user']"));
+    Die();
+
+    if(Database::executeUpdate("UPDATE USER SET AVAILABLE_POINTS = AVAILABLE_POINTS - '$pts' WHERE IDEA_ID = $_SESSION['user']") != 0)
+    {
+        Database::executeUpdate("UPDATE USER SET AVAILABLE_POINTS = AVAILABLE_POINTS - '$pts' WHERE USER_ID = $userId");
+    }
+    echo('done');
 }
-
-
-echo('done');
+else
+{
+    die('Erreur d\'autehntification');
+}

@@ -12,6 +12,7 @@ if($userControlller->isSubmite($login, $password))
     session_start();
     session_reset();
     $_SESSION["suid"] = session_id();
+    $_SESSION["user"] = $login;
     header('Location: ../Views/User/ModificationReussie.php');
     exit();
 }

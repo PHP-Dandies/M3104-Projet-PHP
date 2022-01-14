@@ -1,7 +1,7 @@
 <?php
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include $doc_root . '/Utils/HelperUtils.php';
-include $doc_root . '/Controllers/UserManagement/UserController.php';
+include '../../Utils/HelperUtils.php';
+include '../../Controllers/UserController.php';
 start_page("test");
 navbar();
 ?>
