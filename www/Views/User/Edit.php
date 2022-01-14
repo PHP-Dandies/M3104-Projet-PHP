@@ -1,8 +1,8 @@
 <?php
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include $doc_root.'/Utils/HelperUtils.php';
-start_page("test");
+include substr($doc_root, 0, -6).'/Utils/AutoLoader.php';start_page("test");
 navbar();
+
 /** @var array $data */
 $user = $data[0];
 ?>

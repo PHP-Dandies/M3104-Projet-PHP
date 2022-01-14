@@ -16,7 +16,8 @@ try {
         $url = explode('/', $url);
     }
     if ($url === '') {
-        echo 'acceuil';
+        $controller = new HomeController();
+        $controller->read();
     } else if ($url[0] === 'login' && !isset($url[1])) {
         $controller = new UserController();
         $controller->login();
@@ -39,7 +40,6 @@ try {
     } else if ($url[0] === 'users' && !empty($url) && $url[1] === 'usermanagement') {
         $controller = new UserController();
         $controller->userManagement();
-
 // admin
     } else if ($url[0] ==='admin' && !isset($url[1])) {
         $controller = new AdminController();
