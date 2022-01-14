@@ -3,9 +3,9 @@ $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FI
 include('../Utils/Database.php');
 
 $title = $_POST['title'];
-$description = $_POST['description'];
+$description = $_POST['caption'];
 $goal = $_POST['goal'];
-$picture = $_POST['images'];
+$picture = $_POST['image'];
 
 // Where the file is going to be placed
 $file = time().'.'.substr(strrchr($_FILES['images']['name'], '.'), 1);
