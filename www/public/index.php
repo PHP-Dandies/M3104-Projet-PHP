@@ -8,11 +8,13 @@ try {
     $url = '';
     if (isset($_GET['url'])) {
         $url = $_GET['url'];
-        if (str_contains($url, "Scripts")) {
+        var_dump($url);
+        die();
+        $url = explode('/', $url);
+        if (str_contains($url[0], "Scripts")) {
             include '../' . $url;
             exit;
         }
-        $url = explode('/', $url);
     }
 
     if ($url === '') {
@@ -20,6 +22,13 @@ try {
     } else if ($url[0] === 'login' && !isset($url[1])) {
         $controller = new UserController();
         $controller->login();
+    } else if ($url[0] === 'organisateur') {
+        $controller = new OrganizerController();
+        if (!isset($url[1])) {
+            $controller->read();
+        } else if ($url[1] === 'creer') {
+            $controller->create();
+        }
     } else if ($url[0] === 'jury') {
         if (!isset($_SESSION['suid'])) {
             header('Location: /login');
