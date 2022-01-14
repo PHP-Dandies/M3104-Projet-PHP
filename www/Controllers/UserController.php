@@ -20,4 +20,10 @@ class UserController {
             $user
         );
     }
+    public function  userManagement(): void {
+        ViewHelper::display(
+            $this,
+            'Read',
+        );
+    }
 }

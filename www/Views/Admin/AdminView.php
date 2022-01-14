@@ -13,7 +13,7 @@ navbar();
         </a>
         <br>
         <br>
-        <a href="users/modify/1">
+        <a href="users/usermanagement">
     <button class="button error"> Gérer les utlisateurs </button>
         </a>
 </div>
