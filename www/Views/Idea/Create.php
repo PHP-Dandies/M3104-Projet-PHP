@@ -18,13 +18,16 @@ navbar();
                     <h1>Votre Idée</h1>
                     <div class="group">
                         <label for="title">Titre</label>
-                        <input type="text" name="title" id="title" class="controll"/>
+                        <input type="text" name="title" id="title" required/>
                     </div>
                     <div class="group">
                         <label for="caption">Description</label>
-                        <textarea name="caption" id="caption"></textarea>
+                        <textarea name="caption" id="caption" required></textarea>
                     </div>
-
+                    <div class="group">
+                        <label for="goal">Goal</label>
+                        <input type="number" name="goal" id="goal" required/>
+                    </div>
                     <div class="group file_area">
                         <label for="image">Image</label>
                         <input type="file" name="image" id="image" required/>
