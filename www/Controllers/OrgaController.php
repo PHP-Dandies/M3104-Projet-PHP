@@ -21,8 +21,6 @@ class OrgaController {
             die();
         }
 
-        echo "test";
-
         ViewHelper::display(
             $this,
             'ReadMineView',
