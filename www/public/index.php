@@ -40,9 +40,6 @@ try {
     } else if ($url[0] === 'campaigns') {
         $controller = new CampaignController();
         $controller->read();
-    } else if ($url[0] === 'campaign' && !empty($url) && $url[1] === 'create') {
-        $controller = new CampaignController();
-        $controller->create();
     } else if ($url[0] === 'campaign' && !empty($url[1]) && is_numeric($url[1])) {
         $controller = new IdeaController();
         $controller->read($url[1]);
