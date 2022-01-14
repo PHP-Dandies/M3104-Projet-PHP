@@ -17,22 +17,17 @@ navbar();
                 <form action="../../Scripts/AddIdeaToDb.php" method="post">
                     <h1>Votre Idée</h1>
                     <div class="group">
-                        <label for="title">Titre <span>En majuscule</span></label>
+                        <label for="title">Titre</label>
                         <input type="text" name="title" id="title" class="controll"/>
                     </div>
                     <div class="group">
-                        <label for="caption">Description <span>Un description très simple</span></label>
-                        <input type="text" name="caption" id="caption" class="controll">
+                        <label for="caption">Description</label>
+                        <textarea name="caption" id="caption"></textarea>
                     </div>
 
                     <div class="group file_area">
-                        <label for="images">Images <span>Une image lisible s'il vous plait</span></label>
-                        <input type="file" name="images" id="images" required="required" multiple="multiple"/>
-
-                        <div class="dummy">
-                            <div class="succes">Parfait, votre image a été enregistré. Continuez</div>
-                            <div class="default">Sélectionner votre image</div>
-                        </div>
+                        <label for="image">Image</label>
+                        <input type="file" name="image" id="image" required/>
                     </div>
 
                     <div class="group">
