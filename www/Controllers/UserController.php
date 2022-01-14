@@ -53,4 +53,13 @@ class UserController
             $user
         );
     }
+
+    public function login() : void
+    {
+        ViewHelper::display(
+        $this,
+            'LoginView',
+            array()
+        );
+    }
 }

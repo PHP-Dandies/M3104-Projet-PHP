@@ -11,14 +11,13 @@ try {
             exit;
         }
         $url = explode('/', $url);
-    }
 
+    }
     if ($url === '') {
         echo 'acceuil';
-    } else if($url[0] === 'jury' && !isset($url[1])){
-        $controller = new IdeaController();
-        if()
-        $controller->read();
+    }else if($url[0] === 'login' && !isset($url[1])){
+        $controller = new UserController();
+        $controller->login();
     }
     else if ($url[0] === 'users' && !isset($url[1])) {
         $controller = new UserController();

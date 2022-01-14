@@ -11,7 +11,6 @@ try {
         . " VALUES (NULL, '$beg_date', '$end_date', '$title');";
     echo $query;
     Database::executeUpdate($query);
-    echo 'done';
 } catch(Exception $e) {
     echo $e->getMessage();
     die();

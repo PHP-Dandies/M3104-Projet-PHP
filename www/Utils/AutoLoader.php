@@ -19,7 +19,7 @@ spl_autoload_register(static function ($name) {
     else if (str_contains($name, "View")) {
         $fileName = $projectDir . '/Views/'. $name;
     } else {
-        $fileName = $projectDir . $name;
+        $fileName = $projectDir . '/Utils/' . $name;
     }
 
     $fileName .= '.php';
