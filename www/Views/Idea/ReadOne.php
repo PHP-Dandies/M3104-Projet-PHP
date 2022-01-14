@@ -2,46 +2,72 @@
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
 include substr($doc_root, 0, -6).'/Utils/AutoLoader.php';
 start_page("test");
+/** @var array $data */
+$idea = $data["IDEA"];
+if (isset($data["COMMENTS"])) {
+    $comments = $data["COMMENTS"];
+}
+if (isset($data["CONTENTS"])) {
+    $users = $data["CONTENTS"];
+}
 navbar();
 ?>
     <div class="container" style="margin-top: 5px">
         <div class="is-vertical-align is-horizontal-align" style="margin-top: 5px; height: 20vh; background-image: url('../Images/0.jpg'); background-position: center; background-size: cover;">
-            <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white">Titre de l'Idée</h1>
+            <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white"><?php echo $idea["TITLE"] ?></h1>
         </div>
         <div>
             <div class="row" style="margin-top: 5px">
                 <div class="col-8">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar, eros a rutrum ullamcorper, orci purus semper purus, eu viverra risus turpis sit amet nunc. Sed semper semper congue. Fusce auctor ante sit amet imperdiet tempor. Maecenas tincidunt feugiat ligula ac sodales. Sed egestas, odio sed malesuada aliquet, ligula orci egestas sem, commodo accumsan felis elit eget nunc. Morbi pulvinar justo eget mi varius egestas. Vivamus placerat nulla libero, at vehicula felis volutpat in. In nec nunc pellentesque, tempor mauris a, mattis libero. Aenean ac nulla eu metus rutrum pretium. Donec velit metus, rhoncus quis condimentum id, tincidunt id mi. Maecenas gravida mi id ex consectetur, at eleifend odio dignissim. Aenean consectetur consectetur mattis. Quisque sed tempus augue.
-                    Cras iaculis, magna nec tincidunt consequat, leo libero scelerisque magna, eget mattis massa urna et nisi. Sed vulputate massa sapien, id venenatis mauris laoreet sed. Vestibulum rutrum ipsum vel pellentesque fringilla. Vestibulum placerat libero ut massa ullamcorper eleifend. Sed finibus, urna a sollicitudin vestibulum, dui turpis molestie ligula, sit amet rhoncus ligula arcu vel augue. Quisque sit amet porta nunc. Sed efficitur orci nisl, eu interdum nisi molestie ut. Phasellus lobortis volutpat suscipit.
+                    <p>mettre image ici</p>
+                    <?php echo $idea["DESCRIPTION"] ?>
                 </div>
                 <div class="col-4">
                     <div class="card">
-                        <h3>Organisateur</h3>
-                        <progress value="60" max="100"></progress>
-                        <p>XXX sur XXX pts</p>
+                        <h3>Organisateur : <?php echo $data["USER"]["USERNAME"] ?></h3>
+                        <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $idea["GOAL"] ?>"></progress>
+                        <p><?php echo $idea["TOTAL_POINTS"] ?> sur <?php echo $idea["GOAL"]?> pts</p>
                     </div>
                     <div class="card" style="margin-top: 5px">
-                        <form action="#">
-                            <input type="number"> pts
+                        <form action="../../Scripts/UserVote.php?id=<?php echo $idea["IDEA_ID"] ?>" method="post">
+                            <label>
+                                <input name="pts" type="number">
+                            </label>
                             <input type="submit" value="Donner">
                         </form>
                     </div>
-                    <div class="card" style="margin-top: 5px">
-                        <h4>Contenu Débloquable 1</h4>
-                        <code>XXX pts</code>
-                        <p>Descr Descr Descr Descr Descr Descr Descr Descr Descr Descr Descr Descr Descr </p>
-                    </div>
-                    <div class="card" style="margin-top: 5px">
-                        <h4>Contenu Débloquable 2</h4>
-                        <code>XXX pts</code>
-                        <p>Descr Descr Descr Descr Descr Descr Descr Descr Descr Descr Descr Descr Descr </p>
-                    </div>
-                    <div class="card" style="margin-top: 5px">
-                        <h4>Contenu Débloquable 3</h4>
-                        <code>XXX pts</code>
-                        <p>Descr Descr Descr Descr Descr Descr Descr Descr Descr Descr Descr Descr Descr </p>
-                    </div>
+                    <?php
+                    if (isset($data["CONTENTS"])) {
+                        foreach($data["CONTENTS"] as $content) {
+                    ?>
+                        <div class="card" style="margin-top: 5px">
+                            <h4> <?php echo $content["TITLE"] ?> </h4>
+                            <code> <?php if ($content["POINTS"] < $idea["TOTAL_POINTS"]) echo 'Atteint'; else echo $content["POINTS"]; ?> </code>
+                            <p><?php echo $content["DESCRIPTION"] ?></p>
+                        </div>
+                    <?php
+                        }
+                    }
+                    ?>
                 </div>
+            </div>
+            <div class="is_vertical_align" style="margin-top: 5px">
+                <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white">Commentaires</h1>
+                <form action="../../Scripts/AddComment.php?idea_id=<?php echo $idea["IDEA_ID"] ?> "method="post">
+                    <label>
+                        <input name="comment" placeholder="Laissez un commentaire">
+                    </label>
+                    <input type="submit" class="square">
+                </form>
+                <?php
+                foreach ($comments as $comment) { ?>
+                <div class="is_vertical_align">
+                    <p><?php echo $comment["USERNAME"]?></p>
+                    <p><?php echo $comment["comment"]?></p>
+                </div>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>

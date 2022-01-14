@@ -15,6 +15,8 @@ try {
 
     if ($url === '') {
         echo 'acceuil';
+    } else if ($url[0] === 'jury' && !isset($url[1])) {
+        JuryController::read();
     } else if ($url[0] === 'users' && !isset($url[1])) {
         $controller = new UserController();
         $controller->read();
@@ -23,15 +25,21 @@ try {
         $controller->editUser($url[2]);
     } else if ($url[0] === 'campaigns') {
         $controller = new CampaignController();
-        $controller->read();
-    } else if ($url[0] === 'campaign' && !empty($url) && $url[1] === 'create') {
-        $controller = new CampaignController();
-        $controller->create();
-    } else if ($url[0] === 'campaign' && !empty($url[1]) && is_numeric($url[1])) {
-        $controller = new IdeaController();
-        $controller->read($url[1]);
+        if (!isset($url[1])) {
+            $controller->read();
+        } else {
+            if (is_numeric($url[1])) {
+                if (!isset($url[2])) {
+                    $controller = new IdeaController();
+                    $controller->readAll($url[1]);
+                }
+            } else if ($url[1] === 'idea' && isset($url[2]) && is_numeric($url[2])) {
+                $controller = new IdeaController();
+                $controller->read($url[2]);
+            }
+        }
     } else if ($url[0] === 'ideas') {
-        if (!empty($url) && is_numeric($url[1])) {
+        if (!empty($url[1]) && is_numeric($url[1])) {
             $controller = new IdeaController();
             $controller->read($url[1]);
         }
