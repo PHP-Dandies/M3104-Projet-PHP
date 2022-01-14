@@ -8,12 +8,19 @@ class IdeaModel {
     public function __construct($ideas){
         $this->_ideas = $ideas;
     }
+
     /**
      * @throws Exception
      */
-    public static function get_ideas($campaign_id) : array {
-        $query = "SELECT * FROM IDEA WHERE CAMPAIGN_ID = $campaign_id";
-        return Database::executeQuery($query);
+    public static function fetchIdeas($campaignID) : array {
+        return Database::executeQuery("SELECT * FROM IDEA WHERE CAMPAIGN_ID = $campaignID");
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function fetchIdea($ideaID) : array {
+        return Database::executeQuery("SELECT * FROM IDEA WHERE CAMPAIGN_ID = $ideaID");
     }
 
     /**

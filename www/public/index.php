@@ -4,7 +4,6 @@ session_start();
 
 require_once('../Utils/AutoLoader.php');
 
-
 try {
     $url = '';
     if (isset($_GET['url'])) {
@@ -17,9 +16,9 @@ try {
             exit;
         }
     }
+
     if ($url === '') {
-        $controller = new HomeController();
-        $controller->read();
+        echo 'acceuil';
     } else if ($url[0] === 'login' && !isset($url[1])) {
         $controller = new UserController();
         $controller->login();
@@ -46,21 +45,6 @@ try {
     } else if (isset($url[1], $url[2]) && $url[0] === 'users' && $url[1] === 'modify' && is_numeric($url[2])) {
         $controller = new UserController();
         $controller->editUser($url[2]);
-    } else if ($url[0] === 'users' && !empty($url) && $url[1] === 'usermanagement') {
-        $controller = new UserController();
-        $controller->userManagement();
-// admin
-    } else if ($url[0] ==='admin' && !isset($url[1])) {
-        $controller = new AdminController();
-        $controller->read();
-    } else if ($url[0] ==='admin' && !empty($url) && $url[1]=== 'campaign') {
-        $controller = new CampaignController();
-        $controller->create();
-
-    } else if ($url[0] ==='admin' && !empty($url) && $url[1]=== 'usermanagement') {
-        $controller = new UserController();
-        $controller->userManagement();
-
     } else if ($url[0] === 'campaigns') {
         $controller = new CampaignController();
         if (!isset($url[1])) {
@@ -77,7 +61,7 @@ try {
             }
         }
     } else if ($url[0] === 'ideas') {
-        if (!empty($url) && is_numeric($url[1])) {
+        if (!empty($url[1]) && is_numeric($url[1])) {
             $controller = new IdeaController();
             $controller->read($url[1]);
         }
