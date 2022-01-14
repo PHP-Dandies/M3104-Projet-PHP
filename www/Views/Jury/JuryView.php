@@ -1,12 +1,15 @@
 <?php
-$doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include $doc_root.'/Utils/HelperUtils.php';
-include $doc_root.'/Utils/database.php';
-start_page("Jury");
-navbar();
 
+$doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
+include '../../Utils/HelperUtils.php';
+include '../../Utils/Database.php';
+include '../../Models/IdeaModel.php';
+start_page("test");
+navbar();
+$ideaModel = new IdeaModel();
 $query = 'SELECT * FROM IDEA';
-$Result = database::execute_query($query);
+$Result = database::executeQuery($query);
+var_dump($Result);
 ?>
     <div class="container" style="margin-top: 5px">
         <table>
@@ -24,7 +27,7 @@ $Result = database::execute_query($query);
             <tbody>
             <?php foreach ($Result as $res){?>
             <tr>
-                <td><?php echo $res['TITLE']?> </td>
+                <td><?php var_dump($res['TITLE']);?> </td>
                 <td><a class="button outline primary">Voir</a></td>
                 <td><a class="button outline primary">Mettre en oeuvre</a></td>
                 <td><a class="button outline">Abandonner</a></td>

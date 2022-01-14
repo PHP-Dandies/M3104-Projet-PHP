@@ -3,7 +3,7 @@ $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FI
 include $doc_root.'/Utils/HelperUtils.php';
 start_page("test");
 navbar();
-/** @var TYPE_NAME $data */
+/** @var array $data */
 $user = $data[0];
 ?>
     <div class="container" style="margin-top: 5px">

@@ -1,7 +1,37 @@
 <?php
+
 include('../Utils/AutoLoader.php');
 
-class UserController {
+class UserController
+{
+    public function __construct(){
+    }
+
+    public function isSubmite($login, $password) : bool
+    {
+        $model = new UserModel();
+        if ($model->isLogin($login))
+        {
+
+            if($model->isPassword($login, $password))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function changePassword($password)
+    {
+        //changer le password
+        // Mano le fait
+    }
+
+    public function register($login, $password)
+    {
+
+    }
+
     public function read() : void {
         $users = UserModel::get_users();
         ViewHelper::display(
@@ -20,10 +50,13 @@ class UserController {
             $user
         );
     }
-    public function  userManagement(): void {
+
+    public function login() : void
+    {
         ViewHelper::display(
-            $this,
-            'Read',
+        $this,
+            'Login',
+            array()
         );
     }
 }

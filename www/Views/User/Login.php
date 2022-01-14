@@ -1,6 +1,6 @@
 <?php
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include '../HelperUtils.php';
+include substr($doc_root,0, -6) . '/Utils/AutoLoader.php';
 start_page("test");
 navbar();
 ?>
@@ -14,15 +14,15 @@ navbar();
             <div class="container2">
                 <div class="form">
                     <h2>Login</h2>
-                    <form>
+                    <form action="../../Scripts/CheckCredentials.php" method="post">
                         <div class="inputBox">
-                            <input type="text" placeholder="Identifiant">
+                            <input type="text" name="login" placeholder="Identifiant">
                         </div>
                         <div class="inputBox">
-                            <input type="password" placeholder="Mot de Passe">
+                            <input type="password" name="password" placeholder="Mot de Passe">
                         </div>
                         <div class="inputBox">
-                            <input type="submit" value="Login">
+                            <input type="submit" name="submit" value="submit">
                         </div>
                         <p class="forget">Mot de passe oublié ? <a href="PasswordChangeView.php">Clique Ici</a></p>
                     </form>

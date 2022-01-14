@@ -3,9 +3,9 @@ spl_autoload_register(static function ($name) {
     $projectDir = substr(__DIR__, 0, -6);
 
     foreach (glob("../Utils/*.php") as $fileName) {
-        if (strpos($fileName, 'CustomAutoLoad.php') <= 0) {
+//        if (strpos($fileName, 'CustomAutoLoad.php') <= 0) {
             include_once $fileName;
-        }
+//        }
     }
 
     $fileName = "";
@@ -19,7 +19,7 @@ spl_autoload_register(static function ($name) {
     else if (str_contains($name, "View")) {
         $fileName = $projectDir . '/Views/'. $name;
     } else {
-        $fileName = $projectDir . $name;
+        $fileName = $projectDir . '/Utils/' . $name;
     }
 
     $fileName .= '.php';

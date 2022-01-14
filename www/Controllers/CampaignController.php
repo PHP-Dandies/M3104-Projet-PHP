@@ -14,6 +14,7 @@ class CampaignController {
             $campaigns
         );
     }
+    //verifier que la derniere date est terminé dans la base de donée
 
     public function create(): void
     {

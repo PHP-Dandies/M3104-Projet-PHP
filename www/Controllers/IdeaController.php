@@ -16,6 +16,8 @@ class IdeaController {
         );
     }
 
+
+
     public function create() {
         ViewHelper::display(
             $this,
