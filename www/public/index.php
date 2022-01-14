@@ -11,11 +11,18 @@ try {
             exit;
         }
         $url = explode('/', $url);
-
     }
     if ($url === '') {
         echo 'acceuil';
-    }else if($url[0] === 'login' && !isset($url[1])){
+    }
+    var_dump($url);
+    die();
+    if($url)
+    if ($url[0] === 'test' && !isset($url[1])){
+        include '../Views/User/ModificationReussie.php';
+    }
+    else if($url[0] === 'login' && !isset($url[1]))
+    {
         $controller = new UserController();
         $controller->login();
     }

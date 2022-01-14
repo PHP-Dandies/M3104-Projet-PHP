@@ -60,4 +60,13 @@ class UserController
             array()
         );
     }
+
+    public function test() : void
+    {
+        ViewHelper::display(
+            $this,
+            'ModificationReussie',
+            array()
+        );
+    }
 }

@@ -6,8 +6,8 @@ const DB_PASS = "Gca7gPeAU9bU";
 const DB_NAME = "PHP";
 */
 const DB_HOST = "localhost";
-const DB_LOGIN = "root";
-const DB_PASS = "root";
+const DB_LOGIN = "admin";
+const DB_PASS = "admin";
 const DB_NAME = "eevent_io";
 
 class Database
