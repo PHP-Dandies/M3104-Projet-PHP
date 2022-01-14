@@ -10,7 +10,7 @@ class OrgaController {
         $campaign_id = CampaignModel::get_running_campaing();
         $ideas = IdeaModel::get_ideas($campaign_id);
         $my_ideas = array();
-        if (isset($_SESSION("UID"))) {
+        if (isset($_SESSION["UID"])) {
             foreach ($ideas as $idea) {
                 if ($idea['USER'] == $_SESSION['UID']) {
                     $my_ideas[] = $idea;
