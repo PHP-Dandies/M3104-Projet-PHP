@@ -7,10 +7,17 @@ $ideas = $data;
 navbar();
 ?>
     <div class="container" style="margin-top: 5px">
-        <table>
+        <details class=dropdown>
+            <summary  class="button success">A propos ↓ </summary>
+            <div class=card>
+                Bienvenue sur E-event_io ! Un site fabuleux où il fait bon vivre. C'est du remplissage parce que j'ai mieux à faire
+                mais voilà je pensais à un résumé de ce que fait le site web  ou un truc comme ça
+            </div>
+        </details>
+                <table>
             <thead>
                 <tr>
-                    <th>Bienvenue sur notre site </th>
+                    <th class="text-center">Liste des idées disponibles</th>
                 </tr>
             </thead>
             <tbody>
