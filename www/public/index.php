@@ -8,8 +8,6 @@ try {
     $url = '';
     if (isset($_GET['url'])) {
         $url = $_GET['url'];
-        var_dump($url);
-        die();
         $url = explode('/', $url);
         if (str_contains($url[0], "Scripts")) {
             include '../' . $url;
@@ -18,7 +16,26 @@ try {
     }
 
     if ($url === '') {
-        echo 'acceuil';
+        echo 'a';
+    } elseif ($url[0] === 'admin') {
+        $controller = new AdminController();
+        if (!isset($url[1])) {
+            $controller->readIndex();
+        } elseif ($url[1] === 'campagnes') {
+            if (!isset($url[2])) {
+                $controller->readCampaigns();
+            } elseif (is_numeric($url[2])) {
+                if (!isset($url[3])) {
+                    $controller->readIdeas($url[2]);
+                } elseif () {
+                    // campaign/Y/ideeX
+                }
+            } elseif ($url[2] === 'creer' && !isset($url[3])) {
+                $controller->createCampaign();
+            }
+        } elseif ($url[1] === 'utilisateurs' && !isset($url[2])) {
+            $controller->readUsers();
+        }
     } else if ($url[0] === 'login' && !isset($url[1])) {
         $controller = new UserController();
         $controller->login();
