@@ -8,12 +8,12 @@ navbar();
     <h1 class="text-center"> Espace Administrateur </h1>
     <br>
     <div class="text-center">
-        <a href="campaign/create">
+        <a href="admin/campaign">
     <button class="button success"> Créer une nouvelle campagne </button>
         </a>
         <br>
         <br>
-        <a href="users/usermanagement">
+        <a href="admin/usermanagement">
     <button class="button error"> Gérer les utlisateurs </button>
         </a>
 </div>

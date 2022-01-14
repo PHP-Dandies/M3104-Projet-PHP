@@ -25,10 +25,17 @@ try {
         $controller = new UserController();
         $controller->userManagement();
 
-
+// admin
     } else if ($url[0] ==='admin' && !isset($url[1])) {
         $controller = new AdminController();
         $controller->read();
+    } else if ($url[0] ==='admin' && !empty($url) && $url[1]=== 'campaign') {
+        $controller = new CampaignController();
+        $controller->create();
+
+    } else if ($url[0] ==='admin' && !empty($url) && $url[1]=== 'usermanagement') {
+        $controller = new UserController();
+        $controller->userManagement();
 
     } else if ($url[0] === 'campaigns') {
         $controller = new CampaignController();
