@@ -1,6 +1,6 @@
 <?php
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include $doc_root.'/Classes/User/User.php';
+include substr($doc_root,0,-6).'/Classes/User/User.php';
 class UserModel
 {
     public function __construct()

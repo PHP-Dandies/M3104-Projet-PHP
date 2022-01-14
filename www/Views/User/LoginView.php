@@ -1,9 +1,9 @@
 <?php
-$doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include '../../Utils/HelperUtils.php';
-include '../../Controllers/UserController.php';
 start_page("test");
 navbar();
+/** @var array $data */
+$loginError = $data;
+var_dump($loginError);
 ?>
     <section>
         <div class="box">
@@ -15,7 +15,8 @@ navbar();
             <div class="container2">
                 <div class="form">
                     <h2>Login</h2>
-                    <form action="../../Controllers/LoginController.php" method="post">
+                    <form method="POST" action="<?php SITE_URL ?>?controller=User&action=login">
+                        <?php if($loginError === ""?>
                         <div class="inputBox">
                             <input type="text" name="login" placeholder="Identifiant">
                         </div>

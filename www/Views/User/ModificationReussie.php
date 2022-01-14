@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if(!isset($_SESSION["suid"]))
+if(!isset($_SESSION["user"]))
 {
     die('Rentrer sans session');
 }
