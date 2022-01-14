@@ -48,7 +48,6 @@ try {
         $controller->create();
     } else if ($url[0] === 'orga' && empty($url[1])) {
         $controller = new OrgaController();
-        echo "test";
         $controller->ReadMine();
     } else {
         echo '404';

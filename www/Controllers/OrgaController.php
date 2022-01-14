@@ -18,7 +18,10 @@ class OrgaController {
             }
         } else {
             header('Location: /');
+            die();
         }
+
+        echo "test";
 
         ViewHelper::display(
             $this,
