@@ -5,7 +5,6 @@ include('../Utils/Database.php');
 $title = $_POST['title'];
 $description = $_POST['caption'];
 $goal = $_POST['goal'];
-$picture = $_POST['image'];
 
 // Where the file is going to be placed
 $file = time().'.'.substr(strrchr($_FILES['image']['name'], '.'), 1);
