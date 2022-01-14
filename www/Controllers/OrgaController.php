@@ -22,7 +22,7 @@ class OrgaController {
 
         ViewHelper::display(
             $this,
-            'ReadMine',
+            'ReadMineView',
             $my_ideas
         );
     }
