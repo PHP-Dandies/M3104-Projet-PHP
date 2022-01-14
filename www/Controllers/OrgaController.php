@@ -7,7 +7,7 @@ class OrgaController {
      * @throws Exception
      */
     public function readMine(): void {
-        $campaign_id = CampaignModel::get_running_campaing()
+        $campaign_id = CampaignModel::get_running_campaing();
         $ideas = IdeaModel::get_ideas($campaign_id);
         $my_ideas = array();
         if (isset($_SESSION("UID"))) {
