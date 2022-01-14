@@ -1,26 +1,36 @@
 <?php
-include('../Utils/AutoLoader.php');
-class JuryController
-{
-    public function
 
+include('../Utils/AutoLoader.php');
+
+class JuryController {
+    /**
+     * @throws Exception
+     */
     public function read(): void
     {
-        $users = UserModel::get_users();
+        $ideas = JuryModel::getIdeas();
+        $viewName = 'ReadAll';
+
+        if (empty($ideas)) {
+            $viewName = 'NoCampaign';
+        }
+
         ViewHelper::display(
             $this,
-            'Read',
-            $users
+            $viewName,
+            $ideas
         );
     }
 
-    public function editUser(int $id): void
-    {
-        $user = UserModel::get_user($id);
+    /**
+     * @throws Exception
+     */
+    public function readOne($id) : void {
+        $idea = JuryModel::getIdea($id);
         ViewHelper::display(
             $this,
-            'Edit',
-            $user
+            'ReadOne',
+            $idea
         );
     }
 }

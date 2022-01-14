@@ -1,7 +1,6 @@
 <?php
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include '../../Utils/HelperUtils.php';
-include '../../Controllers/UserController.php';
+include substr($doc_root,0, -6) . '/Utils/AutoLoader.php';
 start_page("test");
 navbar();
 ?>
@@ -15,7 +14,7 @@ navbar();
             <div class="container2">
                 <div class="form">
                     <h2>Login</h2>
-                    <form action="../../Controllers/LoginController.php" method="post">
+                    <form action="../../Scripts/CheckCredentials.php" method="post">
                         <div class="inputBox">
                             <input type="text" name="login" placeholder="Identifiant">
                         </div>
