@@ -14,6 +14,7 @@ try {
     }
 
     if ($url === '') {
+        var_dump($_GET['url']);
         echo 'acceuil';
     } else if ($url[0] === 'jury' && !isset($url[1])) {
         JuryController::read();
@@ -46,6 +47,9 @@ try {
     } else if ($url[0] === 'idea' && !empty($url[1]) && $url[1] === 'create') {
         $controller = new IdeaController();
         $controller->create();
+    } else if ($url[0] === 'orga' && empty($url[1])) {
+        $controller = new OrgaController();
+        $controller->ReadMine();
     } else {
         echo '404';
     }
