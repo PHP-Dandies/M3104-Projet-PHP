@@ -60,7 +60,7 @@ try {
         $controller = new IdeaController();
         $controller->create();
     } else {
-        echo '404';
+        include '../Views/Error/404.php';
     }
 } catch (Exception $e) {
     echo $e->getMessage();
