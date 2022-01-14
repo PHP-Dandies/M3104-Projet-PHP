@@ -1,6 +1,6 @@
 <?php
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include '../../Utils/HelperUtils.php';
+include '../Utils/HelperUtils.php';
 start_page("test");
 navbar();
 ?>
@@ -24,8 +24,8 @@ navbar();
                         <div class="inputBox">
                             <input type="submit" value="Login">
                         </div>
-                        <p class="forget">Mot de passe oublié ? <a href="PasswordChangeView.php">Clique Ici</a></p>
-                        <p class="forget">Vous n'avez pas de compte ? <a href="RegistrationView.php">S'inscrire</a></p>
+                        <p class="forget">Mot de passe oublié ? <a href="../Views/User/PasswordChangeView.php">Clique Ici</a></p>
+                        <p class="forget">Vous n'avez pas de compte ? <a href="../Views/User/RegistrationView.php">S'inscrire</a></p>
                     </form>
                 </div>
             </div>

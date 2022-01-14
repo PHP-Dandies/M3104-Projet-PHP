@@ -5,7 +5,7 @@ start_page("test");
 navbar();
 $campaigns = $data;
 ?>
-    <div class="container" style="margin-top: 5px">
+    <div class="container-privet" style="margin-top: 5px">
         <h1 class="text-center"> Campagnes en cours </h1>
         <?php
         echo'    <table class="striped">'.PHP_EOL;

@@ -1,13 +1,15 @@
+
+
 <?php
 function start_page($title)
 {
     echo '<!DOCTYPE html>'.PHP_EOL;
     echo '<html lang="fr">'.PHP_EOL;
     echo '<head>'.PHP_EOL;
-    echo '    <meta charset="UTF-8">'.PHP_EOL;
+    echo '    <meta charset="utf-8">'.PHP_EOL;
     echo '    <link rel="stylesheet" href="https://unpkg.com/chota@latest">'.PHP_EOL;
-    echo '    <link rel="stylesheet" href="/PhP_Dandies/www/CSS/style.css" type="text/css" media="all">'.PHP_EOL;
-    echo '    <link rel="stylesheet" href="/PHP_Dandies/www/CSS/style2.css" type="text/css" media="all">'.PHP_EOL;
+    echo '    <link rel="stylesheet" href="/CSS/style.css" type="text/css" media="all">' .PHP_EOL;
+    echo '    <link rel="stylesheet" href="/CSS/style2.css" type="text/css" media="all">' .PHP_EOL;
     echo '    <title>'.$title.'</title>'.PHP_EOL;
     echo '</head>'.PHP_EOL;
     echo '<body style="min-height: 100vh">'.PHP_EOL;

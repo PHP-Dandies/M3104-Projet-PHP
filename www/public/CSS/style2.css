@@ -95,3 +95,28 @@ label span {
     text-shadow: 0 1px 2px #fff;
     cursor: pointer;
 }
+
+.container2 .form .custom-selector {
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+    color: #888;
+}
+
+.custom-selector select {
+    width: 200px;
+    min-height: 35px;
+    background: #cbe7ff;
+    border-radius: 3px;
+    border: 2px solid #2196f3;
+    outline: none;
+    padding: 0 10px;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.container-privet {
+ color: rebeccapurple;
+    cursor: pointer;
+}
