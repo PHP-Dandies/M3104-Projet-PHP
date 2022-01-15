@@ -61,6 +61,17 @@ class AdminController
     }
 
     /**
+     * @param $ideaID
+     * @return void
+     */
+    public function readModifyIdea($ideaID) : void {
+        ViewHelper::display(
+            $this,
+            'M'
+        );
+    }
+
+    /**
      * @return void
      * @throws Exception
      */

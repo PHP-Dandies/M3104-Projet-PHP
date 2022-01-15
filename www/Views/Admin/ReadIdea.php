@@ -27,14 +27,7 @@ navbar();
                         <h3>Organisateur : <?php echo $data["USER"]["USERNAME"] ?></h3>
                         <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $idea["GOAL"] ?>"></progress>
                         <p><?php echo $idea["TOTAL_POINTS"] ?> sur <?php echo $idea["GOAL"]?> pts</p>
-                    </div>
-                    <div class="card" style="margin-top: 5px">
-                        <form action="../../Scripts/UserVote.php?id=<?php echo $idea["IDEA_ID"] ?>" method="post">
-                            <label>
-                                <input name="pts" type="number">
-                            </label>
-                            <input type="submit" value="Donner">
-                        </form>
+                        <a href="idee<?php echo $idea['IDEA_ID']; ?>/modify"><button class="inputBox">Modifier</button></a>
                     </div>
                     <?php
                     if (isset($data["CONTENTS"])) {
@@ -53,12 +46,6 @@ navbar();
             </div>
             <div class="is_vertical_align" style="margin-top: 5px">
                 <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white">Commentaires</h1>
-                <form action="../../Scripts/AddComment.php?idea_id=<?php echo $idea["IDEA_ID"] ?> "method="post">
-                    <label>
-                        <input name="comment" placeholder="Laissez un commentaire">
-                    </label>
-                    <input type="submit" class="square">
-                </form>
                 <?php
                 foreach ($comments as $comment) { ?>
                     <div class="is_vertical_align">

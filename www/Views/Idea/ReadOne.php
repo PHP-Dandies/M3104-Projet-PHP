@@ -53,7 +53,7 @@ navbar();
             </div>
             <div class="is_vertical_align" style="margin-top: 5px">
                 <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white">Commentaires</h1>
-                <form action="../../Scripts/AddComment.php?idea_id=<?php echo $idea["IDEA_ID"] ?> "method="post">
+                <form action="?controller=Public&action=addComment" method="post">
                     <label>
                         <input name="comment" placeholder="Laissez un commentaire">
                     </label>
