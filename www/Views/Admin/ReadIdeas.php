@@ -10,7 +10,7 @@ if (empty($ideas)) {
 } else {
 ?>
     <div class="container" style="margin-top: 5px">
-        <table>
+        <table class="table-auto">
             <thead>
             <tr>
                 <th>Idées</th>

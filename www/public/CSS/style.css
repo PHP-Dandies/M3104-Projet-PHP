@@ -1,3 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.product-name {
+    @apply p-5 h-screen bg-gray-100
+}
 
 section {
     display: flex;
@@ -269,10 +276,6 @@ tr .row100 head {
     font-family: 'Poppins', sans-serif;
 }
 
-body {
-    background: linear-gradient(45deg, #8500ff, #5acaff);
-    height: 100vh;
-}
 #container4 {
     position: absolute;
     /*top: 10%;

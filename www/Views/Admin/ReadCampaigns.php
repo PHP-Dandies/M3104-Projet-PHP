@@ -5,18 +5,30 @@ start_page("test");
 navbar();
 $campaigns = $data;
 ?>
-    <div class="container" style="margin-top: 5px">
-        <h1 class="text-center"> Campagnes en cours </h1>
+        <h1 class="p-5 h-screen bg-gray-100"> Campagnes en cours </h1>
         <?php
-        echo'    <table class="striped">'.PHP_EOL;
+        echo '<template>'.PHP_EOL;
+        echo '    <div class="p-5 h-screen bg-gray-100">'.PHP_EOL;
+        echo '        <table class="w-full">'.PHP_EOL;
+        echo '            <thead class="bg-gray-50 border-b-2 border-gray-200">'.PHP_EOL;
+        echo '                <tr>'.PHP_EOL;
+        echo '                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Titre</th>'.PHP_EOL;
+        echo '                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Date de début</th>'.PHP_EOL;
+        echo '                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Date de fin</th>'.PHP_EOL;
+        echo '                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Bouton</th>'.PHP_EOL;
+        echo '                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Bouton</th>'.PHP_EOL;
+        echo '                </tr>'.PHP_EOL;
+        echo '            </thead>'.PHP_EOL;
         foreach ($campaigns as $campaign){
-            echo'        <tr>'.PHP_EOL;
-            echo'            <td>'.$campaign["TITLE"].'</td>'.PHP_EOL;
-            echo'            <td>'.$campaign["BEG_DATE"].'</td>'.PHP_EOL;
-            echo'            <td>'.$campaign["END_DATE"].'</td>'.PHP_EOL;
-            echo'            <td><a href="campagnes/' . $campaign["CAMPAIGN_ID"] . '" class="button error">Modifier</a></td>'.PHP_EOL;
-            echo'            <td><a href="campagnes/' . $campaign["CAMPAIGN_ID"] . '/modifier" class="button error">Modifier</a></td>'.PHP_EOL;
-            echo'        </tr>'.PHP_EOL;
+            echo '        <tbody class="divide-y divide-gray-100">'.PHP_EOL;
+            echo '            <tr class="bg-white">'.PHP_EOL;
+            echo '                <td class="p-3 text-sm text-gray-700"><spam class="p-1.5 text-xs font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-lg bg-opacity-50">'.$campaign["TITLE"].'</spam></td>'.PHP_EOL;
+            echo '                <td class="p-3 text-sm text-gray-700">'.$campaign["BEG_DATE"].'</td>'.PHP_EOL;
+            echo '                <td class="p-3 text-sm text-gray-700">'.$campaign["END_DATE"].'</td>'.PHP_EOL;
+            echo '                <td class="p-3 text-sm text-gray-700"><a class="font-bold text-blue-500 hover:underline" href="campagnes/' . $campaign["CAMPAIGN_ID"] . '" class="button error">Modifier</a></td>'.PHP_EOL;
+            echo '                <td class="p-3 text-sm text-gray-700"><a class="font-bold text-blue-500 hover:underline" href="campagnes/' . $campaign["CAMPAIGN_ID"] . '/modifier" class="button error">Modifier</a></td>'.PHP_EOL;
+            echo '            </tr>'.PHP_EOL;
+            echo '        </tbody>'.PHP_EOL;
         }
         echo'    </table>'.PHP_EOL;
         ?>
@@ -34,7 +46,6 @@ $campaigns = $data;
                     </a></p>
             </div>
         </details>
-    </div>
 <?php
 end_page();
 ?>
