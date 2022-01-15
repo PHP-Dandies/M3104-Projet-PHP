@@ -6,7 +6,8 @@ class IdeaController {
     /**
      * @throws Exception
      */
-    public function readAll($campaign_id): void {
+    public function read($campaign_id) {
+        'SELECT * FROM IDEA WHERE CAMPAIGN_ID = ' . $campaign_id;
         $ideas = IdeaModel::get_ideas($campaign_id);
         ViewHelper::display(
             $this,
@@ -15,21 +16,9 @@ class IdeaController {
         );
     }
 
-    /**
-     * @throws Exception
-     */
-    public function read($idea_id): void
-    {
-        $ideas = IdeaModel::get_idea($idea_id);
-        ViewHelper::display(
-            $this,
-            'ReadOne',
-            $ideas
-        );
-    }
 
-    public function create(): void
-    {
+
+    public function create() {
         ViewHelper::display(
             $this,
             'Create',

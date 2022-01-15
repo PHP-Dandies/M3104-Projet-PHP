@@ -40,6 +40,28 @@ class Database
         return mysqli_query(self::$connection, $query);
     }
 
+
+    public static function executeCount($query): int
+    {
+        if (preg_match_all('/INSERT|UPDATE|DELETE/i', $query) > 0) {
+            self::closeConnection();
+            throw new \RuntimeException("For any modification of the base use database::mysqli_update");
+        }
+
+        if (!self::$connection) {
+            self::openConnection();
+        }
+
+        $db_result = mysqli_query(self::$connection, $query);
+        if (!$db_result) {
+            self::closeConnection();
+            throw new \RuntimeException('Something went wrong with query : ' . $query . PHP_EOL, 2);
+        }
+
+        return intval(mysqli_fetch_assoc($db_result)["COUNT(*)"]);
+    }
+
+
     // for any other query
     /**
      * @throws Exception
@@ -56,7 +78,6 @@ class Database
         }
 
         $db_result = mysqli_query(self::$connection, $query);
-
         if (!$db_result) {
             self::closeConnection();
             throw new \RuntimeException('Something went wrong with query : ' . $query . PHP_EOL, 2);

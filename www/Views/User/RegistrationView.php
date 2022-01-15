@@ -1,6 +1,6 @@
 <?php
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include '../HelperUtils.php';
+include $doc_root . '/Utils/HelperUtils.php';
 start_page("test");
 navbar();
 ?>

@@ -6,9 +6,8 @@ class CampaignModel {
     /**
      * @throws Exception
      */
-    public static function get_campaigns() : array {
-        $query = 'SELECT * FROM CAMPAIGN;';
-        return Database::executeQuery($query);
+    public static function fetchCampaigns() : array {
+        return Database::executeQuery("SELECT * FROM CAMPAIGN;");
     }
 
     public static function get_running_campaing() {
