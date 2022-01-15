@@ -1,8 +1,8 @@
 <?php
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include $doc_root . '/Utils/HelperUtils.php';
-start_page("test");
+include substr($doc_root, 0, -6).'/Utils/AutoLoader.php';start_page("test");
 navbar();
+
 $users = array(array('USER_ID'  => 1, 'USERNAME' => 'toto', 'PASSWORD' => 'password', 'ROLE' => 'admin', 'AVAILABLE_POINTS' => 200, 'EMAIL' => 'test@example.com'),
     array('USER_ID'  => 2, 'USERNAME' => 'tata', 'PASSWORD' => 'password', 'ROLE' => 'admin', 'AVAILABLE_POINTS' => 200, 'EMAIL' => 'test1@example.com'),
     array('USER_ID'  => 3, 'USERNAME' => 'titi', 'PASSWORD' => 'password', 'ROLE' => 'admin', 'AVAILABLE_POINTS' => 200, 'EMAIL' => 'test2@example.com'));

@@ -2,7 +2,7 @@
 
 include('../Utils/AutoLoader.php');
 
-class JuryController {
+class OrganizerController {
     /**
      * @throws Exception
      */
@@ -25,12 +25,19 @@ class JuryController {
     /**
      * @throws Exception
      */
-    public function readOne($id) : void {
-        $idea = JuryModel::getIdea($id);
+    public function create() : void {
         ViewHelper::display(
             $this,
-            'ReadOne',
-            $idea
+            'Create',
+            array()
+        );
+    }
+
+    public function modify() : void {
+        ViewHelper::display(
+            $this,
+            'Edit',
+            array()
         );
     }
 }

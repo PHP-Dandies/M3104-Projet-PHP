@@ -6,7 +6,7 @@ const BEG_DATE = 'BEG_DATE';
 const END_DATE = 'END_DATE';
 
 class Campaign {
-    private string $id;
+    private int $id;
     private string $name;
     private string $beg_date;
     private string $end_date;

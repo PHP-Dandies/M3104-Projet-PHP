@@ -1,9 +1,8 @@
 <?php
+$doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
+include substr($doc_root,0, -6) . '/Utils/AutoLoader.php';
 start_page("test");
 navbar();
-/** @var array $data */
-$loginError = $data;
-var_dump($loginError);
 ?>
     <section>
         <div class="box">
@@ -15,8 +14,7 @@ var_dump($loginError);
             <div class="container2">
                 <div class="form">
                     <h2>Login</h2>
-                    <form method="POST" action="<?php SITE_URL ?>?controller=User&action=login">
-                        <?php if(empty($loginError)){ echo $loginError; }?>
+                    <form action="../../Scripts/CheckCredentials.php" method="post">
                         <div class="inputBox">
                             <input type="text" name="login" placeholder="Identifiant">
                         </div>
