@@ -31,7 +31,7 @@ class UserModel
         return $user;
     }
 
-    function getUserByUsername ($username): User
+    static function getUserByUsername ($username): User
     {
         $query = database::executeQuery("SELECT * FROM USER WHERE USERNAME = '$username' ;")[0];
         $user = new User($query['USER_ID'],

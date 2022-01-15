@@ -5,10 +5,10 @@ const DB_LOGIN = "PHP";
 const DB_PASS = "Gca7gPeAU9bU";
 const DB_NAME = "PHP";
 */
-const DB_HOST = "localhost";
-const DB_LOGIN = "admin";
-const DB_PASS = "admin";
-const DB_NAME = "eevent_io";
+const DB_HOST = "mysql-ozeliurs.alwaysdata.net";
+const DB_LOGIN = "ozeliurs";
+const DB_PASS = "rCfB7pnRrY2UmQR";
+const DB_NAME = "ozeliurs_eevent_io";
 
 class Database
 {

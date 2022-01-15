@@ -1,5 +1,4 @@
 RewriteEngine On
-ErrorDocument 404 "J'ai mangé mon frère ..."
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
