@@ -2,7 +2,7 @@
 
 require_once('../Utils/AutoLoader.php');
 
-class CampaignController {
+class CampaignController extends AbstractController {
     /**
      * @throws Exception
      */

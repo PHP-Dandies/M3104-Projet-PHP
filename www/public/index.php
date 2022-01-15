@@ -4,23 +4,53 @@ session_start();
 
 require_once('../Utils/AutoLoader.php');
 
-
 try {
     $url = '';
     if (isset($_GET['url'])) {
         $url = $_GET['url'];
-        if (str_contains($url, "Scripts")) {
-            include '../' . $url;
-            exit;
-        }
         $url = explode('/', $url);
     }
-    if ($url === '') {
-        $controller = new PublicController();
-        $controller->readIdeas(5);
+    if (isset($_GET['controller'], $_GET['action'])) {
+        $controllerName = $_GET["controller"] . 'Controller';
+        $controller = new $controllerName();
+
+        $actionName = $_GET["action"];
+        $controller->$actionName();
+    } elseif ($url === '') {
+        echo 'a';
+    } elseif ($url[0] === 'admin') {
+        $controller = new AdminController();
+        if (!isset($url[1])) {
+            $controller->readIndex();
+        } elseif ($url[1] === 'campagnes') {
+            if (!isset($url[2])) {
+                $controller->readCampaigns();
+            } elseif (is_numeric($url[2])) {
+                if (!isset($url[3])) {
+                    $controller->readIdeas($url[2]);
+                } elseif (str_contains($url[3], 'idee')) {
+                    if (!isset($url[4])) {
+                        $controller->readIdea(substr($url[3], -1));
+                    } elseif ($url[4] === 'modify' && !isset($url[5])) {
+                        $controller->readModifyIdea(substr($url[3], -1));
+                    }
+                } elseif ($url[3] === 'modifier' && !isset($url[4])) {
+                    $controller->readModifyCampaign($url[2]);
+                }
+            }
+        } elseif ($url[1] === 'utilisateurs' && !isset($url[2])) {
+            $controller->readUsers();
+        }
     } else if ($url[0] === 'login' && !isset($url[1])) {
         $controller = new UserController();
         $controller->login();
+    } else if ($url[0] === 'organisateur') {
+        $controller = new OrganizerController();
+        if (!isset($url[1])) {
+            $controller->read();
+        } else if ($url[1] === 'creer') {
+            $controller->create();
+        }
     } else if ($url[0] === 'jury') {
         if (!isset($_SESSION['suid'])) {
             header('Location: /login');
@@ -28,7 +58,7 @@ try {
         $controller = new JuryController();
         if (!isset($url[1])) {
             $controller->read();
-        } else if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])){
+        } else if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])) {
             $controller->readOne($url[2]);
         }
     } else if ($url[0] === 'users' && !isset($url[1])) {
@@ -37,21 +67,6 @@ try {
     } else if (isset($url[1], $url[2]) && $url[0] === 'users' && $url[1] === 'modify' && is_numeric($url[2])) {
         $controller = new UserController();
         $controller->editUser($url[2]);
-    } else if ($url[0] === 'users' && !empty($url) && $url[1] === 'usermanagement') {
-        $controller = new UserController();
-        $controller->userManagement();
-// admin
-    } else if ($url[0] ==='admin' && !isset($url[1])) {
-        $controller = new AdminController();
-        $controller->read();
-    } else if ($url[0] ==='admin' && !empty($url) && $url[1]=== 'campaign') {
-        $controller = new CampaignController();
-        $controller->create();
-
-    } else if ($url[0] ==='admin' && !empty($url) && $url[1]=== 'usermanagement') {
-        $controller = new UserController();
-        $controller->userManagement();
-
     } else if ($url[0] === 'campaigns') {
         $controller = new CampaignController();
         if (!isset($url[1])) {
@@ -68,13 +83,16 @@ try {
             }
         }
     } else if ($url[0] === 'ideas') {
-        if (!empty($url) && is_numeric($url[1])) {
+        if (!empty($url[1]) && is_numeric($url[1])) {
             $controller = new IdeaController();
             $controller->read($url[1]);
         }
     } else if ($url[0] === 'idea' && !empty($url[1]) && $url[1] === 'create') {
         $controller = new IdeaController();
         $controller->create();
+    } else if ($url[0] === 'orga' && empty($url[1])) {
+        $controller = new OrgaController();
+        $controller->ReadMine();
     } else {
         echo '404';
     }
