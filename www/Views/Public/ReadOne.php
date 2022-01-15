@@ -28,6 +28,7 @@ navbar();
                         <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $idea["GOAL"] ?>"></progress>
                         <p><?php echo $idea["TOTAL_POINTS"] ?> sur <?php echo $idea["GOAL"]?> pts</p>
                     </div>
+                    <?php if ($_SESSION['role'] === 'DONATEUR'){ ?>
                     <div class="card" style="margin-top: 5px">
                         <form action="../../Scripts/UserVote.php?id=<?php echo $idea["IDEA_ID"] ?>" method="post">
                             <label>
@@ -36,7 +37,7 @@ navbar();
                             <input type="submit" value="Donner">
                         </form>
                     </div>
-                    <?php
+                    <?php }
                     if (isset($data["CONTENTS"])) {
                         foreach($data["CONTENTS"] as $content) {
                             ?>
@@ -51,6 +52,7 @@ navbar();
                     ?>
                 </div>
             </div>
+        <?php if ($_SESSION['role'] === 'DONATEUR'){ ?>
             <div class="is_vertical_align" style="margin-top: 5px">
                 <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white">Commentaires</h1>
                 <form action="?controller=Public&action=addComment" method="post">
@@ -69,6 +71,7 @@ navbar();
                 }
                 ?>
             </div>
+    <?php } ?>
         </div>
     </div>
 <?php
