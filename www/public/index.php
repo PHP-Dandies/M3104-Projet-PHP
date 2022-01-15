@@ -9,13 +9,12 @@ try {
     if (isset($_GET['url'])) {
         $url = $_GET['url'];
         $url = explode('/', $url);
-        if (str_contains($url[0], "Scripts")) {
-            include '../' . $url;
-            exit;
-        }
     }
 
-    if ($url === '') {
+    if (isset($_GET['controller'], $_GET['action'])) {
+        $controller = $_GET["controller"]();
+        $controller->$_GET["action"]();
+    } elseif ($url === '') {
         echo 'a';
     } elseif ($url[0] === 'admin') {
         $controller = new AdminController();
@@ -57,7 +56,7 @@ try {
         $controller = new JuryController();
         if (!isset($url[1])) {
             $controller->read();
-        } else if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])){
+        } else if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])) {
             $controller->readOne($url[2]);
         }
     } else if ($url[0] === 'users' && !isset($url[1])) {
