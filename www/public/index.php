@@ -47,7 +47,7 @@ try {
         }
     } else if ($url[0] === 'login' && !isset($url[1])) {
         $controller = new UserController();
-        $controller->login();
+        $controller->Index();
     } else if ($url[0] === 'organisateur') {
         $controller = new OrganizerController();
         if (!isset($url[1])) {
@@ -94,9 +94,6 @@ try {
     } else if ($url[0] === 'idea' && !empty($url[1]) && $url[1] === 'create') {
         $controller = new IdeaController();
         $controller->create();
-    } else if ($url[0] === 'orga' && empty($url[1])) {
-        $controller = new OrgaController();
-        $controller->ReadMine();
     } else {
         echo '404';
     }
