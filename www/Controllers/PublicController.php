@@ -1,8 +1,14 @@
 <?php
 
+require_once('../Utils/AutoLoader.php');
+
 class PublicController
 {
- public function readIdeas ($campaign_id){
+    /**
+     * @throws Exception
+     */
+    public function readIdeas (){
+     $campaign_id = campaignModel::fetchRunningCampaign();
      $ideas = IdeaModel::fetchIdeas($campaign_id);
      ViewHelper::display(
          $this,
@@ -11,8 +17,10 @@ class PublicController
      );
  }
 
-
- public function readIdea ($idea_id){
+    /**
+     * @throws Exception
+     */
+    public function readIdea ($idea_id){
      $idea = IdeaModel::fetchIdea($idea_id);
      ViewHelper::display(
          $this,

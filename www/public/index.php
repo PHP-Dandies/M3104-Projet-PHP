@@ -17,7 +17,11 @@ try {
         $actionName = $_GET["action"];
         $controller->$actionName();
     } elseif ($url === '') {
-        echo 'a';
+        $controller = new PublicController();
+        $controller->readIdeas();
+    } elseif (str_contains($url[0], 'idee') && !isset($url[1])){
+        $controller = new PublicController();
+        $controller->readIdea(substr($url[0], -1));
     } elseif ($url[0] === 'admin') {
         $controller = new AdminController();
         if (!isset($url[1])) {
