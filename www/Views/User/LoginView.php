@@ -16,7 +16,7 @@ var_dump($loginError);
                 <div class="form">
                     <h2>Login</h2>
                     <form method="POST" action="<?php SITE_URL ?>?controller=User&action=login">
-                        <?php if($loginError === ""?>
+                        <?php if(empty($loginError)){ echo $loginError; }?>
                         <div class="inputBox">
                             <input type="text" name="login" placeholder="Identifiant">
                         </div>

@@ -16,7 +16,7 @@ class UserController
             $this,
             'User',
             array(
-                'html_head_title' => 'User/Login',
+                'html_head_title' => 'User/Login'
             )
         );
 
@@ -30,6 +30,7 @@ class UserController
 
     public function login()
     {
+
         $loginError = null;
         $login = $_POST['login'];
         $password = $_POST['password'];
@@ -40,17 +41,16 @@ class UserController
         }
 
         if ($model->isLogin($login)) {
-
             if ($model->isPassword($login, $password)) {
-                session_start();
 
-                $_SESSION["suid"] = session_id();
+//                $_SESSION["suid"] = session_id();
                 $_SESSION['user'] = serialize($login);
                 header('Location: test'); //  #TODO remplacer "test" par le fichier qui accueil l'utilisateur qui se connecte
                  exit();
             }
         }
         else {
+
             $loginError = "Nom d'utilisateur ou mot de passe incorrect";
         }
 
@@ -58,10 +58,10 @@ class UserController
             $this,
             'Login',
             array(
-                $loginError
-            )
+                'loginError' =>  $loginError,
+            ),
         );
-
+        die();
     }
 
     public function logout(){

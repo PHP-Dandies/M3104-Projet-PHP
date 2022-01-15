@@ -18,14 +18,16 @@ try {
 
             $action = $_GET['action'];
             $controller->$action();
-//            var_dump($controller);
-//            die();
         }
     }
 
     if ($url === '') {
         echo 'acceuil';
-    } else if ($url[0] === 'login' && !isset($url[1])) {
+    }
+        if ($url[0] === 'test' && !isset($url[1])){
+        include '../Views/User/ModificationReussie.php';
+    }
+    else if ($url[0] === 'login' && !isset($url[1])) {
         $controller = new UserController();
         $controller->lautre();
     } else if ($url[0] === 'organisateur') {
