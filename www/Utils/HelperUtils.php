@@ -23,7 +23,11 @@ function navbar()
     echo '            <a class="brand" href="/">E-Event.io</a>' .PHP_EOL;
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-right">'.PHP_EOL;
-    echo '              <a class="button primary" href="/?a=login">Login</a>' .PHP_EOL;
+    if (isset($_SESSION['user'])) {
+        echo '              <a class="button primary" href="/logout">Bienvenue '.$_SESSION['user'].'</a>' .PHP_EOL;
+    } else {
+        echo '              <a class="button primary" href="/login">Login</a>' .PHP_EOL;
+    }
     echo '        </div>'.PHP_EOL;
     echo '    </nav>'.PHP_EOL;
 }

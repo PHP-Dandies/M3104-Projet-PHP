@@ -7,8 +7,7 @@ class IdeaModel {
      * @throws Exception
      */
     public static function fetchIdeas($campaignID) : ?array {
-        return Database::executeQuery("SELECT * FROM `idea` WHERE CAMPAIGN_ID = "
-            . $campaignID[0]['CAMPAIGN_ID'] . " ORDER BY TOTAL_POINTS DESC;");
+        return Database::executeQuery('SELECT * FROM `idea` WHERE CAMPAIGN_ID = '.$campaignID[0]['CAMPAIGN_ID'].' ORDER BY TOTAL_POINTS DESC;');
     }
 
 
