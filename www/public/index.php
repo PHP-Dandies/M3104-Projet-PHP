@@ -43,7 +43,7 @@ try {
         }
     } else if ($url[0] === 'login' && !isset($url[1])) {
         $controller = new UserController();
-        $controller->login();
+        $controller->Index();
     } else if ($url[0] === 'organisateur') {
         $controller = new OrganizerController();
         if (!isset($url[1])) {

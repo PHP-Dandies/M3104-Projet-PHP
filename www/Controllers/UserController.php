@@ -9,13 +9,6 @@ class UserController
     {
     }
 
-    public function GetUser() {
-        if( isset($_SESSION['user']) ) {
-            return unserialize($_SESSION['user']);
-        }
-        return null;
-    }
-
     public function login()
     {
         $loginError = null;
@@ -24,16 +17,21 @@ class UserController
         $password = $_POST['password'];
         $model = new UserModel();
 
-        if( $this->GetUser() != null ) {
-            echo 'deja connecté avec Utilisateur : ' . $_SESSION['trueUser'];
+        if( isset($_SESSION['user'])) {
+            echo 'deja connecté avec Utilisateur : ' . $_SESSION['user'];
             header('Location:  ');
             exit();
         }
         if ($model->isLogin($login)) {
 
             if ($model->isPassword($login, $password)) {
-                $_SESSION['user'] = serialize($login);
-                $_SESSION['trueUser'] = $login;
+                $_SESSION['user'] = $login;
+                $_SESSION['id']= UserModel::getId($login);
+                $_SESSION['role']= UserModel::getRole($login);
+                var_dump($_SESSION['id']);
+                var_dump($_SESSION['role']);
+                die();
+
                 header('Location: test'); //  #TODO remplacer "test" par le fichier qui accueil l'utilisateur qui se connecte
                  exit();
             }

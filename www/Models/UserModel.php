@@ -49,6 +49,17 @@ class UserModel
         return $user;
 
     }
+    static function getId($username) : string
+    {
+        $query = database::executeQuery("SELECT USER_ID FROM USER WHERE USERNAME ='$username'")[0];
+        return $query['USER_ID'];
+    }
+
+    static function getRole($username) : string
+    {
+        $query = database::executeQuery("SELECT ROLE FROM USER WHERE USERNAME ='$username'")[0];
+        return $query['ROLE'];
+    }
 
     function isLogin ($username): bool
     {
