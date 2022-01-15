@@ -1,7 +1,7 @@
 <?php
 
 require_once('../Utils/AutoLoader.php');
-class AdminController
+class AdminController extends AbstractController
 {
     /**
      * Displays all the campaigns
@@ -52,22 +52,59 @@ class AdminController
      * Shows the screen to create a campaign
      * @return void
      */
-    public function createCampaign() : void {
+    public function modifyCampaign() : void {
+        $errors = array();
+        if (!empty($_POST)) {
+            /** @var CampaignModel $campaign */
+            $campaign = $this->mapDataPostToClass('CampaignModel');
+            if (date_create($campaign->getBegDate()) > date_create($campaign->getEndDate())
+                || date_create($campaign->getBegDate()) > date_create($campaign->getDelibEndDate())) {
+                $errors['datebeg'] = 'La date de début ne peux pas être supérieure à la date de fin ou de délibération';
+            }
+            if (date_create($campaign->getDelibEndDate()) < date_create($campaign->getEndDate())
+                || date_create($campaign->getDelibEndDate()) < date_create($campaign->getBegDate())) {
+                $errors['dateenddelib'] = 'La date de délibétation ne peux pas'
+                    . ' être inférieure à la date de fin ou de délibération';
+            }
+            if (empty($errors)) {
+                CampaignModel::modifyCampaign($campaign);
+            }
+        } else {
+            throw new \http\Exception\RuntimeException('bad acess');
+        }
         ViewHelper::display(
             $this,
-            'CreateCampaign',
-            array()
+            'EditCampaign',
+            array(
+                'errors' => $errors,
+                'data' => $campaign
+            )
         );
     }
 
     /**
      * @param $ideaID
      * @return void
+     * @throws Exception
      */
     public function readModifyIdea($ideaID) : void {
+        $idea = IdeaModel::fetchIdea($ideaID);
         ViewHelper::display(
             $this,
-            'M'
+            '',
+            $idea
+        );
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function readModifyCampaign($campaignID) : void {
+        $campaign = CampaignModel::fetchCampaign($campaignID);
+        ViewHelper::display(
+            $this,
+            'EditCampaign',
+            $campaign
         );
     }
 
