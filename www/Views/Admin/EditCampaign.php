@@ -5,10 +5,15 @@ include substr($doc_root, 0, -6).'/Utils/AutoLoader.php';
 start_page("test");
 navbar();
 /** @var CampaignModel $campaign */
-$campaign = CampaignModel::constructFromArray($data[0]);
+var_dump($data['campaign']);
+die();
+$campaign = CampaignModel::constructFromArray($data['campaign']);
+if (isset($data['errors'])) {
+    $errors = $data['errors'];
+}
 ?>
     <div>
-        <form action="modifier/?controller=Admin&action=modifyCampaign" method="post"">
+        <form action="modifier/?controller=Admin&action=modifyCampaign" method="post">
             <input type="hidden" name="ID" value="<?php echo $campaign->getID() ?>">
             <label for="title"> Titre actuel : <?php echo $campaign->getTitle();?></label>
             <input id="title"

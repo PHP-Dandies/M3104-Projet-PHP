@@ -13,10 +13,10 @@ class CampaignModel extends AbstractModel
 
     /**
      * @param $campaignID
-     * @return void
+     * @return bool
      */
-    public static function modifyCampaign(CampaignModel $campaign) : void {
-        Database::executeUpdate("
+    public static function modifyCampaign(CampaignModel $campaign) : bool {
+        return Database::executeUpdate("
         UPDATE CAMPAIGN
         SET
             BEG_DATE = '$campaign->begDate',
@@ -44,7 +44,7 @@ class CampaignModel extends AbstractModel
     public static function fetchCampaign(int $campaignID): array
     {
         return Database::executeQuery("SELECT CAMPAIGN_ID AS ID, BEG_DATE AS BegDate, END_DATE as EndDate,"
-            . "DELIB_END AS DelibEndDate, TITLE AS Title, STATUS AS Status FROM CAMPAIGN WHERE CAMPAIGN_ID = $campaignID");
+            . "DELIB_END AS DelibEndDate, TITLE AS Title, STATUS AS Status FROM CAMPAIGN WHERE CAMPAIGN_ID = $campaignID")[0];
     }
 
     /**

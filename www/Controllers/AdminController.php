@@ -51,6 +51,7 @@ class AdminController extends AbstractController
     /**
      * Shows the screen to create a campaign
      * @return void
+     * @throws Exception
      */
     public function modifyCampaign() : void {
         $errors = array();
@@ -61,13 +62,15 @@ class AdminController extends AbstractController
                 || date_create($campaign->getBegDate()) > date_create($campaign->getDelibEndDate())) {
                 $errors['datebeg'] = 'La date de début ne peux pas être supérieure à la date de fin ou de délibération';
             }
+
             if (date_create($campaign->getDelibEndDate()) < date_create($campaign->getEndDate())
                 || date_create($campaign->getDelibEndDate()) < date_create($campaign->getBegDate())) {
                 $errors['dateenddelib'] = 'La date de délibétation ne peux pas'
                     . ' être inférieure à la date de fin ou de délibération';
             }
-            if (empty($errors)) {
-                CampaignModel::modifyCampaign($campaign);
+
+            if (empty($errors) && !CampaignModel::modifyCampaign($campaign)) {
+                $errors['unexpected'] = 'Erreur innatendue, contactez le service de maintenance';
             }
         } else {
             throw new \http\Exception\RuntimeException('bad acess');
@@ -77,7 +80,7 @@ class AdminController extends AbstractController
             'EditCampaign',
             array(
                 'errors' => $errors,
-                'data' => $campaign
+                'campaign' => $campaign
             )
         );
     }
@@ -104,7 +107,9 @@ class AdminController extends AbstractController
         ViewHelper::display(
             $this,
             'EditCampaign',
-            $campaign
+            array(
+                'campaign' => $campaign
+            )
         );
     }
 
