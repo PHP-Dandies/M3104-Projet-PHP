@@ -1,6 +1,6 @@
 <?php
-
 require_once('../Utils/AutoLoader.php');
+
 
 class IdeaController {
     /**
@@ -26,11 +26,12 @@ class IdeaController {
         );
     }
 
-    public function edit() {
+    public function edit($id) {
+        $idea = IdeaModel::fetchIdea($id);
         ViewHelper::display(
             $this,
             'Edit',
-            array()
+            $idea
         );
     }
 
@@ -71,6 +72,44 @@ class IdeaController {
         $query = "INSERT INTO IDEA(TITLE, DESCRIPTION, GOAL, PICTURE, USER_ID, CAMPAIGN_ID) "
             . "VALUES('$title', '$description', '$goal', '$rel_path', '$uid', '$cid')";
 
+
+        if (Database::executeUpdate($query)) {
+            header("Location: /organisateur");
+        } else {
+            header("HTTP/1.0 404 Not Found");
+            die();
+        }
+    }
+
+    public function editIdea(): void
+    {
+        $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
+        include_once $doc_root . '/../Utils/Database.php';
+
+        if (isset($_POST['image'])) {
+            // Where the file is going to be placed
+            $file = time() . '.' . substr(strrchr($_FILES['image']['name'], '.'), 1);
+            $rel_path = '/images/' . $file;
+            $target_path = $doc_root . $rel_path;
+
+            if (!move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
+                header("HTTP/1.1 500 Internal Server Error");
+                die();
+            }
+        }
+
+        $iid = $_POST['id'];
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $goal = $_POST['goal'];
+
+        if (isset($_POST['image'])) {
+            $query = "UPDATE IDEA SET TITLE = '$title', DESCRIPTION = '$description', GOAL = '$goal', PICTURE = '$rel_path' WHERE IDEA_ID = $iid;";
+        } else {
+            $query = "UPDATE IDEA SET TITLE = '$title', DESCRIPTION = '$description', GOAL = '$goal' WHERE IDEA_ID = $iid;";
+        }
+
+        var_dump($query);
 
         if (Database::executeUpdate($query)) {
             header("Location: /organisateur");

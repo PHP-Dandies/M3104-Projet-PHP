@@ -4,34 +4,41 @@ include_once $doc_root.'/../Utils/HelperUtils.php';
 start_page("OrgaView");
 navbar();
 /** @var array $data */
+$idea = $data['IDEA'];
 ?>
     <div class="container" style="margin-top: 5px">
-        <table class="striped">
-            <caption>Mes Idées</caption>
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Goal</th>
-                <th>Current Points</th>
-                <th>Modifier</th>
-            </tr>
-            </thead>
-            <?php
-            foreach($data as $idea) {
-                ?>
-                <tr>
-                    <td><?php echo $idea["TITLE"] ?></td>
-                    <td><?php echo $idea["GOAL"] ?></td>
-                    <td><?php echo $idea["TOTAL_POINTS"] ?></td>
-                    <td><a href="idea/edit/<?php echo $idea["IDEA_ID"];?>">Modifier</a></td>
-                </tr>
-                <?php
-            }
-            ?>
-        </table>
-        <a href="/idea/create">
-            Créer une idée.
-        </a>
+        <form enctype="multipart/form-data" action="/?controller=Idea&action=editIdea" method="post">
+            <input name="id" type="hidden" value="<?php echo $idea["IDEA_ID"] ?>" required>
+            <table class="striped">
+                <caption>Modifier mon idée.</caption>
+                <thead>
+                    <tr>
+                        <th>Champ</th>
+                        <th>Valeur du champ</th>
+                    </tr>
+                </thead>
+                    <tr>
+                        <td><label for="title">Titre</label></td>
+                        <td><input type="text" name="title" value="<?php echo $idea["TITLE"] ?>" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="description">Description</label></td>
+                        <td><textarea name="description" required><?php echo $idea["DESCRIPTION"] ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><label for="goal">Goal</label></td>
+                        <td><input type="number" name="goal" value="<?php echo $idea["GOAL"] ?>" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="image">Picture</label></td>
+                        <td>
+                            <img src="<?php echo $idea["PICTURE"] ?>" style="max-height: 30vh; max-width: 50vw;">
+                            <input type="file" name="image" accept="image/*">
+                        </td>
+                    </tr>
+                </table>
+            <input type="submit" value="Enregistrer">
+            </form>
     </div>
 <?php
 end_page();

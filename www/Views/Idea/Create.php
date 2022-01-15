@@ -31,7 +31,7 @@ navbar();
                     <div class="group file_area" style="margin-bottom: 5px">
                         <input type="hidden" name="MAX_FILE_SIZE" value="100000000" />
                         <label for="image">Image</label>
-                        <input type="file" name="image" required/>
+                        <input type="file" name="image" accept="image/*" required/>
                     </div>
 
                     <div class="group">

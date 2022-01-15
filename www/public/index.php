@@ -96,7 +96,7 @@ try {
         if (!empty($url[1]) && $url[1] === 'create') { // /idea/create
             $controller->create();
         } else if (!empty($url[1]) && $url[1] === 'edit' && !empty($url[2]) && is_numeric($url[2])) { // /idea/edit/X
-            $controller->edit();
+            $controller->edit($url[2]);
         }
     } else {
         echo '404';
