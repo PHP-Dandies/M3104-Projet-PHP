@@ -51,6 +51,13 @@ navbar();
                     <div class="is_vertical_align">
                         <p><?php echo $comment["USERNAME"]?></p>
                         <p><?php echo $comment["comment"]?></p>
+                        <form action="?controller=Admin&action=deleteComment" method="post">
+                            <input type="hidden" name="commentid" value="<?php echo $comment["comment_id"] ?>">
+                            <input type="hidden" name="userid" value="<?php echo $comment["user_id"] ?>">
+                            <label for="reason"></label>
+                            <input id="reason" type="text" placeholder="reason">
+                            <input type="submit" value="delete">
+                        </form>
                     </div>
                     <?php
                 }
