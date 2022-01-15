@@ -91,9 +91,13 @@ try {
             $controller = new IdeaController();
             $controller->read($url[1]);
         }
-    } else if ($url[0] === 'idea' && !empty($url[1]) && $url[1] === 'create') {
+    } else if ($url[0] === 'idea'){ // /idea
         $controller = new IdeaController();
-        $controller->create();
+        if (!empty($url[1]) && $url[1] === 'create') { // /idea/create
+            $controller->create();
+        } else if (!empty($url[1]) && $url[1] === 'edit' && !empty($url[2]) && is_numeric($url[2])) { // /idea/edit/X
+            $controller->edit();
+        }
     } else {
         echo '404';
     }

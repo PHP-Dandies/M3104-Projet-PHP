@@ -15,6 +15,7 @@ class OrganizerController {
             }
         }
         if ($campaign_id == -1) {header('Location: /'); die();}
+        $campaign_id = CampaignModel::fetchRunningCampaign();
         $ideas = IdeaModel::fetchIdeas($campaign_id);
         $my_ideas = array();
 
