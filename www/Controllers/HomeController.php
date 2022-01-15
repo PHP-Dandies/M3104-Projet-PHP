@@ -11,7 +11,7 @@ class HomeController
         $viewName = 'ReadAll';
 
         if (empty($ideas)) {
-            echo'ya rien wesh';
+            $viewName = 'NoActiveCampaignView';
         }
 
         ViewHelper::display(
