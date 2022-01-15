@@ -33,6 +33,8 @@ try {
                     } elseif ($url[4] === 'modify' && !isset($url[5])) {
                         $controller->readModifyIdea(substr($url[3], -1));
                     }
+                } elseif ($url[3] === 'modifier' && !isset($url[4])) {
+                    $controller->readModifyCampaign($url[2]);
                 }
             }
         } elseif ($url[1] === 'utilisateurs' && !isset($url[2])) {

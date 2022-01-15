@@ -1,7 +1,7 @@
 <?php
 
 require_once('../Utils/AutoLoader.php');
-class AdminController
+class AdminController extends AbstractController
 {
     /**
      * Displays all the campaigns
@@ -65,9 +65,23 @@ class AdminController
      * @return void
      */
     public function readModifyIdea($ideaID) : void {
+        $idea = IdeaModel::fetchIdea($ideaID);
         ViewHelper::display(
             $this,
-            'M'
+            '',
+            $idea
+        );
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function readModifyCampaign($campaignID) : void {
+        $campaign = CampaignModel::fetchCampaign($campaignID);
+        ViewHelper::display(
+            $this,
+            'EditCampaign',
+            $campaign
         );
     }
 
