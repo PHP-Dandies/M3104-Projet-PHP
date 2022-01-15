@@ -34,8 +34,6 @@ try {
                         $controller->readModifyIdea(substr($url[3], -1));
                     }
                 }
-            } elseif ($url[2] === 'creer' && !isset($url[3])) {
-                $controller->createCampaign();
             }
         } elseif ($url[1] === 'utilisateurs' && !isset($url[2])) {
             $controller->readUsers();
