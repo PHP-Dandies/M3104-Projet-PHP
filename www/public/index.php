@@ -15,9 +15,20 @@ try {
         }
     }
 
-    if ($url === '') {
+    if (isset($_GET['controller'], $_GET['action'])) {;
+        $controllername = $_GET["controller"] . 'Controller';
+        $controller =  new $controllername();
+        $actionName = $_GET["action"];
+        $controller->$actionName();
+
+    } elseif ($url === '') {
         echo 'a';
-    } elseif ($url[0] === 'admin') {
+    }
+    else if ($url[0] === 'test' && !isset($url[1])){  //Changer, ici c'est la page de redirection quand le login est réussie
+        include '../Views/User/ModificationReussie.php';
+    }
+
+    elseif ($url[0] === 'admin') {
         $controller = new AdminController();
         if (!isset($url[1])) {
             $controller->readIndex();
@@ -42,7 +53,7 @@ try {
         }
     } else if ($url[0] === 'login' && !isset($url[1])) {
         $controller = new UserController();
-        $controller->login();
+        $controller->index();
     } else if ($url[0] === 'organisateur') {
         $controller = new OrganizerController();
         if (!isset($url[1])) {

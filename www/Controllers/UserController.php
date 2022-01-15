@@ -9,18 +9,6 @@ class UserController
     {
     }
 
-    public function Index()
-    {
-        $viewHelper = new ViewHelper();
-        return $viewHelper->display(
-            $this,
-            'User',
-            array(
-                'html_head_title' => 'User/Login'
-            )
-        );
-
-    }
     public function GetUser() {
         if( isset($_SESSION['user']) ) {
             return unserialize($_SESSION['user']);
@@ -30,47 +18,47 @@ class UserController
 
     public function login()
     {
-
         $loginError = null;
+
         $login = $_POST['login'];
         $password = $_POST['password'];
         $model = new UserModel();
 
         if( $this->GetUser() != null ) {
-            $loginError = "Une session utilisateur existe déjà";
+            echo 'deja connecté avec Utilisateur : ' . $_SESSION['trueUser'];
+            header('Location:  ');
+            exit();
         }
-
         if ($model->isLogin($login)) {
-            if ($model->isPassword($login, $password)) {
 
-//                $_SESSION["suid"] = session_id();
+            if ($model->isPassword($login, $password)) {
                 $_SESSION['user'] = serialize($login);
+                $_SESSION['trueUser'] = $login;
                 header('Location: test'); //  #TODO remplacer "test" par le fichier qui accueil l'utilisateur qui se connecte
                  exit();
             }
+            else
+                $loginError = 'Nom d\'utilisateur ou mot de passe incorrect';
         }
-        else {
-
-            $loginError = "Nom d'utilisateur ou mot de passe incorrect";
-        }
+        else
+            $loginError = 'Nom d\'utilisateur ou mot de passe incorrect';
 
         ViewHelper::display(
             $this,
             'Login',
             array(
                 'loginError' =>  $loginError,
-            ),
+            )
         );
-        die();
     }
 
     public function logout(){
         session_destroy();
-        header('Location: ' . SITE_URL); //#TODO A la place de "SITE_URL" mettre l'accueil
+        header('Location: ' . SITE_URL); //#TODO A la place de "SITE_URL" mettre l'accueil ou deconnecter l'utilisateur
         return;
     }
 
-    public function changePassword($password)
+    public function changePassword($password) //#TODO ecrire la méthode
     {
         //changer le password
         // Mano le fait
@@ -95,11 +83,11 @@ class UserController
         );
     }
 
-    public function lautre() : void
+    public function index() : void
     {
         ViewHelper::display(
         $this,
-            'LoginView',
+            'Login',
             array()
         );
     }
