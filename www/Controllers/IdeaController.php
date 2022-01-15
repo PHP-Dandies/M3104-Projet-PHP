@@ -86,7 +86,8 @@ class IdeaController {
         $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
         include_once $doc_root . '/../Utils/Database.php';
 
-        if (isset($_POST['image'])) {
+        if (isset($_FILES['image']) and $_FILES['image']['tmp_name'] != "") {
+            echo "file !!";
             // Where the file is going to be placed
             $file = time() . '.' . substr(strrchr($_FILES['image']['name'], '.'), 1);
             $rel_path = '/images/' . $file;
@@ -103,13 +104,11 @@ class IdeaController {
         $description = $_POST['description'];
         $goal = $_POST['goal'];
 
-        if (isset($_POST['image'])) {
+        if (isset($_FILES['image']) and $_FILES['image']['tmp_name'] != "") {
             $query = "UPDATE IDEA SET TITLE = '$title', DESCRIPTION = '$description', GOAL = '$goal', PICTURE = '$rel_path' WHERE IDEA_ID = $iid;";
         } else {
             $query = "UPDATE IDEA SET TITLE = '$title', DESCRIPTION = '$description', GOAL = '$goal' WHERE IDEA_ID = $iid;";
         }
-
-        var_dump($query);
 
         if (Database::executeUpdate($query)) {
             header("Location: /organisateur");

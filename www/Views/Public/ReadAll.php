@@ -14,26 +14,22 @@ navbar();
                 mais voilà je pensais à un résumé de ce que fait le site web  ou un truc comme ça
             </div>
         </details>
-                <table>
-            <thead>
-                <tr>
-                    <th class="text-center">Liste des idées disponibles</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                foreach ($ideas as $idea) { ?>
-                    <tr>
-                        <td>Mettre image ici</td>
-                        <td><?php echo $idea["TITLE"] ?></td>
-                        <td>Goal : <?php echo $idea["GOAL"] ?></td>
-                        <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>
-                        <td><a href="idee<?php echo $idea["IDEA_ID"] ?>">Voir</a></td>
-                    </tr>
-                <?php
-                }
-                ?>
-            </tbody>
+            <table class="striped">
+                <caption>Liste des idées disponibles</caption>
+                <tbody>
+                    <?php
+                    foreach ($ideas as $idea) { ?>
+                        <tr>
+                            <td><img src="<?php echo $idea["PICTURE"] ?>" style="max-height: 5vh; max-width: 10vw" onError="this.onerror=null; this.src='/images/casali.gif';"></td>
+                            <td><?php echo $idea["TITLE"] ?></td>
+                            <td>Goal : <?php echo $idea["GOAL"] ?></td>
+                            <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>
+                            <td><a href="idea/<?php echo $idea["IDEA_ID"] ?>">Voir</a></td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
         </table>
     </div>
 <?php

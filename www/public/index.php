@@ -92,10 +92,14 @@ try {
             $controller->read($url[1]);
         }
     } else if ($url[0] === 'idea'){ // /idea
-        $controller = new IdeaController();
-        if (!empty($url[1]) && $url[1] === 'create') { // /idea/create
+        if (!empty($url[1]) && is_numeric($url[1])) {
+            $controller = new  PublicController();
+            $controller->readIdea($url[1]);
+        } else if (!empty($url[1]) && $url[1] === 'create') { // /idea/create
+            $controller = new IdeaController();
             $controller->create();
         } else if (!empty($url[1]) && $url[1] === 'edit' && !empty($url[2]) && is_numeric($url[2])) { // /idea/edit/X
+            $controller = new IdeaController();
             $controller->edit($url[2]);
         }
     } else {

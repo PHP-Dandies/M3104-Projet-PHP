@@ -13,13 +13,12 @@ if (isset($data["CONTENTS"])) {
 navbar();
 ?>
     <div class="container" style="margin-top: 5px">
-        <div class="is-vertical-align is-horizontal-align" style="margin-top: 5px; height: 20vh; background-image: url('../Images/0.jpg'); background-position: center; background-size: cover;">
+        <div class="is-vertical-align is-horizontal-align" style="margin-top: 5px; height: 20vh; background-image: url('<?php echo $idea["PICTURE"] ?>'); background-position: center; background-size: cover;">
             <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white"><?php echo $idea["TITLE"] ?></h1>
         </div>
         <div>
             <div class="row" style="margin-top: 5px">
                 <div class="col-8">
-                    <p>mettre image ici</p>
                     <?php echo $idea["DESCRIPTION"] ?>
                 </div>
                 <div class="col-4">
