@@ -8,7 +8,7 @@ class PublicController
      * @throws Exception
      */
     public function readIdeas (){
-     $campaign_id = campaignModel::fetchRunningCampaign();
+     $campaign_id = CampaignModel::fetchRunningCampaign();
      $ideas = IdeaModel::fetchIdeas($campaign_id);
      ViewHelper::display(
          $this,
