@@ -2,7 +2,7 @@
 class AbstractModel {
     public static function constructFromArray(array $array): AbstractModel
     {
-        $obj = new self();
+        $obj = new static();
         foreach ($array as $dataKey => $dataValue) {
             $setter = "set$dataKey";
             if (method_exists($obj, $setter)) {
