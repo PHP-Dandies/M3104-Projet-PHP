@@ -6,17 +6,13 @@ $login = $_POST['login'];
 $password = $_POST['password'];
 $userController = new UserController();
 
-if($userController->isSubmite($login, $password))
-{
-
+if ($userController->isSubmite($login, $password)) {
     session_start();
     $_SESSION["suid"] = session_id();
     $_SESSION["user"] = $login;
     header('Location: ../Views/User/ModificationReussie.php');
     exit();
-}
-else
-{
+} else {
     header('Location: ../Views/User/Login.php');
     exit();
 }
