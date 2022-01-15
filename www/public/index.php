@@ -16,8 +16,8 @@ try {
         $url = explode('/', $url);
     }
     if ($url === '') {
-        $controller = new HomeController();
-        $controller->read();
+        $controller = new PublicController();
+        $controller->readIdeas(5);
     } else if ($url[0] === 'login' && !isset($url[1])) {
         $controller = new UserController();
         $controller->login();

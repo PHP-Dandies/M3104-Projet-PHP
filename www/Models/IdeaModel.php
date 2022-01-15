@@ -11,7 +11,7 @@ class IdeaModel {
     /**
      * @throws Exception
      */
-    public static function get_ideas($campaign_id) : array {
+    public static function fetchIdeas($campaign_id) : array {
         $query = "SELECT * FROM IDEA WHERE CAMPAIGN_ID = $campaign_id";
         return Database::executeQuery($query);
     }
@@ -19,7 +19,7 @@ class IdeaModel {
     /**
      * @throws Exception
      */
-    public static function get_idea($idea_id) : array {
+    public static function fetchIdea($idea_id) : array {
         $data = array();
 
         $data["IDEA"] = Database::executeQuery("SELECT * FROM IDEA WHERE IDEA_ID = $idea_id")[0];

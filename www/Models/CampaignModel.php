@@ -11,5 +11,8 @@ class CampaignModel {
         return Database::executeQuery($query);
     }
 
+    public static function fetchNextCampaigns(){
+        $query = "SELECT * FROM CAMAPAIGN WHERE STATUS = 'SCHEDUELED'";
+    }
 
 }
