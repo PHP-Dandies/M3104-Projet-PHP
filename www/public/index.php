@@ -10,10 +10,12 @@ try {
         $url = $_GET['url'];
         $url = explode('/', $url);
     }
-
     if (isset($_GET['controller'], $_GET['action'])) {
-        $controller = $_GET["controller"]();
-        $controller->$_GET["action"]();
+        $controllerName = $_GET["controller"] . 'Controller';
+        $controller = new $controllerName();
+
+        $actionName = $_GET["action"];
+        $controller->$actionName();
     } elseif ($url === '') {
         echo 'a';
     } elseif ($url[0] === 'admin') {

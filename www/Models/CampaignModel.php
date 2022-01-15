@@ -12,6 +12,23 @@ class CampaignModel extends AbstractModel
     private string $status;
 
     /**
+     * @param $campaignID
+     * @return void
+     */
+    public static function modifyCampaign(CampaignModel $campaign) : void {
+        Database::executeUpdate("
+        UPDATE CAMPAIGN
+        SET
+            BEG_DATE = '$campaign->begDate',
+            END_DATE = '$campaign->endDate',
+            DELIB_END = '$campaign->delibEndDate',
+            TITLE = '$campaign->title'
+        WHERE
+            CAMPAIGN_ID = $campaign->ID;
+        ");
+    }
+
+    /**
      * @throws Exception
      */
     public static function fetchCampaigns(): array
