@@ -6,7 +6,7 @@ class JuryModel {
     /**
      * @throws Exception
      */
-    public static function getIdeas() : array {
+    public static function  getIdeas() : array {
         $query = "SELECT CAMPAIGN_ID FROM CAMPAIGN WHERE `STATUS` = 'deliberation';";
         $campaign = Database::executeQuery($query);
 
@@ -15,6 +15,6 @@ class JuryModel {
     }
 
     public static function getIdea($idea_id) {
-        return IdeaModel::get_idea($idea_id);
+        return IdeaModel::fetchIdea($idea_id);
     }
 }

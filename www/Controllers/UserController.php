@@ -17,7 +17,7 @@ class UserController
         $password = $_POST['password'];
         $model = new UserModel();
 
-        if( isset($_SESSION['user'])) {
+        if(isset($_SESSION['user'])) {
             echo 'deja connecté avec Utilisateur : ' . $_SESSION['user'];
             header('Location:  ');
             exit();
@@ -28,10 +28,6 @@ class UserController
                 $_SESSION['user'] = $login;
                 $_SESSION['id']= UserModel::getId($login);
                 $_SESSION['role']= UserModel::getRole($login);
-                var_dump($_SESSION['id']);
-                var_dump($_SESSION['role']);
-                die();
-
                 header('Location: test'); //  #TODO remplacer "test" par le fichier qui accueil l'utilisateur qui se connecte
                  exit();
             }
