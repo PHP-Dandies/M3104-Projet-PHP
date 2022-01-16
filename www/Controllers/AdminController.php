@@ -58,13 +58,13 @@ class AdminController extends AbstractController
         if (!empty($_POST)) {
             /** @var CampaignModel $campaign */
             $campaign = $this->mapDataPostToClass('CampaignModel');
-            if (date_create($campaign->getBegDate()) > date_create($campaign->getEndDate())
-                || date_create($campaign->getBegDate()) > date_create($campaign->getDelibEndDate())) {
+            if (date_create($campaign->getBegDate()) >= date_create($campaign->getEndDate())
+                || date_create($campaign->getBegDate()) >= date_create($campaign->getDelibEndDate())) {
                 $errors['datebeg'] = 'La date de début ne peux pas être supérieure à la date de fin ou de délibération';
             }
 
-            if (date_create($campaign->getDelibEndDate()) < date_create($campaign->getEndDate())
-                || date_create($campaign->getDelibEndDate()) < date_create($campaign->getBegDate())) {
+            if (date_create($campaign->getDelibEndDate()) <= date_create($campaign->getEndDate())
+                || date_create($campaign->getDelibEndDate()) <= date_create($campaign->getBegDate())) {
                 $errors['dateenddelib'] = 'La date de délibétation ne peux pas'
                     . ' être inférieure à la date de fin ou de délibération';
             }
@@ -75,6 +75,7 @@ class AdminController extends AbstractController
         } else {
             throw new \http\Exception\RuntimeException('bad acess');
         }
+        $campaign = CampaignModel::fetchCampaign($campaign->getID());
         ViewHelper::display(
             $this,
             'EditCampaign',

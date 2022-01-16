@@ -4,16 +4,21 @@ $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FI
 include substr($doc_root, 0, -6).'/Utils/AutoLoader.php';
 start_page("test");
 navbar();
-/** @var CampaignModel $campaign */
-var_dump($data['campaign']);
-die();
 $campaign = CampaignModel::constructFromArray($data['campaign']);
 if (isset($data['errors'])) {
     $errors = $data['errors'];
 }
-?>
+if (isset($errors)) { ?>
     <div>
-        <form action="modifier/?controller=Admin&action=modifyCampaign" method="post">
+<?php foreach ($errors as $error) { ?>
+
+        <p><?php echo $error ?></p>
+
+<?php } ?>
+    </div>
+<?php } ?>
+    <div>
+        <form action="?controller=Admin&action=modifyCampaign" method="post">
             <input type="hidden" name="ID" value="<?php echo $campaign->getID() ?>">
             <label for="title"> Titre actuel : <?php echo $campaign->getTitle();?></label>
             <input id="title"

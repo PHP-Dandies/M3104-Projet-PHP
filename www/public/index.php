@@ -37,7 +37,8 @@ try {
                 } elseif (str_contains($url[3], 'idee')) {
                     if (!isset($url[4])) {
                         $controller->readIdea(substr($url[3], -1));
-                    } elseif ($url[4] === 'modify' && !isset($url[5])) {
+                    }
+                    elseif ($url[4] === 'modify' && !isset($url[5])) {
                         $controller->readModifyIdea(substr($url[3], -1));
                     }
                 } elseif ($url[3] === 'modifier' && !isset($url[4])) {
