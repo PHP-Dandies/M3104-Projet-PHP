@@ -5,12 +5,13 @@ class ErrorController {
     /**
      * @throws Exception
      */
-    public function error404() : void{
-        $campaigns = CampaignModel::get_campaigns();
+    public function error404(string $path) : void{
         ViewHelper::display(
             $this,
             '404',
-            $campaigns
+            array(
+                'path' => $path
+            )
         );
     }
 }

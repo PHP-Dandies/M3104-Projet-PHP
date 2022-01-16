@@ -17,29 +17,23 @@ class UserController
         $password = $_POST['password'];
         $model = new UserModel();
 
-        if( isset($_SESSION['user'])) {
-            echo 'deja connecté avec Utilisateur : ' . $_SESSION['user'];
-            header('Location:  ');
+        if(!empty($_SESSION)) {
+            header('Location: /');
             exit();
         }
         if ($model->isLogin($login)) {
-
             if ($model->isPassword($login, $password)) {
                 $_SESSION['user'] = $login;
-                $_SESSION['id']= UserModel::getId($login);
-                $_SESSION['role']= UserModel::getRole($login);
-                var_dump($_SESSION['id']);
-                var_dump($_SESSION['role']);
-                die();
-
-                header('Location: test'); //  #TODO remplacer "test" par le fichier qui accueil l'utilisateur qui se connecte
+                $_SESSION['id']= UserModel::fetchId($login);
+                $_SESSION['role']= UserModel::fetchRole($login);
+                header('Location: /'); //  #TODO remplacer "test" par le fichier qui accueil l'utilisateur qui se connecte
                  exit();
             }
-            else
-                $loginError = 'Nom d\'utilisateur ou mot de passe incorrect';
-        }
-        else
             $loginError = 'Nom d\'utilisateur ou mot de passe incorrect';
+        }
+        else {
+            $loginError = 'Nom d\'utilisateur ou mot de passe incorrect';
+        }
 
         ViewHelper::display(
             $this,
@@ -52,7 +46,7 @@ class UserController
 
     public function logout(){
         session_destroy();
-        header('Location: ' . SITE_URL); //#TODO A la place de "SITE_URL" mettre l'accueil ou deconnecter l'utilisateur
+        header('Location: /'); //#TODO A la place de "SITE_URL" mettre l'accueil ou deconnecter l'utilisateur
         return;
     }
 
@@ -63,7 +57,7 @@ class UserController
     }
 
     public function read() : void {
-        $users = UserModel::get_users();
+        $users = UserModel::fetchAll();
         ViewHelper::display(
             $this,
             'Read',
@@ -73,7 +67,7 @@ class UserController
 
     public function editUser(int $id) : void
     {
-        $user = UserModel::get_user($id);
+        $user = UserModel::fetchUser($id);
         ViewHelper::display(
             $this,
             'Edit',
@@ -83,6 +77,11 @@ class UserController
 
     public function index() : void
     {
+        if(!empty($_SESSION)) {
+            header('Location: /');
+            exit();
+        }
+
         ViewHelper::display(
         $this,
             'Login',

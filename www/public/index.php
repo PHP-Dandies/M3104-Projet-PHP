@@ -8,7 +8,15 @@ try {
     $url = '';
     if (isset($_GET['url'])) {
         $url = $_GET['url'];
+        if ($url[strlen($url) - 1] === '/') {
+            $url = substr($url, 0, -1);
+            header('Location: /' . $url);
+            exit();
+        }
         $url = explode('/', $url);
+        if ($url[array_key_last($url)] === '') {
+            unset($url[array_key_last($url)]);
+        }
     }
     if (isset($_GET['controller'], $_GET['action'])) {
         $controllerName = $_GET["controller"] . 'Controller';
@@ -29,9 +37,13 @@ try {
         } elseif ($url[1] === 'campagnes') {
             if (!isset($url[2])) {
                 $controller->readCampaigns();
+            } elseif ($url[2] === 'creer' && !isset($url[3])){
+                $controller->readCreateCampaign();
             } elseif (is_numeric($url[2])) {
                 if (!isset($url[3])) {
                     $controller->readIdeas($url[2]);
+                } elseif ($url[3] === 'modifier' && !isset($url[4])) {
+                    $controller->readModifyCampaign($url[2]);
                 } elseif (str_contains($url[3], 'idee')) {
                     if (!isset($url[4])) {
                         $controller->readIdea(substr($url[3], -1));
@@ -41,6 +53,8 @@ try {
                 } elseif ($url[3] === 'modifier' && !isset($url[4])) {
                     $controller->readModifyCampaign($url[2]);
                 }
+            } elseif ($url[2] === 'creer' && !isset($url[3])) {
+                $controller->readCreateCampaign();
             }
         } elseif ($url[1] === 'utilisateurs' && !isset($url[2])) {
             $controller->readUsers();
@@ -56,14 +70,18 @@ try {
             $controller->create();
         }
     } else if ($url[0] === 'jury') {
-        if (!isset($_SESSION['suid'])) {
-            header('Location: /login');
-        }
-        $controller = new JuryController();
-        if (!isset($url[1])) {
-            $controller->read();
-        } else if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])) {
-            $controller->readOne($url[2]);
+        if (!isset($_SESSION['user'])) {
+            $controller = new JuryController();
+            if (!isset($url[1])) {
+                //mettre ici le /jury/ideeX pouru acceder a une idée en partculier
+                $controller->read();
+            }
+            else if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])) {
+                $controller->readOne($url[2]);
+            }
+            else
+                echo'Erreur';
+                exit();
         }
     } else if ($url[0] === 'users' && !isset($url[1])) {
         $controller = new UserController();
