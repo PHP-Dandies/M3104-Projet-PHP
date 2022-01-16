@@ -11,6 +11,7 @@ class AdminController extends AbstractController
         if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
             $controller = new ErrorController();
             $controller->error404('/');
+            die();
         }
     }
 

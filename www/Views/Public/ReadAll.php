@@ -1,19 +1,19 @@
 <?php
-$doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include substr($doc_root, 0, -6).'/Utils/AutoLoader.php';
 start_page("test");
-/** @var array $data */
-$ideas = $data;
 navbar();
 /** @var array $data */
 if (isset($data['ideas'])) {
     $ideas = $data['ideas'];
-} elseif (isset($data['next_campaign'])) {
-    $nextCampaign = $data['next_campaign'];
-} elseif (isset($data['last_campaign_results'])) {
-    $lastCampaignResults = $data['last_campaign_results'];
 }
-var_dump($lastCampaignResults);die();
+if (isset($data['next_campaign'])) {
+    $nextCampaign = $data['next_campaign'];
+}
+if (isset($data['last_campaign_result'])) {
+    $lastCampaignResults = $data['last_campaign_result'];
+}
+if (isset($data['ideas_delib'])) {
+    $currentDeliberation = $data['ideas_delib'];
+}
 $option = $data['option'];
 ?>
     <div class="container" style="margin-top: 5px">
@@ -28,9 +28,9 @@ $option = $data['option'];
         <?php if (!empty($ideas)) { ?>
         <table>
             <thead>
-            <tr>
-                <th class="text-center">Liste des idées disponibles</th>
-            </tr>
+                <tr>
+                    <th class="text-center">Liste des idées disponibles</th>
+                </tr>
             </thead>
             <tbody>
             <?php
@@ -56,8 +56,46 @@ $option = $data['option'];
         <p>Pas de campagnes prévues, restez à l'écoute...</p>
             <?php }
         } ?>
-        <?php if (!empty($lastCampaign)) { ?>
-
+        <?php if (isset($lastCampaignResults) && !empty($lastCampaignResults)) { ?>
+        <table>
+            <thead>
+                <tr>
+                    <th class="text-center">Liste des idées courament en délibération</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+            foreach ($currentDeliberation as $idea) { ?>
+                <tr>
+                    <td><?php echo $idea["TITLE"] ?></td>
+                    <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>
+                    <td><a href="idee<?php echo $idea["IDEA_ID"] ?>">Voir</a></td>
+                </tr>
+                <?php
+            }
+            ?>
+            </tbody>
+        </table>
+        <?php } if (!empty($lastCampaignResults)) { ?>
+        <table>
+            <thead>
+                <tr>
+                    <th class="text-center">Liste des idées acceptées</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+            foreach ($lastCampaignResults as $idea) { ?>
+                <tr>
+                    <td><?php echo $idea["TITLE"] ?></td>
+                    <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>
+                    <td><a href="idee<?php echo $idea["IDEA_ID"] ?>">Voir</a></td>
+                </tr>
+                <?php
+            }
+            ?>
+            </tbody>
+        </table>
         <?php } ?>
     </div>
 <?php

@@ -18,7 +18,7 @@ class IdeaModel extends AbstractModel{
      * @throws Exception
      */
     public static function fetchRealizedIdeas(int $campaignID) : array {
-        $result = Database::executeQuery("SELECT * FROM IDEA WHERE REALIZED = 1 AND CAMPAIGN_ID = $campaignID");
+        $result = Database::executeQuery("SELECT * FROM IDEA WHERE REALISED = 1 AND CAMPAIGN_ID = $campaignID");
         return empty($result) ? array() : $result;
     }
 
