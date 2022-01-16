@@ -59,8 +59,8 @@ class IdeaController {
         $cid = -1;
         $campaigns = CampaignModel::fetchCampaigns();
         foreach ($campaigns as $campaign) {
-            if ($campaign['STATUS'] == 'running') {
-                $cid = $campaign['CAMPAIGN_ID'];
+            if ($campaign['Status'] == 'running') {
+                $cid = $campaign['ID'];
             }
         };
 
@@ -69,10 +69,8 @@ class IdeaController {
             die();
         }
 
-        $query = "INSERT INTO IDEA(TITLE, DESCRIPTION, GOAL, PICTURE, USER_ID, CAMPAIGN_ID) "
-            . "VALUES('$title', '$description', '$goal', '$rel_path', '$uid', '$cid')";
-
-
+        $query = "INSERT INTO IDEA(TITLE, DESCRIPTION, GOAL, PICTURE, USER_ID, CAMPAIGN_ID) VALUES('$title', '$description', '$goal', '$rel_path', '$uid', '$cid')";
+        
         if (Database::executeUpdate($query)) {
             header("Location: /organisateur");
         } else {
