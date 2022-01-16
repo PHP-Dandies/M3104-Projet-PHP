@@ -29,6 +29,8 @@ try {
         } elseif ($url[1] === 'campagnes') {
             if (!isset($url[2])) {
                 $controller->readCampaigns();
+            }elseif ($url[2] === 'creer'){
+                $controller->createCampaign();
             } elseif (is_numeric($url[2])) {
                 if (!isset($url[3])) {
                     $controller->readIdeas($url[2]);
