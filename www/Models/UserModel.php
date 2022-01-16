@@ -10,6 +10,32 @@ class UserModel extends AbstractModel
     private string $email;
     private int $points;
 
+    function getAllUsers()
+    {
+        $query = database::executeQuery('SELECT * FROM USER;');
+        $userList = NAN;
+
+        foreach ($query as $user)
+        {
+            $userList[] = new User($user['USER_ID'],
+                $user['USERNAME'],
+                $user['PASSWORD'],
+                $user['ROLE'],
+                $user['AVAILABLE_POINTS'],
+                $user['EMAIL']);
+        }
+        return $userList;
+    }
+
+    /**
+     * Returns a list of all users
+     * @return array
+     * @throws Exception
+     */
+    public static function fetchAll() : array {
+        return Database::executeQuery("SELECT * FROM USER");
+    }
+
     /**
      * @param int $points
      * @return bool
@@ -71,6 +97,18 @@ class UserModel extends AbstractModel
             $query['EMAIL']);
         return $user;
 
+    }
+
+    static function fetchId($username) : string
+    {
+        $query = database::executeQuery("SELECT USER_ID FROM USER WHERE USERNAME ='$username'")[0];
+        return $query['USER_ID'];
+    }
+
+    static function fetchRole($username) : string
+    {
+        $query = database::executeQuery("SELECT ROLE FROM USER WHERE USERNAME ='$username'")[0];
+        return $query['ROLE'];
     }
 
     /**
