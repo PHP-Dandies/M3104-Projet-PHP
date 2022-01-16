@@ -25,15 +25,19 @@ function returnButton($path) {
 function navbar()
 {
     echo '    <nav class="nav">'.PHP_EOL;
+
     echo '        <div class="nav-left tabs">'.PHP_EOL;
-    echo '            <a class="active">Link 1</a>'.PHP_EOL;
-    echo '            <a>Link 2</a>'.PHP_EOL;
+    if (isset ($_SESSION['role']) and $_SESSION['role'] === 'ADMIN') {
+        echo '            <a class="active" href="admin/campagnes/creer">Créer une nouvelle camapagne</a>'.PHP_EOL;
+        echo '             <a href="admin/campagnes"> Voir la liste des camapgnes </a>'.PHP_EOL;
+        echo '              <a href="admin/utilisateurs"> Voir la liste des utilisateurs </a>'.PHP_EOL;
+    }
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-center">'.PHP_EOL;
     echo '            <a class="brand" href="/">E-Event.io</a>' .PHP_EOL;
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-right">'.PHP_EOL;
-    echo '              <a class="button primary" href="/?a=login">Login</a>' .PHP_EOL;
+    echo '              <a class="button primary" href="/login">Login</a>' .PHP_EOL;
     echo '        </div>'.PHP_EOL;
     echo '    </nav>'.PHP_EOL;
 }

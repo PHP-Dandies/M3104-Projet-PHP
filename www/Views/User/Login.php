@@ -23,11 +23,12 @@ if(isset($loginError))
                         <div class="inputBox">
                             <input type="password" name="password" placeholder="Mot de Passe">
                         </div>
-                        <div class="inputBox">
-                            <input type="submit" name="submit" value="submit">
+                        <div class="inputBox" >
+                            <input  type="submit" name="submit" value="submit"></a>
                         </div>
                         <p class="forget">Mot de passe oublié ? <a href="PasswordChangeView.php">Clique Ici</a></p>
                     </form>
+                    <a href="/">Retour à la page d'acceuil</a>
                 </div>
             </div>
         </div>
