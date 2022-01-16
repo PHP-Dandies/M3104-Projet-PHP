@@ -11,6 +11,9 @@ class IdeaModel {
             . $campaignID[0]['CAMPAIGN_ID'] . " ORDER BY TOTAL_POINTS DESC;");
     }
 
+public static function fetchTheIdea($ideaID) : array {
+    return database::executeQuery("SELECT * FROM IDEA WHERE IDEA_ID = $ideaID")[0];
+}
 
     /**
      * @throws Exception

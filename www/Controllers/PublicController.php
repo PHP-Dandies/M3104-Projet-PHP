@@ -29,4 +29,20 @@ class PublicController
      );
 
  }
+
+
+    /**
+     * @throws Exception
+     */
+    public function readIdeaAgain ($idea_id, $errors){
+        $idea = IdeaModel::fetchIdea($idea_id);
+        ViewHelper::display(
+            $this,
+            'ReadOneAgain',
+           array(
+               $idea,
+
+        );
+
+    }
 }

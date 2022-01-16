@@ -55,6 +55,11 @@ class UserModel
         return $query['USER_ID'];
     }
 
+
+    public static function fetchUser($userID){
+        return database::executeQuery("SELECT * FROM USER WHERE USER_ID = $userID")[0];
+    }
+
     static function getRole($username) : string
     {
         $query = database::executeQuery("SELECT ROLE FROM USER WHERE USERNAME ='$username'")[0];
