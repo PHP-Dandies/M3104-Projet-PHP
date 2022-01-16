@@ -11,7 +11,7 @@ for ($i = 0, $iMax = count($campaigns); $i < $iMax; ++$i){
 
     <div class="w-2/3 mx-auto">
         <div class="bg-white shadow-md rounded my-6">
-            <h1 class="text-3xl"> Campagnes en cours </h1>
+            <h1 class="mb-4 font-semibold"> Campagnes en cours </h1>
             <table class="text-left w-full border-collapse">
                 <thead>
                     <tr>
@@ -37,7 +37,7 @@ for ($i = 0, $iMax = count($campaigns); $i < $iMax; ++$i){
                 <?php } ?>
                 </tbody>
             </table>
-            <a class="h-10 px-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:shadow-outline hover:bg-indigo-500 hover:text-indigo-100" href="campagnes/creer"><button>Creer une nouvelle campagne</button></a>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"><a href="campagnes/creer">Creer une nouvelle campagne</a></button>
         </div>
     </div>
 <?php

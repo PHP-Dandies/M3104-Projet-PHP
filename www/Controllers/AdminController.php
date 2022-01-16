@@ -1,18 +1,17 @@
 <?php
 
-require_once('../Utils/AutoLoader.php');
 
 class AdminController extends AbstractController
 {
     /**
      * @throws Exception
      */
-    public function __construct() {
+    /*public function __construct() {
         if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
             $controller = new ErrorController();
             $controller->error404('/');
         }
-    }
+    }*/
 
     /**
      * @throws Exception

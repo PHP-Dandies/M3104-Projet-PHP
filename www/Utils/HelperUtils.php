@@ -1,6 +1,3 @@
-
-
-
 <?php
 function displayErrors(array $errors) {
     foreach($errors as $error) {?>
