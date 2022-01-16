@@ -7,8 +7,15 @@ class PublicController
     /**
      * @throws Exception
      */
-    public function readIdeas()
-    {
+    public function readIdeas (){
+     $campaign_id = campaignModel::fetchRunningCampaign();
+     $ideas = IdeaModel::fetchIdeas($campaign_id);
+     ViewHelper::display(
+         $this,
+         'ReadAll',
+         $ideas
+     );
+ }
 
         $campaign_id = CampaignModel::fetchRunningCampaign();
         $ideas = IdeaModel::fetchIdeas((int)$campaign_id);

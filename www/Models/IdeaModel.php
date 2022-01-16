@@ -13,12 +13,10 @@ class IdeaModel extends AbstractModel{
     private string $picture;
     private int $userID;
     private int $campaignID;
-
     public static function ideaExists($ideaID) : bool {
         return Database::executeCount("SELECT COUNT(*) TOTAL FROM IDEA WHERE IDEA_ID = $ideaID");
     }
-
-    /**
+/**
      * @throws Exception
      */
     public static function fetchIdeas(int $campaignID) : ?array {
@@ -26,9 +24,9 @@ class IdeaModel extends AbstractModel{
             . $campaignID . " ORDER BY TOTAL_POINTS DESC;");
     }
 
-    public static function fetchTheIdea($ideaID) : array {
-        return database::executeQuery("SELECT * FROM IDEA WHERE IDEA_ID = $ideaID")[0];
-    }
+public static function fetchTheIdea($ideaID) : array {
+    return database::executeQuery("SELECT * FROM IDEA WHERE IDEA_ID = $ideaID")[0];
+}
 
     /**
      * @throws Exception
@@ -51,7 +49,6 @@ class IdeaModel extends AbstractModel{
 
         return $data;
     }
-
     /**
      * @throws Exception
      */
