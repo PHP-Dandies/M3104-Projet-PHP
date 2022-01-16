@@ -10,8 +10,7 @@ class PublicController
     public function readIdeas()
     {
 
-        $campaign_id['CAMPAIGN_ID'] = campaignModel::fetchRunningCampaign();
-
+        $campaign_id = campaignModel::fetchRunningCampaign();
         $ideas = IdeaModel::fetchIdeas((int)$campaign_id);
         ViewHelper::display(
             $this,
@@ -31,6 +30,5 @@ class PublicController
             'ReadOne',
             $idea
         );
-
- }
+    }
 }
