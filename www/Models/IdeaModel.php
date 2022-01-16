@@ -19,7 +19,7 @@ class IdeaModel {
 
         $data["IDEA"] = Database::executeQuery("SELECT * FROM IDEA WHERE IDEA_ID = $ideaID")[0];
 
-        $data["USER"] = Database::executeQuery("SELECT USER.USER_ID, USER.USERNAME FROM USER, IDEA WHERE USER.USER_ID = IDEA.USER_ID")[0];
+        $data["USER"] = Database::executeQuery("SELECT USER.USER_ID, USER.USERNAME FROM USER, IDEA WHERE USER.USER_ID = IDEA.USER_ID AND IDEA.IDEA_ID = $ideaID")[0];
 
         $data["COMMENTS"] = Database::executeQuery("SELECT * FROM COMMENT WHERE IDEA_ID = $ideaID");
 

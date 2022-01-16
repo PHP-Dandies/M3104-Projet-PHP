@@ -117,4 +117,54 @@ class IdeaController {
             die();
         }
     }
+
+    /**
+     * @throws Exception
+     */
+    public function addContent() {
+        $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
+        include_once $doc_root . '/../Utils/Database.php';
+
+        if (!isset($_POST)) {header('Location: /'); die();}
+
+        $iid = $_POST['iid'];
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $goal = $_POST['goal'];
+
+        $query = "INSERT INTO `UNLOCKABLE_CONTENT` (`IDEA_ID`, `TITLE`, `DESCRIPTION`, `POINTS`) VALUES ($iid, '$title', '$description', $goal);";
+
+        if (Database::executeUpdate($query)) {
+            header("Location: /organisateur");
+        } else {
+            header("HTTP/1.0 500");
+            die();
+        }
+
+        header('Location: idea/edit/'.$iid);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function delContent() {
+        $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
+        include_once $doc_root . '/../Utils/Database.php';
+
+        if (!isset($_POST)) {header('Location: /'); die();}
+
+        $iid = $_POST['iid'];
+        $title = $_POST['title'];
+
+        $query = "DELETE FROM `UNLOCKABLE_CONTENT` WHERE IDEA_ID = $iid AND TITLE = '$title';";
+
+        if (Database::executeUpdate($query)) {
+            header("Location: /organisateur");
+        } else {
+            header("HTTP/1.0 500");
+            die();
+        }
+
+        header('Location: idea/edit/'.$iid);
+    }
 }

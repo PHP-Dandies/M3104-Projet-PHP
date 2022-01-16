@@ -10,6 +10,7 @@ if (isset($data["COMMENTS"])) {
 if (isset($data["CONTENTS"])) {
     $users = $data["CONTENTS"];
 }
+var_dump($data);
 navbar();
 ?>
     <div class="container" style="margin-top: 5px">
@@ -19,17 +20,17 @@ navbar();
         <div>
             <div class="row" style="margin-top: 5px">
                 <div class="col-8">
-                    <?php echo $idea["DESCRIPTION"] ?>
+                    <?php echo $idea["DESCRIPTION"]; ?>
                 </div>
                 <div class="col-4">
                     <div class="card">
-                        <h3>Organisateur : <?php echo $data["USER"]["USERNAME"] ?></h3>
-                        <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $idea["GOAL"] ?>"></progress>
-                        <p><?php echo $idea["TOTAL_POINTS"] ?> sur <?php echo $idea["GOAL"]?> pts</p>
+                        <h3>Organisateur : <?php echo $data["USER"]["USERNAME"]; ?></h3>
+                        <progress value="<?php echo $idea["TOTAL_POINTS"]; ?>" max="<?php echo $idea["GOAL"] ?>"></progress>
+                        <p><?php echo $idea["TOTAL_POINTS"]; ?> sur <?php echo $idea["GOAL"];?> pts</p>
                     </div>
                     <?php if ($_SESSION['role'] === 'DONATEUR'){ ?>
                     <div class="card" style="margin-top: 5px">
-                        <form action="../../Scripts/UserVote.php?id=<?php echo $idea["IDEA_ID"] ?>" method="post">
+                        <form action="../../Scripts/UserVote.php?id=<?php echo $idea["IDEA_ID"]; ?>" method="post">
                             <label>
                                 <input name="pts" type="number">
                             </label>
@@ -41,9 +42,9 @@ navbar();
                         foreach($data["CONTENTS"] as $content) {
                             ?>
                             <div class="card" style="margin-top: 5px">
-                                <h4> <?php echo $content["TITLE"] ?> </h4>
+                                <h4> <?php echo $content["TITLE"]; ?> </h4>
                                 <code> <?php if ($content["POINTS"] < $idea["TOTAL_POINTS"]) echo 'Atteint'; else echo $content["POINTS"]; ?> </code>
-                                <p><?php echo $content["DESCRIPTION"] ?></p>
+                                <p><?php echo $content["DESCRIPTION"]; ?></p>
                             </div>
                             <?php
                         }
@@ -63,8 +64,8 @@ navbar();
                 <?php
                 foreach ($comments as $comment) { ?>
                     <div class="is_vertical_align">
-                        <p><?php echo $comment["USERNAME"]?></p>
-                        <p><?php echo $comment["comment"]?></p>
+                        <p><?php echo $comment["USERNAME"];?></p>
+                        <p><?php echo $comment["comment"];?></p>
                     </div>
                     <?php
                 }
