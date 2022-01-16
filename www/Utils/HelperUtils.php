@@ -30,14 +30,13 @@ function navbar()
 
     echo '        <div class="nav-left tabs">'.PHP_EOL;
     if (isset ($_SESSION['role']) and $_SESSION['role'] === 'admin') {
-        echo '              <a class="active" href="/admin"><button class="button success">Espace Administrateur</button></a>'.PHP_EOL;
-        echo '            <a class="active" href="/admin/campagnes/creer"><button class="button success">Créer une nouvelle campagne</button></a>'.PHP_EOL;
-        echo '             <a class="active" href="/admin/campagnes"> <button class="button success">Voir la liste des campagnes </button></a>'.PHP_EOL;
-        echo '              <a class="active" href="/admin/utilisateurs"> <button class="button success">Voir la liste des utilisateurs </button></a>'.PHP_EOL;
+        echo '              <a class="active" href="/admin">Espace Administrateur</a>'.PHP_EOL;
+        echo '            <a class="active" href="/admin/campagnes/creer">Créer une nouvelle campagne</a>'.PHP_EOL;
+        echo '             <a class="active" href="/admin/campagnes">Voir la liste des campagnes</a>'.PHP_EOL;
+        echo '              <a class="active" href="/admin/utilisateurs">Voir la liste des utilisateurs</a>'.PHP_EOL;
     }
     elseif (isset($_SESSION['role']) and $_SESSION['role'] === 'organiser') {
-        echo '              <a class="active" href="/organisateur"><button class="button success">Espace Organisateur</button></a>' . PHP_EOL;
-        echo '            <a class="active" href="/organisateur/creer"><button class="button success">Créer un nouvel utilisateur</button></a>' . PHP_EOL;
+        echo '              <a class="active" href="/organisateur">Espace Organisateur</button></a>' . PHP_EOL;
     }
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-center">'.PHP_EOL;

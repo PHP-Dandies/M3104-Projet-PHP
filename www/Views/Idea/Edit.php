@@ -5,7 +5,6 @@ start_page("OrgaView");
 navbar();
 /** @var array $data */
 $idea = $data['IDEA'];
-var_dump($data);
 ?>
     <div class="container" style="margin-top: 5px">
         <form enctype="multipart/form-data" action="/?controller=Idea&action=editIdea" method="post">
@@ -46,6 +45,7 @@ var_dump($data);
                     <td>Nom du But</td>
                     <td>Description</td>
                     <td>Valeur du But</td>
+                    <td>Supprimmer</td>
                 </tr>
             </thead>
             <tbody>
@@ -60,7 +60,7 @@ var_dump($data);
                         <form action="/?controller=Idea&action=delContent" method="post">
                             <input type="hidden" name="iid" value="<?php echo $idea['IDEA_ID'] ?>">
                             <input type="hidden" name="title" value="<?php echo $CONTENT['TITLE'] ?>">
-                            <input type="submit" value="delete">
+                            <input type="submit" value="Supprimmer">
                         </form>
                     </td>
                 </tr>
