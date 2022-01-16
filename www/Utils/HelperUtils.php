@@ -44,8 +44,11 @@ function navbar()
     echo '            <a class="brand" href="/">E-Event.io</a>' .PHP_EOL;
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-right">'.PHP_EOL;
+    if (!isset($_SESSION['id'])) {
     echo '              <a class="button primary" href="/login">Login</a>' .PHP_EOL;
+    } else {
     echo '              <a href="?controller=User&action=logout"><button class="button error">Logout</button></a>'.PHP_EOL;
+    }
     echo '        </div>'.PHP_EOL;
     echo '    </nav>'.PHP_EOL;
 }
