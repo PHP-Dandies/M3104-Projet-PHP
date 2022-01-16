@@ -12,22 +12,24 @@ class DonatorController
         $ideaGoal = IdeaModel::fetchTheIdea($ideaID)['GOAL'];
 
         if ($pts > $totalPointsUser) {
-            $errors['notEnough'] = 'Vous ne possedez pas le nombre de points suffisants !';
-            $controller = new PublicController();
-            $controller->readIdeaAgain($ideaID,$errors);
+            $errors['notEnough'] = 'Vous ne possedez pas le nombre de points suffisant !';
+
         }
         elseif ($totalPointsIdea + $pts > $ideaGoal) {
             $errors['toomuchpoints'] = 'Vous ne pouvez pas donner plus de points que nécessaire à cette idée !';
-            $controller = new PublicController();
-            $controller->readIdeaAgain($ideaID,$errors);
         }
         else {
             Database::executeUpdate("UPDATE IDEA SET TOTAL_POINTS = TOTAL_POINTS + $pts WHERE IDEA_ID = " . $ideaID);
             Database::executeUpdate("UPDATE USER SET POINTS = POINTS - $pts WHERE USER_ID = " . $_SESSION['id']);
-
-            $controller = new PublicController();
-            $controller->readIdea($ideaID);
             }
+
+        $idea = IdeaModel::fetchIdea($ideaID);
+        ViewHelper::display(
+            $this,
+            'readOne',
+            array('errors' => $errors,
+                'idea' => $idea)
+        );
     }
 
 

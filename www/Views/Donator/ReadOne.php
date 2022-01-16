@@ -4,13 +4,18 @@ include substr($doc_root, 0, -6).'/Utils/AutoLoader.php';
 start_page("test");
 
 /** @var array $data */
-$idea = $data["IDEA"];
-if (isset($data["COMMENTS"])) {
-    $comments = $data["COMMENTS"];
+$idea = ($data['idea']['IDEA']);
+if (isset($data['idea']["COMMENTS"])) {
+    $comments = $data['idea']["COMMENTS"];
 }
-if (isset($data["CONTENTS"])) {
-    $users = $data["CONTENTS"];
+if (isset($data['idea']["CONTENTS"])) {
+    $users = $data['idea']["CONTENTS"];
 }
+if (isset($data['errors'])) {
+    $errors = $data['errors'];
+}
+
+
 navbar();?>
 
 
@@ -27,7 +32,7 @@ navbar();?>
                 </div>
                 <div class="col-4">
                     <div class="card">
-                        <h3>Organisateur : <?php echo $data["USER"]["USERNAME"] ?></h3>
+                        <h3>Organisateur : <?php echo $data['idea']["USER"]["USERNAME"] ?></h3>
                         <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $idea["GOAL"] ?>"></progress>
                         <p><?php echo $idea["TOTAL_POINTS"] ?> sur <?php echo $idea["GOAL"]?> pts</p>
                     </div>
@@ -41,6 +46,16 @@ navbar();?>
                                 <input min="0"  name="pts" type="number">
                             </label>
                             <input type="submit" value="Donner">
+                            <?php
+                             if (isset($errors)) { ?>
+                                 <div>
+                             <?php foreach ($errors as $error) { ?>
+
+                            <p><?php echo $error ?></p>
+
+                             <?php } ?>
+                                </div>
+                            <?php } ?>
                         </form>
                     </div>
                     <?php }
@@ -70,8 +85,8 @@ navbar();?>
                 <?php
                 foreach ($comments as $comment) { ?>
                     <div class="is_vertical_align">
-                        <p><?php echo $comment["USERNAME"]?></p>
-                        <p><?php echo $comment["comment"]?></p>
+                        <p><?php echo $comment['idea']["USERNAME"]?></p>
+                        <p><?php echo $comment['idea']["comment"]?></p>
                     </div>
                     <?php
                 }
