@@ -12,7 +12,7 @@ class CampaignModel extends AbstractModel
     private string $status;
 
     public static function fetchLastFinishedCampaign() : array {
-        $result = Database::executeQuery("SELECT * FROM CAMPAIGN WHERE `STATUS` = 'over' ORDER BY DELIB_DATE DESC;");
+        $result = Database::executeQuery("SELECT * FROM CAMPAIGN WHERE `STATUS` = 'over' ORDER BY DELIB_END DESC;");
         return empty($result) ? array() : $result[0];
     }
 
@@ -99,6 +99,15 @@ class CampaignModel extends AbstractModel
     {
         return Database::executeQuery("SELECT CAMPAIGN_ID AS ID, BEG_DATE AS BegDate, END_DATE as EndDate,"
             . "DELIB_END AS DelibEndDate, TITLE AS Title, STATUS AS Status FROM CAMPAIGN WHERE CAMPAIGN_ID = $campaignID")[0];
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function fetchCampaignInDeliberation() : array
+    {
+        $result = Database::executeQuery("SELECT * FROM CAMPAIGN WHERE `STATUS` = 'deliberation';");
+        return empty($result) ? array() : $result[0];
     }
 
     /**
