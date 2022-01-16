@@ -23,7 +23,7 @@ class PublicController
                 $data['next_campaign'] = $next_campaigns[0];
             }
         } else {
-            $campaign_id = $campaign['CAMPAIGN_ID'];
+            $campaign_id = $campaign ;
             $data['option'] = 'none';
             $data['ideas'] = IdeaModel::fetchIdeas((int) $campaign_id);
         }
