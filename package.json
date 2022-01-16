@@ -1,0 +1,23 @@
+{
+  "name": "php_dandies",
+  "version": "1.0.0",
+  "description": "exemple variableNumeroUn",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "tailwindcss build www/public/CSS/taillwindre.css -o taillwindre.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PHP-Dandies/M3104-Projet-PHP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PHP-Dandies/M3104-Projet-PHP/issues"
+  },
+  "homepage": "https://github.com/PHP-Dandies/M3104-Projet-PHP#readme",
+  "dependencies": {
+    "tailwindcss": "^3.0.15"
+  }
+}
