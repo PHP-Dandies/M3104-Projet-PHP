@@ -227,6 +227,14 @@ class UserModel extends AbstractModel
         $this->points = $points;
     }
 
+    public static function removeEmailFromFileIfExists(string $email) : bool {
+        $contents = file_get_contents('../Assets/emails');
+        if (!str_contains($contents, $email)) return false;
+        $contents = str_replace($email, '', $contents);
+        file_put_contents('../Assets/emails', $contents);
+        return true;
+    }
+
     public static function getAllEmails() : array {
         $emails = array();
 

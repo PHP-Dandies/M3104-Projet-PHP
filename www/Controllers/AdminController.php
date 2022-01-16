@@ -298,6 +298,15 @@ class AdminController extends AbstractController
         /** @var UserModel $user */
         $user = UserModel::constructFromArray($_POST);
 
+        if (UserModel::fetchUser($user->getUserID())['EMAIL'] !== $user->getEmail()) {
+            if (!UserModel::removeEmailFromFileIfExists($user->getEmail())) {
+                $errors['something_went_won'] = 'Oups, il y a eu un probleme innatendu, peu etre que l\'email est deja attribuée';
+            } else {
+                // TODO
+                // evoyer un email avec le nouveau mot de passe à l'utilisateur
+            }
+        }
+
         if (UserModel::usernameAlreadyExists($user->getUserID(), $user->getUserName())) {
             $errors['username_exists'] = 'The username selected already exists';
         }
