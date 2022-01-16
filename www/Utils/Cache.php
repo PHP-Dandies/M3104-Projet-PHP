@@ -10,7 +10,6 @@ class Cache {
         $this->expiration = time()+3600;
     }
 
-
     //Getters Setters
     public function set_page($page) {  $this->page = $page;  }
 
