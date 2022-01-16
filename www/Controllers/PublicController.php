@@ -9,14 +9,38 @@ class PublicController
      */
     public function readIdeas()
     {
+        $data = array();
 
-        $campaign_id['CAMPAIGN_ID'] = campaignModel::fetchRunningCampaign();
+        $campaign = campaignModel::fetchRunningCampaign();
+
+        if (empty($campaign)) {
+            $next_campaigns = CampaignModel::fetchScheduledCampaigns();
+            if (empty($next_campaigns)) {
+                $data['option'] = 'no_campaigns_scheduled';
+            }
+            ViewHelper::display(
+                $this,
+                'ReadAll',
+                array(
+                    'next_campaign' => $next_campaigns[0],
+                    'last_campaign_results' => IdeaModel::fetchRealizedIdeas(CampaignModel::fetchLastFinishedCampaign()['$CAMPAIGN_ID']),
+                    'option' => 'next_campaign'
+                )
+            );
+            return;
+        }
+
+        $campaign_id = $campaign['CAMPAIGN_ID'];
 
         $ideas = IdeaModel::fetchIdeas((int)$campaign_id);
+
         ViewHelper::display(
             $this,
             'ReadAll',
-            $ideas
+            array(
+                'option' => 'none',
+                'ideas' => $ideas,
+            )
         );
     }
 

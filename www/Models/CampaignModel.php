@@ -11,6 +11,15 @@ class CampaignModel extends AbstractModel
     private string $delibEndDate;
     private string $status;
 
+    public static function fetchLastFinishedCampaign() : array {
+        $result = Database::executeQuery("SELECT * FROM CAMPAIGN WHERE `STATUS` = 'over' ORDER BY DELIB_DATE DESC;");
+        return empty($result) ? array() : $result[0];
+    }
+
+    public static function fetchScheduledCampaigns() : array {
+        return Database::executeQuery("SELECT * FROM CAMPAIGN WHERE `STATUS` = 'scheduled' ORDER BY BEG_DATE;");
+    }
+
     /**
      * @param $campaignID
      * @return bool
@@ -30,8 +39,8 @@ class CampaignModel extends AbstractModel
     }
 
     public static function fetchRunningCampaign() : array {
-        $query = "SELECT CAMPAIGN_ID FROM CAMPAIGN WHERE STATUS = 'RUNNING'";
-        return Database::executeQuery($query)[0];
+        $result = Database::executeQuery("SELECT CAMPAIGN_ID FROM CAMPAIGN WHERE STATUS = 'RUNNING';");
+        return empty($result) ? array() : $result;
     }
 
     /**
