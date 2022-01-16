@@ -37,7 +37,7 @@ for ($i = 0, $iMax = count($campaigns); $i < $iMax; ++$i){
                 <?php } ?>
                 </tbody>
             </table>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"><a href="campagnes/creer">Creer une nouvelle campagne</a></button>
+            <button class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded"><a href="campagnes/creer">Creer une nouvelle campagne</a></button>
         </div>
     </div>
 <?php

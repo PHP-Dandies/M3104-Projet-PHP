@@ -4,7 +4,7 @@
   "description": "exemple variableNumeroUn",
   "main": "index.js",
   "scripts": {
-    "build-css": "tailwindcss build www/public/css/style.css -o www/public/style.css"
+    "build-css": "tailwindcss build www/public/css/style.css -o www/public/css/style.css"
   },
   "repository": {
     "type": "git",

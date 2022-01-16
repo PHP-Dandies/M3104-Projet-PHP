@@ -34,7 +34,7 @@ if (isset($data['errors'])) {
                             <input type="number" name="pts" min="1" required>
                         </label>
                     </div>
-                    <button role="submit" class="p-3 bg-blue-500 text-white hover:bg-blue-400" required>Enregistrer</button>
+                    <button role="submit" class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded" required>Enregistrer</button>
                 </form>
             </div>
     </div>
