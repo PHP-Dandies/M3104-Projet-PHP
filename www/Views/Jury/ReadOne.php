@@ -29,7 +29,7 @@ navbar();
                         <p><?php echo $idea["TOTAL_POINTS"] ?> sur <?php echo $idea["GOAL"]?> pts</p>
                     </div>
                     <div class="card" style="margin-top: 5px">
-                        <form action="../../Scripts/UserVote.php?id=<?php echo $idea["IDEA_ID"] ?>" method="post">
+                        <form action="?controller=Jury&action=juryVote&param=<?php echo $idea["IDEA_ID"]; ?>"method="post">
                             <input type="submit" value="Vote">
                         </form>
                     </div>

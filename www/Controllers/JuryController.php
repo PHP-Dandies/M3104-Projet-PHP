@@ -6,13 +6,24 @@ class JuryController {
     /**
      * @throws Exception
      */
+
+    public function __construct()
+    {
+        if(!isset($_SESSION['role']) || $_SESSION['role'] != 'jury'){
+            $controller = new ErrorController();
+            $controller->error404('/');
+            die();
+        }
+    }
+
+
     public function read(): void
     {
         $ideas = JuryModel::getIdeas();
         $viewName = 'Deliberation';
 
         if (empty($ideas)) {
-            $viewName = 'JuryView';
+            $viewName = 'CampaignList'; //CampaignList est placé dans Views/Campagin et non plus dans View/Jury
         }
 
         ViewHelper::display(
@@ -22,12 +33,17 @@ class JuryController {
         );
     }
 
+    public function juryVote($id){
+        JuryModel::acceptIdea($id);
+        header('Location: /jury');
+        exit();
+    }
+
     /**
      * @throws Exception
      */
     public function readOne($id) : void {
         $idea = JuryModel::getIdea($id);
-        var_dump($idea);
         ViewHelper::display(
             $this,
             'ReadOne',

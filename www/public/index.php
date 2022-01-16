@@ -13,9 +13,16 @@ try {
     if (isset($_GET['controller'], $_GET['action'])) {
         $controllerName = $_GET["controller"] . 'Controller';
         $controller = new $controllerName();
-
+        if(isset($_GET['param']))
+        {
+            $parameter = $_GET['param'];
+            $actionName = $_GET["action"];
+            $controller->$actionName($parameter);
+            exit();
+        }
         $actionName = $_GET["action"];
         $controller->$actionName();
+
     } elseif ($url === '') {
         echo 'a';
     } elseif ($url[0] === 'admin') {
@@ -52,19 +59,18 @@ try {
             $controller->create();
         }
     } else if ($url[0] === 'jury') {
-        if (!isset($_SESSION['user'])) {
-            $controller = new JuryController();
-            if (!isset($url[1])) {
-                //mettre ici le /jury/ideeX pouru acceder a une idée en partculier
-                $controller->read();
-            }
-            else if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])) {
-                $controller->readOne($url[2]);
-            }
-            else
-                echo'Erreur';
-                exit();
+        $controller = new JuryController();
+        if (!isset($url[1])) {
+            $controller->read();
+        } else if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])) {
+            $controller->readOne($url[2]);
         }
+        else
+        {
+            $error = new ErrorController();
+            $error->error404('/Login');
+        }
+
     } else if ($url[0] === 'users' && !isset($url[1])) {
         $controller = new UserController();
         $controller->read();

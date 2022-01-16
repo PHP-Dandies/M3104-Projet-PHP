@@ -61,6 +61,19 @@ class UserModel
         return $query['ROLE'];
     }
 
+    static function getEmailAdmin(): string
+    {
+        $query = database::executeQuery("SELECT EMAIL FROM USER WHERE ROLE='ADMIN';")[0];
+        return $query['EMAIL'];
+    }
+
+    static function getEmailUser($username): string
+    {
+        $query = database::executeQuery("SELECT EMAIL FROM USER WHERE USER='$username';")[0];
+        return $query['EMAIL'];
+    }
+
+
     function isLogin ($username): bool
     {
         return database::executeCount("SELECT COUNT(*) FROM USER WHERE USERNAME = '$username';") >= 1;

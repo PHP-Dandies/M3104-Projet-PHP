@@ -52,10 +52,19 @@ class UserController
         return;
     }
 
-    public function changePassword($password) //#TODO ecrire la méthode
+    public function sendEmailAdmin($username, $userEmail)
     {
-        //changer le password
-        // Mano le fait
+       $email = UserModel::getEmailAdmin();
+       mail($email,
+           'Change Password',
+           'You have to change' . $username . '\'s password. Send it at : ' . $userEmail . '.');
+
+    }
+
+    public function RegisterLoginEmail()
+    {
+        header('Location : AskLoginEmail');
+        exit();
     }
 
     public function read() : void {
@@ -85,17 +94,4 @@ class UserController
             array()
         );
     }
-
-
-// A supprimer si la nouvelle méthode marche
-
-//
-//    public function test() : void
-//    {
-//        ViewHelper::display(
-//            $this,
-//            'ModificationReussie',
-//            array()
-//        );
-//    }
 }

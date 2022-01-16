@@ -3,9 +3,9 @@ include '../Utils/Database.php';
 include('../Utils/AutoLoader.php');
 // une fois les sessions faites, récupérer l'id de l'utilisateur dans le session et lui enlever les points si il en a
 session_start();
-var_dump($_SESSION['user']);
+
 die();
-if(!isset($_SESSION["suid"]))
+if(!isset($_SESSION["user"]))
 {
     $id = $_GET["id"];
     $pts = $_POST["pts"];
@@ -23,5 +23,5 @@ if(!isset($_SESSION["suid"]))
 }
 else
 {
-    die('Erreur d\'autehntification');
+    die('Erreur d\'authentification');
 }

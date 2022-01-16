@@ -17,4 +17,8 @@ class JuryModel {
     public static function getIdea($idea_id) {
         return IdeaModel::fetchIdea($idea_id);
     }
+
+    public  static function acceptIdea($id){
+        Database::executeUpdate("UPDATE IDEA SET REALIZED = '1' WHERE IDEA_ID = $id ;");
+    }
 }
