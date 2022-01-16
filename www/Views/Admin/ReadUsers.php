@@ -27,10 +27,11 @@ $emails = $data['emails'];
                     <label for="role-select">Role actuel : <?php echo $user->getRole() ?></label>
                     <select name="role" id="role-select" value="">
                         <option value="<?php echo $user->getRole() ?>">Choisissez une option</option>
-                        <option value="admin">Admin</option>
-                        <option value="organizer">Proposeur d'event</option>
-                        <option value="jury">Jury</option>
-                        <option value="donor">Voteur</option>
+                        <option value="<?PHP echo ADMIN ?>"><?PHP echo ADMIN ?></option>
+                        <option value="<?PHP echo JURY ?>"><?PHP echo ADMIN ?></option>
+                        <option value="<?PHP echo DONOR ?>"><?PHP echo ADMIN ?></option>
+                        <option value="<?PHP echo ORGANIZER ?>"><?PHP echo ORGANIZER ?></option>
+                        <option value="<?PHP echo _PUBLIC ?>"><?PHP echo _PUBLIC ?></option>
                     </select>
                     <?php if ($user->getEmail() === 'none') { ?><br>
                     <label for="email_select">Utilisateur non attribué</label>

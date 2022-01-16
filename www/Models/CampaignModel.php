@@ -40,7 +40,7 @@ class CampaignModel extends AbstractModel
 
     public static function fetchRunningCampaign() : array {
         $result = Database::executeQuery("SELECT CAMPAIGN_ID FROM CAMPAIGN WHERE STATUS = 'RUNNING';");
-        return empty($result) ? array() : $result;
+        return empty($result) ? array() : $result[0];
     }
 
     /**

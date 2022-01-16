@@ -56,7 +56,7 @@ $option = $data['option'];
         <p>Pas de campagnes prévues, restez à l'écoute...</p>
             <?php }
         } ?>
-        <?php if (isset($lastCampaignResults) && !empty($lastCampaignResults)) { ?>
+        <?php if (isset($currentDeliberation) && !empty($currentDeliberation)) { ?>
         <table>
             <thead>
                 <tr>
@@ -69,7 +69,7 @@ $option = $data['option'];
                 <tr>
                     <td><?php echo $idea["TITLE"] ?></td>
                     <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>
-                    <td><a href="idee<?php echo $idea["IDEA_ID"] ?>">Voir</a></td>
+                    <td><a href="idee/<?php echo $idea["IDEA_ID"] ?>">Voir</a></td>
                 </tr>
                 <?php
             }
@@ -89,7 +89,7 @@ $option = $data['option'];
                 <tr>
                     <td><?php echo $idea["TITLE"] ?></td>
                     <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>
-                    <td><a href="idee<?php echo $idea["IDEA_ID"] ?>">Voir</a></td>
+                    <td><a href="idee/<?php echo $idea["IDEA_ID"] ?>">Voir</a></td>
                 </tr>
                 <?php
             }

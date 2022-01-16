@@ -9,7 +9,7 @@ class AdminController extends AbstractController
      * @throws Exception
      */
     public function __construct() {
-        if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+        if (!isset($_SESSION['role']) || $_SESSION['role'] !== ADMIN) {
             $controller = new ErrorController();
             $controller->error404('/');
             die();

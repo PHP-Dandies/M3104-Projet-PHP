@@ -2,6 +2,18 @@
 
 class DonatorController
 {
+    /**
+     * Verifies au moment de la création du controller, si l'utilisateur à les droits d'administrateur
+     * @throws Exception
+     */
+    public function __construct() {
+        if (!isset($_SESSION['role']) || $_SESSION['role'] !== DONOR) {
+            $controller = new ErrorController();
+            $controller->error404('/');
+            die();
+        }
+    }
+
     public function userVote(): void
     {
         $errors = array();
@@ -31,6 +43,4 @@ class DonatorController
                 'idea' => $idea)
         );
     }
-
-
 }

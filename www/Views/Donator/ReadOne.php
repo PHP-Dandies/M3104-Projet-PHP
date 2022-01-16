@@ -36,7 +36,7 @@ navbar();?>
                         <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $idea["GOAL"] ?>"></progress>
                         <p><?php echo $idea["TOTAL_POINTS"] ?> sur <?php echo $idea["GOAL"]?> pts</p>
                     </div>
-                    <?php if (isset ($_SESSION['role']) and $_SESSION['role'] === 'DONATEUR'){ ?>
+                    <?php if (isset ($_SESSION['role']) and $_SESSION['role'] === DONOR){ ?>
                     <div class="card" style="margin-top: 5px">
                         <form action="?controller=Donator&action=userVote" method="post">
                             <label>
@@ -73,7 +73,7 @@ navbar();?>
                     ?>
                 </div>
             </div>
-            <?php if (isset ($_SESSION['role']) and $_SESSION['role'] === 'DONATEUR'){ ?>
+            <?php if (isset ($_SESSION['role']) and $_SESSION['role'] === DONOR){ ?>
             <div class="is_vertical_align" style="margin-top: 5px">
                 <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white">Commentaires</h1>
                 <form action="?controller=Public&action=addComment" method="post">
