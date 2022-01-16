@@ -3,6 +3,10 @@
 require_once('../Utils/Database.php');
 
 class IdeaModel {
+    public static function ideaExists($ideaID) : bool {
+        return Database::executeCount("SELECT COUNT(*) TOTAL FROM IDEA WHERE IDEA_ID = $ideaID");
+    }
+
     /**
      * @throws Exception
      */
@@ -30,5 +34,16 @@ class IdeaModel {
         $data["CONTENTS"] = Database::executeQuery("SELECT * FROM UNLOCKABLE_CONTENT WHERE IDEA_ID = $ideaID");
 
         return $data;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function deleteIdea(int $ideaID): bool
+    {
+        return Database::executeUpdate("
+            DELETE FROM IDEA
+            WHERE IDEA_ID = $ideaID;
+        ");
     }
 }

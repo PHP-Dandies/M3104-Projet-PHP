@@ -1,4 +1,10 @@
 <?php
+function displayErrors(array $errors) {
+    foreach($errors as $error) {?>
+        <p><?php echo $error ?></p>
+<?php
+    }
+}
 function start_page($title)
 {
     echo '<!DOCTYPE html>'.PHP_EOL;
@@ -10,6 +16,10 @@ function start_page($title)
     echo '    <title>'.$title.'</title>'.PHP_EOL;
     echo '</head>'.PHP_EOL;
     echo '<body style="min-height: 100vh">'.PHP_EOL;
+}
+
+function returnButton($path) {
+    echo "  <a href=\"$path\">Retour</a>";
 }
 
 function navbar()

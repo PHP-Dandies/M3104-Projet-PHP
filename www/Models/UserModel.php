@@ -1,7 +1,7 @@
 <?php
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
 
-class UserModel
+class UserModel extends AbstractModel
 {
     private int $userID;
     private string $username;
@@ -11,14 +11,43 @@ class UserModel
     private int $points;
 
     /**
+     * @param int $points
+     * @return bool
+     * @throws Exception
+     */
+    public static function addPointsToAllDonors(int $points) : bool {
+        return Database::executeUpdate("
+            UPDATE 
+                USER
+            SET
+                POINTS = $points
+            WHERE
+                ROLE = 'DONOR';
+        ");
+    }
+
+    /**
      * Returns a list of all users
      * @return array
      * @throws Exception
      */
     public static function fetchAll() : array {
-        return Database::executeQuery("SELECT * FROM USER");
+        return Database::executeQuery("SELECT USER_ID AS USERID, USERNAME, PASSWORD, ROLE, EMAIL, POINTS FROM USER");
     }
 
+    public static function createUser(UserModel $user) : bool
+    {
+        return Database::executeUpdate("
+            INSERT INTO 
+                `user` (USERNAME, PASSWORD)
+            VALUES( '" . $user->getUserName() . "',
+            '" . $user->getPassword() . "'
+        );");
+    }
+
+    /**
+     * @throws Exception
+     */
     function getUserWithId($id): User
     {
         $query = database::executeQuery("SELECT * FROM USER WHERE USER_ID='$id';")[0];
@@ -44,9 +73,57 @@ class UserModel
 
     }
 
+    /**
+     * @deprecated
+     * @param $username
+     * @return bool
+     */
     function isLogin ($username): bool
     {
         return database::executeCount("SELECT COUNT(*) FROM USER WHERE USERNAME = '$username';") >= 1;
+    }
+
+    public static function fetchUser($userID){
+        return database::executeQuery("SELECT * FROM USER WHERE USER_ID = $userID")[0];
+    }
+
+    /**
+     * @param UserModel $user
+     * @return bool
+     * @throws Exception
+     */
+    public static function updateUser(UserModel $user) : bool {
+        if ($user->getPassword() !== '') {
+            $user->setPassword(password_hash($user->getPassword(),PASSWORD_DEFAULT));
+        }
+        return Database::executeUpdate("
+            UPDATE 
+                `user`
+            SET
+                USERNAME = '$user->username',
+                PASSWORD = '$user->password',
+                EMAIL = '$user->email',
+                ROLE = '$user->role'
+            WHERE
+                USER_ID = '$user->userID';
+        ");
+    }
+
+    public static function usernameAlreadyExists(int $userID, string $username) : bool {
+        return Database::executeCount(
+            "SELECT COUNT(*) TOTAL 
+                    FROM `user` 
+                    WHERE USER_ID != '$userID' 
+                        AND USERNAME = '$username'") > 0;
+    }
+
+    /**
+     * @param $username
+     * @return bool
+     */
+    public static function userNameExists($username): bool
+    {
+        return database::executeCount("SELECT COUNT(*) TOTAL FROM USER WHERE USERNAME = '$username';") > 0;
     }
 
     function isPassword ($username, $password): bool
@@ -148,5 +225,17 @@ class UserModel
     public function setPoints(int $points): void
     {
         $this->points = $points;
+    }
+
+    public static function getAllEmails() : array {
+        $emails = array();
+
+        $data = file('../Assets/emails');
+
+        foreach ($data as $line) {
+            $emails[] = $line;
+        }
+
+        return $emails;
     }
 }

@@ -15,7 +15,8 @@ class CampaignModel extends AbstractModel
      * @param $campaignID
      * @return bool
      */
-    public static function modifyCampaign(CampaignModel $campaign) : bool {
+    public static function modifyCampaign(CampaignModel $campaign): bool
+    {
         return Database::executeUpdate("
         UPDATE CAMPAIGN
         SET
@@ -31,9 +32,48 @@ class CampaignModel extends AbstractModel
     /**
      * @throws Exception
      */
+    public static function checkIfDatesConflicts(CampaignModel $campaign): bool
+    {
+        $campaigns = self::fetchCampaigns();
+        /** @var CampaignModel $n_campaign */
+        foreach ($campaigns as $c) {
+            $n_campaign = self::constructFromArray($c);
+            if (($campaign->getBegDT() <= $n_campaign->getBegDT() && $campaign->getEndDT() >= $n_campaign->getEndDT())
+                || ($campaign->getBegDT() >= $n_campaign->getBegDT() && $campaign->getBegDT() <= $n_campaign->getEndDT())
+                || ($campaign->getEndDT() >= $n_campaign->getBegDT() && $campaign->getEndDT() <= $n_campaign->getEndDT())
+                || ($campaign->getDelibEndDT() >= $n_campaign->getEndDT() && $campaign->getDelibEndDT() <= $n_campaign->getDelibEndDT())
+                || ($campaign->getDelibEndDT() >= $n_campaign->getEndDT() && $campaign->getEndDT() <= $n_campaign->getBegDT())) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function addCampaign(CampaignModel $campaign): bool
+    {
+        return Database::executeUpdate("
+            INSERT INTO
+                CAMPAIGN(TITLE, BEG_DATE, END_DATE, DELIB_END)
+            VALUES (
+                '$campaign->title',
+                '$campaign->begDate',
+                '$campaign->endDate',
+                '$campaign->delibEndDate'
+            );
+        ");
+    }
+
+    /**
+     * @throws Exception
+     */
     public static function fetchCampaigns(): array
     {
-        return Database::executeQuery("SELECT * FROM CAMPAIGN;");
+        return Database::executeQuery("SELECT CAMPAIGN_ID AS ID, BEG_DATE AS BegDate, END_DATE as EndDate,"
+            . "DELIB_END AS DelibEndDate, TITLE AS Title, STATUS AS Status FROM CAMPAIGN;");
     }
 
     /**
@@ -173,5 +213,20 @@ class CampaignModel extends AbstractModel
     public function isScheduled(): bool
     {
         return $this->status === 'scheduled';
+    }
+
+    public function getBegDT(): DateTime
+    {
+        return date_create($this->begDate);
+    }
+
+    public function getEndDT(): DateTime
+    {
+        return date_create($this->endDate);
+    }
+
+    public function getDelibEndDT(): DateTime
+    {
+        return date_create($this->delibEndDate);
     }
 }

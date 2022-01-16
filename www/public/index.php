@@ -8,7 +8,15 @@ try {
     $url = '';
     if (isset($_GET['url'])) {
         $url = $_GET['url'];
+        if ($url[strlen($url) - 1] === '/') {
+            $url = substr($url, 0, -1);
+            header('Location: /' . $url);
+            exit();
+        }
         $url = explode('/', $url);
+        if ($url[array_key_last($url)] === '') {
+            unset($url[array_key_last($url)]);
+        }
     }
     if (isset($_GET['controller'], $_GET['action'])) {
         $controllerName = $_GET["controller"] . 'Controller';
@@ -28,16 +36,18 @@ try {
             } elseif (is_numeric($url[2])) {
                 if (!isset($url[3])) {
                     $controller->readIdeas($url[2]);
+                } elseif ($url[3] === 'modifier' && !isset($url[4])) {
+                    $controller->readModifyCampaign($url[2]);
                 } elseif (str_contains($url[3], 'idee')) {
                     if (!isset($url[4])) {
                         $controller->readIdea(substr($url[3], -1));
                     }
-                    elseif ($url[4] === 'modify' && !isset($url[5])) {
+                    elseif ($url[4] === 'modifier' && !isset($url[5])) {
                         $controller->readModifyIdea(substr($url[3], -1));
                     }
-                } elseif ($url[3] === 'modifier' && !isset($url[4])) {
-                    $controller->readModifyCampaign($url[2]);
                 }
+            } elseif ($url[2] === 'creer' && !isset($url[3])) {
+                $controller->readCreateCampaign();
             }
         } elseif ($url[1] === 'utilisateurs' && !isset($url[2])) {
             $controller->readUsers();
