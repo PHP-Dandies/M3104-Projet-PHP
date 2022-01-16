@@ -17,7 +17,7 @@ navbar();
                 <table>
             <thead>
                 <tr>
-                    <th class="text-center">Liste des idées disponibles</th>
+                    <th class="text-center">Liste des idées disponibles <?php var_dump($_SESSION); ?></th>
                 </tr>
             </thead>
             <tbody>

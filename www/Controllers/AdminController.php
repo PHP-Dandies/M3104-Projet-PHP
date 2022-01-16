@@ -8,8 +8,10 @@ class AdminController extends AbstractController
      * @throws Exception
      */
     public function __construct() {
-        $controller = new ErrorController();
-        $controller->error404();
+        if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+            $controller = new ErrorController();
+            $controller->error404('/');
+        }
     }
 
     /**
@@ -125,7 +127,8 @@ class AdminController extends AbstractController
     public function readIdea(int $ideaID): void
     {
         if (!IdeaModel::ideaExists($ideaID)) {
-            throw new ErrorException("404");
+            $controller = new ErrorController();
+            $controller->error404('');
         }
         $campaign = IdeaModel::fetchIdea($ideaID);
 
