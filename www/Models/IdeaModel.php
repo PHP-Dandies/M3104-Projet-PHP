@@ -13,6 +13,15 @@ class IdeaModel extends AbstractModel{
     private string $picture;
     private int $userID;
     private int $campaignID;
+
+    /**
+     * @throws Exception
+     */
+    public static function fetchRealizedIdeas(int $campaignID) : array {
+        $result = Database::executeQuery("SELECT * FROM IDEA WHERE REALIZED = 1 AND CAMPAIGN_ID = $campaignID");
+        return empty($result) ? array() : $result;
+    }
+
     public static function ideaExists($ideaID) : bool {
         return Database::executeCount("SELECT COUNT(*) TOTAL FROM IDEA WHERE IDEA_ID = $ideaID");
     }
@@ -49,6 +58,7 @@ public static function fetchTheIdea($ideaID) : array {
 
         return $data;
     }
+
     /**
      * @throws Exception
      */
