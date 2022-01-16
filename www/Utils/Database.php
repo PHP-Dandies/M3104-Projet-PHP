@@ -58,7 +58,7 @@ class Database
             throw new \RuntimeException('Something went wrong with query : ' . $query . PHP_EOL, 2);
         }
 
-        return (int)mysqli_fetch_assoc($db_result)["TOTAL"];
+        return (int)mysqli_fetch_assoc($db_result)["COUNT(*)"];
     }
 
 

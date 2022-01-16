@@ -7,6 +7,14 @@ class AdminController extends AbstractController
     /**
      * @throws Exception
      */
+    public function __construct() {
+        $controller = new ErrorController();
+        $controller->error404();
+    }
+
+    /**
+     * @throws Exception
+     */
     public function createUser() : void {
         $errors = array();
 

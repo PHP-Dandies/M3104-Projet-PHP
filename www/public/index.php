@@ -1,5 +1,9 @@
 <?php
 
+session_start();
+
+var_dump($_SESSION);
+
 require_once('../Utils/AutoLoader.php');
 
 try {
@@ -23,7 +27,7 @@ try {
         $actionName = $_GET["action"];
         $controller->$actionName();
     } elseif ($url === '') {
-        echo 'a';
+        echo 'acceuil';
     } elseif ($url[0] === 'admin') {
         $controller = new AdminController();
         if (!isset($url[1])) {

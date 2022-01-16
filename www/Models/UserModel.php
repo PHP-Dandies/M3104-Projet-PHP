@@ -28,15 +28,6 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * Returns a list of all users
-     * @return array
-     * @throws Exception
-     */
-    public static function fetchAll() : array {
-        return Database::executeQuery("SELECT * FROM USER");
-    }
-
-    /**
      * @param int $points
      * @return bool
      * @throws Exception
@@ -149,7 +140,7 @@ class UserModel extends AbstractModel
 
     public static function usernameAlreadyExists(int $userID, string $username) : bool {
         return Database::executeCount(
-            "SELECT COUNT(*) TOTAL 
+            "SELECT COUNT(*)
                     FROM `user` 
                     WHERE USER_ID != '$userID' 
                         AND USERNAME = '$username'") > 0;
@@ -161,7 +152,7 @@ class UserModel extends AbstractModel
      */
     public static function userNameExists($username): bool
     {
-        return database::executeCount("SELECT COUNT(*) TOTAL FROM USER WHERE USERNAME = '$username';") > 0;
+        return database::executeCount("SELECT COUNT(*) FROM USER WHERE USERNAME = '$username';") > 0;
     }
 
     function isPassword ($username, $password): bool
