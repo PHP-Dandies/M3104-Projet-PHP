@@ -11,8 +11,6 @@ if (isset($data['errors'])) {
     displayErrors($data['errors']);
 }
 $emails = $data['emails'];
-var_dump($emails);
-die();
 /** @var UserModel $user */
 ?>
     <div class="container" style="margin-top: 5px">
@@ -41,10 +39,10 @@ die();
                                 utilisateur
                             </option>
                             <?php
-                            foreach ($users as $nUser) {
-                                if ($nUser->getEmail() !== '') {
+                            foreach ($emails as $email) {
+                                if ($email !== '') {
                                     ?>
-                                    <option value="<?php echo $nUser->getEmail(); ?>"><?php echo $nUser->getEmail(); ?></option>
+                                    <option value="<?php echo $email; ?>"><?php echo $email; ?></option>
                                     <?php
                                 }
                             }
