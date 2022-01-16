@@ -62,15 +62,9 @@ try {
         $controller = new JuryController();
         if (!isset($url[1])) {
             $controller->read();
-        } else if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])) {
+        }if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])) {
             $controller->readOne($url[2]);
         }
-        else
-        {
-            $error = new ErrorController();
-            $error->error404('/Login');
-        }
-
     } else if ($url[0] === 'users' && !isset($url[1])) {
         $controller = new UserController();
         $controller->read();
@@ -103,7 +97,8 @@ try {
     } else {
         echo '404';
     }
-} catch (Exception $e) {
+}
+ catch (Exception $e) {
     echo $e->getMessage();
     die();
 }

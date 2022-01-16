@@ -18,6 +18,11 @@ class JuryModel {
         return IdeaModel::fetchIdea($idea_id);
     }
 
+    public static function getAllIdeas($campaignID) : bool
+    {
+        return Database::executeQuery("SELECT IDEA_ID FROM IDEA WHERE CAMPAIGN_ID = $campaignID") > 1;
+    }
+
     public  static function acceptIdea($id){
         Database::executeUpdate("UPDATE IDEA SET REALIZED = '1' WHERE IDEA_ID = $id ;");
     }

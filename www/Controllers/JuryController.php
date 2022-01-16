@@ -9,13 +9,12 @@ class JuryController {
 
     public function __construct()
     {
+        $controller = new ErrorController();
         if(!isset($_SESSION['role']) || $_SESSION['role'] != 'jury'){
-            $controller = new ErrorController();
             $controller->error404('/');
             die();
         }
     }
-
 
     public function read(): void
     {
@@ -34,9 +33,19 @@ class JuryController {
     }
 
     public function juryVote($id){
-        JuryModel::acceptIdea($id);
-        header('Location: /jury');
-        exit();
+        $campaign = $_POST['campaignID'];
+        $a = JuryModel::getIdeas();  //Compter les IDEA ID si il y en a aucune alors le numéro dans l'url s'est trompé
+        if(JuryModel::getAllIdeas($campaign))
+        {
+            JuryModel::acceptIdea($id);
+            header('Location: /jury');
+            exit();
+        }
+        else {
+            $controller = new ErrorController();
+            $controller->error404('/');
+            die();
+        }
     }
 
     /**
