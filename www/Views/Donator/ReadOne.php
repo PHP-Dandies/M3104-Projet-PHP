@@ -2,21 +2,28 @@
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
 include substr($doc_root, 0, -6).'/Utils/AutoLoader.php';
 start_page("test");
+
 /** @var array $data */
-$idea = $data["IDEA"];
-if (isset($data["COMMENTS"])) {
-    $comments = $data["COMMENTS"];
+$idea = ($data['idea']['IDEA']);
+if (isset($data['idea']["COMMENTS"])) {
+    $comments = $data['idea']["COMMENTS"];
 }
-if (isset($data["CONTENTS"])) {
-    $users = $data["CONTENTS"];
+if (isset($data['idea']["CONTENTS"])) {
+    $users = $data['idea']["CONTENTS"];
 }
-navbar();
-returnButton('.');
-?>
+if (isset($data['errors'])) {
+    $errors = $data['errors'];
+}
+
+
+navbar();?>
+
+
     <div class="container" style="margin-top: 5px">
         <div class="is-vertical-align is-horizontal-align" style="margin-top: 5px; height: 20vh; background-image: url('../Images/0.jpg'); background-position: center; background-size: cover;">
-            <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white"><?php echo $idea["TITLE"] ?></h1>
+            <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white"><?php echo $idea["TITLE"]?> </h1>
         </div>
+
         <div>
             <div class="row" style="margin-top: 5px">
                 <div class="col-8">
@@ -25,15 +32,33 @@ returnButton('.');
                 </div>
                 <div class="col-4">
                     <div class="card">
-                        <h3>Organisateur : <?php echo $data["USER"]["USERNAME"] ?></h3>
+                        <h3>Organisateur : <?php echo $data['idea']["USER"]["USERNAME"] ?></h3>
                         <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $idea["GOAL"] ?>"></progress>
                         <p><?php echo $idea["TOTAL_POINTS"] ?> sur <?php echo $idea["GOAL"]?> pts</p>
-                        <form action="?controller=Admin&action=deleteIdea" method="post">
-                            <input type="hidden" name="ideaID" value="<?php echo $idea["IDEA_ID"] ?>">
-                            <input type="submit" value="supprimer idée">
+                    </div>
+                    <?php if (isset ($_SESSION['role']) and $_SESSION['role'] === 'DONATEUR'){ ?>
+                    <div class="card" style="margin-top: 5px">
+                        <form action="?controller=Donator&action=userVote" method="post">
+                            <label>
+                                <input type="hidden" name="ideaID" value="<?php echo $idea["IDEA_ID"] ?>">
+                            </label>
+                            <label>
+                                <input min="0"  name="pts" type="number">
+                            </label>
+                            <input type="submit" value="Donner">
+                            <?php
+                             if (isset($errors)) { ?>
+                                 <div>
+                             <?php foreach ($errors as $error) { ?>
+
+                            <p><?php echo $error ?></p>
+
+                             <?php } ?>
+                                </div>
+                            <?php } ?>
                         </form>
                     </div>
-                    <?php
+                    <?php }
                     if (isset($data["CONTENTS"])) {
                         foreach($data["CONTENTS"] as $content) {
                             ?>
@@ -48,25 +73,26 @@ returnButton('.');
                     ?>
                 </div>
             </div>
+            <?php if (isset ($_SESSION['role']) and $_SESSION['role'] === 'DONATEUR'){ ?>
             <div class="is_vertical_align" style="margin-top: 5px">
                 <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white">Commentaires</h1>
+                <form action="?controller=Public&action=addComment" method="post">
+                    <label>
+                        <input name="comment" placeholder="Laissez un commentaire">
+                    </label>
+                    <input type="submit" class="square">
+                </form>
                 <?php
                 foreach ($comments as $comment) { ?>
                     <div class="is_vertical_align">
-                        <p><?php echo $comment["USERNAME"]?></p>
-                        <p><?php echo $comment["comment"]?></p>
-                        <form action="?controller=Admin&action=deleteComment" method="post">
-                            <input type="hidden" name="commentid" value="<?php echo $comment["comment_id"] ?>">
-                            <input type="hidden" name="userid" value="<?php echo $comment["user_id"] ?>">
-                            <label for="reason"></label>
-                            <input id="reason" type="text" placeholder="reason">
-                            <input type="submit" value="supprimer">
-                        </form>
+                        <p><?php echo $comment['idea']["USERNAME"]?></p>
+                        <p><?php echo $comment['idea']["comment"]?></p>
                     </div>
                     <?php
                 }
                 ?>
             </div>
+    <?php } ?>
         </div>
     </div>
 <?php

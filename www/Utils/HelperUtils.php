@@ -1,6 +1,10 @@
-
-
 <?php
+function displayErrors(array $errors) {
+    foreach($errors as $error) {?>
+        <p><?php echo $error ?></p>
+<?php
+    }
+}
 function start_page($title)
 {
     echo '<!DOCTYPE html>'.PHP_EOL;
@@ -16,9 +20,14 @@ function start_page($title)
     echo '<body style="min-height: 100vh">'.PHP_EOL;
 }
 
+function returnButton($path) {
+    echo "  <a href=\"$path\">Retour</a>";
+}
+
 function navbar()
 {
     echo '    <nav class="nav">'.PHP_EOL;
+
     echo '        <div class="nav-left tabs">'.PHP_EOL;
     echo '            <a class="active">Link 1</a>'.PHP_EOL;
     echo '            <a>Link 2</a>'.PHP_EOL;

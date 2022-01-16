@@ -12,10 +12,10 @@ if(!isset($_SESSION["suid"]))
 
     Database::executeUpdate("UPDATE IDEA SET TOTAL_POINTS = TOTAL_POINTS + '$pts' WHERE IDEA_ID = $id");
 
-    var_dump(Database::executeUpdate("UPDATE USER SET AVAILABLE_POINTS = AVAILABLE_POINTS - '$pts' WHERE USERNAME = $_SESSION['user']"));
-    Die();
+    var_dump(Database::executeUpdate("UPDATE USER SET POINTS = POINTS - '$pts' WHERE USERNAME = $_SESSION['user']"));
+    die();
 
-    if(Database::executeUpdate("UPDATE USER SET AVAILABLE_POINTS = AVAILABLE_POINTS - '$pts' WHERE IDEA_ID = $_SESSION['user']") != 0)
+    if(Database::executeUpdate("UPDATE USER SET POINTS = POINTS - '$pts' WHERE IDEA_ID = $_SESSION['user']") != 0)
     {
         Database::executeUpdate("UPDATE USER SET AVAILABLE_POINTS = AVAILABLE_POINTS - '$pts' WHERE USER_ID = $userId");
     }

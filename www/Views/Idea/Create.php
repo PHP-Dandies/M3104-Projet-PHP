@@ -1,6 +1,6 @@
 <?php
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include '../../Utils/HelperUtils.php';
+include_once $doc_root.'/../Utils/HelperUtils.php';
 start_page("test");
 navbar();
 ?>
@@ -14,29 +14,28 @@ navbar();
             <div class="square" style="--i:4;"></div>
 
             <div class="container2">
-                <form action="../../Scripts/AddIdeaToDb.php" method="post">
+                <form enctype="multipart/form-data" action="../../Scripts/AddIdeaToDb.php" method="post" style="margin: 20px">
                     <h1>Votre Idée</h1>
                     <div class="group">
-                        <label for="title">Titre <span>En majuscule</span></label>
-                        <input type="text" name="title" id="title" class="controll"/>
+                        <label for="title">Titre</label>
+                        <input type="text" name="title" required/>
                     </div>
                     <div class="group">
-                        <label for="caption">Description <span>Un description très simple</span></label>
-                        <input type="text" name="caption" id="caption" class="controll">
+                        <label for="caption">Description</label>
+                        <textarea name="caption" required></textarea>
                     </div>
-
-                    <div class="group file_area">
-                        <label for="images">Images <span>Une image lisible s'il vous plait</span></label>
-                        <input type="file" name="images" id="images" required="required" multiple="multiple"/>
-
-                        <div class="dummy">
-                            <div class="succes">Parfait, votre image a été enregistré. Continuez</div>
-                            <div class="default">Sélectionner votre image</div>
-                        </div>
+                    <div class="group">
+                        <label for="goal">Goal</label>
+                        <input type="number" name="goal" required/>
+                    </div>
+                    <div class="group file_area" style="margin-bottom: 5px">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="100000000" />
+                        <label for="image">Image</label>
+                        <input type="file" name="image" required/>
                     </div>
 
                     <div class="group">
-                        <input type="submit" name="test" value="Enregister">
+                        <input type="submit" value="Enregister">
                     </div>
                 </form>
             </div>
