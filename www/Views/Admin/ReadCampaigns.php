@@ -3,37 +3,41 @@ $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FI
 include substr($doc_root, 0, -6).'/Utils/AutoLoader.php';
 start_page("test");
 navbar();
+returnButton('.');
+/** @var array $data */
 $campaigns = $data;
+for ($i = 0, $iMax = count($campaigns); $i < $iMax; ++$i) {
+    $campaigns[$i] = CampaignModel::constructFromArray($campaigns[$i]);
+}
 ?>
     <div class="container" style="margin-top: 5px">
         <h1 class="text-center"> Campagnes en cours </h1>
-        <?php
-        echo'    <table class="striped">'.PHP_EOL;
-        foreach ($campaigns as $campaign){
-            echo'        <tr>'.PHP_EOL;
-            echo'            <td>'.$campaign["TITLE"].'</td>'.PHP_EOL;
-            echo'            <td>'.$campaign["BEG_DATE"].'</td>'.PHP_EOL;
-            echo'            <td>'.$campaign["END_DATE"].'</td>'.PHP_EOL;
-            echo'            <td><a href="campagnes/' . $campaign["CAMPAIGN_ID"] . '" class="button error">Modifier</a></td>'.PHP_EOL;
-            echo'            <td><a href="campagnes/' . $campaign["CAMPAIGN_ID"] . '/modifier" class="button error">Modifier</a></td>'.PHP_EOL;
-            echo'        </tr>'.PHP_EOL;
-        }
-        echo'    </table>'.PHP_EOL;
-        ?>
-        <br>
-        <br>
-        <details class="text-center" class=dropdown>
-            <summary  class="button success">Créer une nouvelle Campagne  ↓ </summary>
-            <div class=card>
-                <p><input type="text" maxlength="25" placeholder="Entrez le nom de votre nouvelle campagne"></p>
-                <p class="text-success"> Sélectionner le début de la campagne : <input type="date" class="text-success" ></p>
-                <p class="text-error">Sélectionner la fin de la campagne : <input type="date" class="text-error"></p>
-                <p>
-                    <a>
-                        <button class="button success" >Enregistrer</button>
-                    </a></p>
-            </div>
-        </details>
+        <table class="stripped">
+            <thead>
+                <tr>
+                    <td>Titre</td>
+                    <td>Date de début</td>
+                    <td>Date de fin</td>
+                    <td>Date de fin des délibérations</td>
+                    <td>Voir les idées</td>
+                    <td>Modifier</td>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                /** @var CampaignModel $campaign */ foreach ($campaigns as $campaign) { ?>
+                    <tr>
+                        <td><?php echo $campaign->getTitle() ?></td>
+                        <td><?php echo $campaign->getBegDate() ?></td>
+                        <td><?php echo $campaign->getEndDate() ?></td>
+                        <td><?php echo $campaign->getDelibEndDate() ?></td>
+                        <td><a href="campagnes/<?php echo $campaign->getID() ?>" class="button error">Voir</a></td>
+                        <td><a href="campagnes/<?php echo $campaign->getID() ?>/modifier" class="button error">Modifier</a></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+        <a href="campagnes/creer"><button>Creer une nouvelle campagne</button></a>
     </div>
 <?php
 end_page();

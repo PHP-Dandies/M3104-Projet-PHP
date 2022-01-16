@@ -11,6 +11,7 @@ if (isset($data["CONTENTS"])) {
     $users = $data["CONTENTS"];
 }
 navbar();
+returnButton('.');
 ?>
     <div class="container" style="margin-top: 5px">
         <div class="is-vertical-align is-horizontal-align" style="margin-top: 5px; height: 20vh; background-image: url('../Images/0.jpg'); background-position: center; background-size: cover;">
@@ -27,7 +28,10 @@ navbar();
                         <h3>Organisateur : <?php echo $data["USER"]["USERNAME"] ?></h3>
                         <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $idea["GOAL"] ?>"></progress>
                         <p><?php echo $idea["TOTAL_POINTS"] ?> sur <?php echo $idea["GOAL"]?> pts</p>
-                        <a href="idee<?php echo $idea['IDEA_ID']; ?>/modify"><button class="inputBox">Modifier</button></a>
+                        <form action="?controller=Admin&action=deleteIdea" method="post">
+                            <input type="hidden" name="ideaID" value="<?php echo $idea["IDEA_ID"] ?>">
+                            <input type="submit" value="supprimer idée">
+                        </form>
                     </div>
                     <?php
                     if (isset($data["CONTENTS"])) {
@@ -56,7 +60,7 @@ navbar();
                             <input type="hidden" name="userid" value="<?php echo $comment["user_id"] ?>">
                             <label for="reason"></label>
                             <input id="reason" type="text" placeholder="reason">
-                            <input type="submit" value="delete">
+                            <input type="submit" value="supprimer">
                         </form>
                     </div>
                     <?php

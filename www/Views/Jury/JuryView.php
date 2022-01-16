@@ -9,7 +9,6 @@ navbar();
 $ideaModel = new IdeaModel();
 $query = 'SELECT * FROM IDEA';
 $Result = database::executeQuery($query);
-var_dump($Result);
 ?>
     <div class="container" style="margin-top: 5px">
         <table>
@@ -20,8 +19,7 @@ var_dump($Result);
             <tr>
                 <th>IDEE</th>
                 <th>VOIR</th>
-                <th>METTRE EN OEUVRE</th>
-                <th>ABANDONNER</th>
+                <th>SELECTIONNER</th>
             </tr>
             </thead>
             <tbody>
@@ -29,8 +27,7 @@ var_dump($Result);
             <tr>
                 <td><?php var_dump($res['TITLE']);?> </td>
                 <td><a class="button outline primary">Voir</a></td>
-                <td><a class="button outline primary">Mettre en oeuvre</a></td>
-                <td><a class="button outline">Abandonner</a></td>
+                <td><a class="button outline primary">Selectionner</a></td>
             </tr>
             <?php }?>
             </tbody>

@@ -9,10 +9,10 @@ class JuryController {
     public function read(): void
     {
         $ideas = JuryModel::getIdeas();
-        $viewName = 'ReadAll';
+        $viewName = 'Deliberation';
 
         if (empty($ideas)) {
-            $viewName = 'NoCampaign';
+            $viewName = 'JuryView';
         }
 
         ViewHelper::display(
@@ -27,6 +27,7 @@ class JuryController {
      */
     public function readOne($id) : void {
         $idea = JuryModel::getIdea($id);
+        var_dump($idea);
         ViewHelper::display(
             $this,
             'ReadOne',

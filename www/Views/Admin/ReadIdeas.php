@@ -5,6 +5,7 @@ start_page("test");
 /** @var array $data */
 $ideas = $data;
 navbar();
+returnButton('.');
 if (empty($ideas)) {
     echo "<h2>Aucune idées n'ont été publiées dans cette campagne !</h2>";
 } else {
