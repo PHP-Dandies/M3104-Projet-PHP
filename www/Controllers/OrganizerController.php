@@ -10,8 +10,8 @@ class OrganizerController {
         $campaign_id = -1;
         $campaigns = CampaignModel::fetchCampaigns();
         foreach ($campaigns as $campaign) {
-            if ($campaign['STATUS'] == 'running') {
-                $campaign_id = $campaign['CAMPAIGN_ID'];
+            if ($campaign['Status'] == 'running') {
+                $campaign_id = $campaign['ID'];
             }
         }
         if ($campaign_id == -1) {header('Location: /'); die();}
@@ -19,9 +19,9 @@ class OrganizerController {
         $ideas = IdeaModel::fetchIdeas($campaign_id);
         $my_ideas = array();
 
-        if (isset($_SESSION["ID"])) {
+        if (isset($_SESSION["id"])) {
             foreach ($ideas as $idea) {
-                if ($idea['USER_ID'] == $_SESSION["ID"]) {
+                if ($idea['USER_ID'] == $_SESSION["id"]) {
                     $my_ideas[] = $idea;
                 }
             }

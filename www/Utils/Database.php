@@ -41,6 +41,9 @@ class Database
     }
 
 
+    /**
+     * @throws Exception
+     */
     public static function executeCount($query): int
     {
         if (preg_match_all('/INSERT|UPDATE|DELETE/i', $query) > 0) {

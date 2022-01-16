@@ -11,6 +11,15 @@ class CampaignModel extends AbstractModel
     private string $delibEndDate;
     private string $status;
 
+    public static function fetchLastFinishedCampaign() : array {
+        $result = Database::executeQuery("SELECT * FROM CAMPAIGN WHERE `STATUS` = 'over' ORDER BY DELIB_END DESC;");
+        return empty($result) ? array() : $result[0];
+    }
+
+    public static function fetchScheduledCampaigns() : array {
+        return Database::executeQuery("SELECT * FROM CAMPAIGN WHERE `STATUS` = 'scheduled' ORDER BY BEG_DATE;");
+    }
+
     /**
      * @param $campaignID
      * @return bool
@@ -29,12 +38,9 @@ class CampaignModel extends AbstractModel
         ");
     }
 
-    /**
-     * @throws Exception
-     */
-    public static function fetchRunningCampaign() : string {
-        $query = "SELECT CAMPAIGN_ID FROM CAMPAIGN WHERE STATUS = 'RUNNING'";
-        return Database::executeQuery($query)[0]['CAMPAIGN_ID'];
+    public static function fetchRunningCampaign() : array {
+        $result = Database::executeQuery("SELECT CAMPAIGN_ID FROM CAMPAIGN WHERE STATUS = 'RUNNING';");
+        return empty($result) ? array() : $result;
     }
 
     /**
@@ -93,6 +99,15 @@ class CampaignModel extends AbstractModel
     {
         return Database::executeQuery("SELECT CAMPAIGN_ID AS ID, BEG_DATE AS BegDate, END_DATE as EndDate,"
             . "DELIB_END AS DelibEndDate, TITLE AS Title, STATUS AS Status FROM CAMPAIGN WHERE CAMPAIGN_ID = $campaignID")[0];
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function fetchCampaignInDeliberation() : array
+    {
+        $result = Database::executeQuery("SELECT * FROM CAMPAIGN WHERE `STATUS` = 'deliberation';");
+        return empty($result) ? array() : $result[0];
     }
 
     /**
