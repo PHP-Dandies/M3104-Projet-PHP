@@ -1,3 +1,6 @@
+
+
+
 <?php
 function displayErrors(array $errors) {
     foreach($errors as $error) {?>
@@ -12,9 +15,10 @@ function start_page($title)
     echo '<head>'.PHP_EOL;
     echo '    <meta charset="utf-8">'.PHP_EOL;
     echo '    <link rel="stylesheet" href="https://unpkg.com/chota@latest">'.PHP_EOL;
-    echo '    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">'.PHP_EOL;
     echo '    <link rel="stylesheet" href="/CSS/style.css" type="text/css" media="all">' .PHP_EOL;
     echo '    <link rel="stylesheet" href="/CSS/style2.css" type="text/css" media="all">' .PHP_EOL;
+    echo '    <link rel="stylesheet" href="/CSS/taillwindre.css" type="text/css" media="all">'.PHP_EOL;
+    echo '    <link href="https://unpkg.com/tailwindcss@0.3.0/dist/tailwind.min.css" rel="stylesheet">'.PHP_EOL;
     echo '    <title>'.$title.'</title>'.PHP_EOL;
     echo '</head>'.PHP_EOL;
     echo '<body style="min-height: 100vh">'.PHP_EOL;

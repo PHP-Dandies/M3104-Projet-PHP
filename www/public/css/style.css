@@ -1,3 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.product-name {
+    @apply p-5 h-screen bg-gray-100
+}
+
 section {
     display: flex;
     justify-content: center;
@@ -12,6 +20,7 @@ section .color {
 }
 .box {
     position: relative;
+    width: auto;
 }
 .box .square {
     position: absolute;
@@ -110,7 +119,6 @@ section .color {
 .form .inputBox input {
     width: 100%;
     background: rgba(255,255,255,0.2);
-    border: none;
     outline: none;
     padding: 10px 20px;
     border-radius: 35px;
@@ -140,4 +148,184 @@ section .color {
 .forget a {
     color: black;
     font-weight: 600;
+}
+
+.form h2 .test {
+    position: relative;
+    color: #747B7E;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+}
+
+.form h2 .test::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 80px;
+    height: 4px;
+    background: grey;
+}
+.inputBox input[type="submit"]{
+    background: #fff;
+    color: #666;
+    max-width: 100px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.form .box3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.box3 select {
+    background-color: #747B7E;
+    color: white;
+    padding: 12px;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    -webkit-appearance: button;
+    outline: none;
+}
+
+.box3::before {
+    content: "\f13a";
+    font-family: FontAwesome, sans-serif;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(255,255,255,0.1);
+    background-color: rgba(255,255,255,0.5);
+    pointer-events: none;
+}
+
+.box3:hover::before {
+    color: rgba(255,255,255,0.6);
+    background-color: rgba(255,255,255,0.2);
+}
+
+.box3 select option {
+    padding: 30px;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+tr .row100 head {
+    display: table-row;
+}
+.ze {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 60%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(32,32,32,0.3);
+    background: #fafafa;
+    text-align: center;
+}
+
+.thr {
+    background: #249ac7;
+}
+
+.thr, .thi{
+    padding: 10px 15px;
+}
+
+.thr {
+    background: #249ac7;
+    color: #fafafa;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+}
+
+.thi {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.sd:nth-child(odd) {
+    background-color: #eeeeee;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+#container4 {
+    position: absolute;
+    /*top: 10%;
+    left: 10%;
+    right: 10%;
+    bottom: 10%;*/
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('p404.png'), #151729;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+#container4 .content {
+    max-width: 600px;
+    text-align: center;
+}
+
+#container4 .content h2 {
+    font-size: 18vw;
+    color: #fff;
+    line-height: 1em;
+}
+
+#container4 .content h4 {
+    position: relative;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #111;
+    background: #fff;
+    font-weight: 300;
+    padding: 10px 20px;
+    display: inline-block;
+}
+
+#container4 .content p {
+    color: #fff;
+    font-size: 1.2em;
+}
+
+#container4 .content a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 25px;
+    background: #ff0562;
+    color: #fff;
+    text-decoration: none;
+    margin-top: 25px;
+    border-radius: 25px;
+    border-bottom: 4px solid #d00d56;
 }

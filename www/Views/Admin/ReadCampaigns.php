@@ -1,51 +1,45 @@
 <?php
-$doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include substr($doc_root, 0, -6).'/Utils/AutoLoader.php';
 start_page("test");
 navbar();
+returnButton('.');
+/** @var array $data */
 $campaigns = $data;
+for ($i = 0, $iMax = count($campaigns); $i < $iMax; ++$i){
+    $campaigns[$i] = CampaignModel::constructFromArray($campaigns[$i]);
+}
 ?>
-        <h1 class="p-5 h-screen bg-gray-100"> Campagnes en cours </h1>
-        <?php
-        echo '<template>'.PHP_EOL;
-        echo '    <div class="p-5 h-screen bg-gray-100">'.PHP_EOL;
-        echo '        <table class="w-full">'.PHP_EOL;
-        echo '            <thead class="bg-gray-50 border-b-2 border-gray-200">'.PHP_EOL;
-        echo '                <tr>'.PHP_EOL;
-        echo '                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Titre</th>'.PHP_EOL;
-        echo '                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Date de début</th>'.PHP_EOL;
-        echo '                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Date de fin</th>'.PHP_EOL;
-        echo '                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Bouton</th>'.PHP_EOL;
-        echo '                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Bouton</th>'.PHP_EOL;
-        echo '                </tr>'.PHP_EOL;
-        echo '            </thead>'.PHP_EOL;
-        foreach ($campaigns as $campaign){
-            echo '        <tbody class="divide-y divide-gray-100">'.PHP_EOL;
-            echo '            <tr class="bg-white">'.PHP_EOL;
-            echo '                <td class="p-3 text-sm text-gray-700"><spam class="p-1.5 text-xs font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-lg bg-opacity-50">'.$campaign["TITLE"].'</spam></td>'.PHP_EOL;
-            echo '                <td class="p-3 text-sm text-gray-700">'.$campaign["BEG_DATE"].'</td>'.PHP_EOL;
-            echo '                <td class="p-3 text-sm text-gray-700">'.$campaign["END_DATE"].'</td>'.PHP_EOL;
-            echo '                <td class="p-3 text-sm text-gray-700"><a class="font-bold text-blue-500 hover:underline" href="campagnes/' . $campaign["CAMPAIGN_ID"] . '" class="button error">Modifier</a></td>'.PHP_EOL;
-            echo '                <td class="p-3 text-sm text-gray-700"><a class="font-bold text-blue-500 hover:underline" href="campagnes/' . $campaign["CAMPAIGN_ID"] . '/modifier" class="button error">Modifier</a></td>'.PHP_EOL;
-            echo '            </tr>'.PHP_EOL;
-            echo '        </tbody>'.PHP_EOL;
-        }
-        echo'    </table>'.PHP_EOL;
-        ?>
-        <br>
-        <br>
-        <details class="text-center" class=dropdown>
-            <summary  class="button success">Créer une nouvelle Campagne  ↓ </summary>
-            <div class=card>
-                <p><input type="text" maxlength="25" placeholder="Entrez le nom de votre nouvelle campagne"></p>
-                <p class="text-success"> Sélectionner le début de la campagne : <input type="date" class="text-success" ></p>
-                <p class="text-error">Sélectionner la fin de la campagne : <input type="date" class="text-error"></p>
-                <p>
-                    <a>
-                        <button class="button success" >Enregistrer</button>
-                    </a></p>
-            </div>
-        </details>
+
+    <div class="w-2/3 mx-auto">
+        <div class="bg-white shadow-md rounded my-6">
+            <h1 class="text-3xl"> Campagnes en cours </h1>
+            <table class="text-left w-full border-collapse">
+                <thead>
+                    <tr>
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Titre</th>
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Date de début</th>
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Date de fin</th>
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Date de fin des délibérations</th>
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Voir les idées</th>
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Modifier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                /** @var CampaignModel $campaign */ foreach ($campaigns as $campaign) { ?>
+                    <tr class="hover:bg-grey-lighter">
+                        <td class="py-4 px-6 border-b border-gret-light"><?php echo $campaign->getTitle() ?></td>
+                        <td class="py-4 px-6 border-b border-gret-light"><?php echo $campaign->getBegDate() ?></td>
+                        <td class="py-4 px-6 border-b border-gret-light"><?php echo $campaign->getEndDate() ?></td>
+                        <td class="py-4 px-6 border-b border-gret-light"><?php echo $campaign->getDelibEndDate() ?></td>
+                        <td class="py-4 px-6 border-b border-gret-light"><a class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark" href="campagnes/<?php echo $campaign->getID() ?>">Voir</a></td>
+                        <td class="py-4 px-6 border-b border-gret-light"><a class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-blue hover:bg-blue-dark" href="campagnes/<?php echo $campaign->getID() ?>/modifier">Modifier</a></td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+            <a class="h-10 px-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:shadow-outline hover:bg-indigo-500 hover:text-indigo-100" href="campagnes/creer"><button>Creer une nouvelle campagne</button></a>
+        </div>
+    </div>
 <?php
 end_page();
 ?>
