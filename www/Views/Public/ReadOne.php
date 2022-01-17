@@ -10,7 +10,7 @@ if (isset($data["COMMENTS"])) {
     $comments = $data["COMMENTS"];
 }
 if (isset($data["CONTENTS"])) {
-    $users = $data["CONTENTS"];
+    $contents = $data["CONTENTS"];
 }
 echo 'hello';
 navbar();?>
@@ -35,8 +35,7 @@ navbar();?>
                 <div class="col-4">
                     <div class="card">
                         <h3>Organisateur : <?php echo $data["USER"]["USERNAME"] ?></h3>
-                        <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $idea["GOAL"] ?>"></progress>
-                        <p><?php echo $idea["TOTAL_POINTS"] ?> sur <?php echo $idea["GOAL"]?> pts</p>
+                        <p><?php echo $idea["TOTAL_POINTS"] ?>  pts</p>
                     </div>
                     <?php if ((isset ($_SESSION['role']) && $_SESSION['role'] === DONOR && $status === 'running')) { ?>
                         <div class="card" style="margin-top: 5px">
@@ -51,12 +50,13 @@ navbar();?>
                             </form>
                         </div>
                     <?php }
-                    if (isset($data["CONTENTS"])) {
-                        foreach($data["CONTENTS"] as $content) {
+                    if (isset($contents)) {
+                        foreach($contents as $content) {
                             ?>
                             <div class="card" style="margin-top: 5px">
                                 <h4> <?php echo $content["TITLE"] ?> </h4>
                                 <code> <?php if ($content["POINTS"] < $idea["TOTAL_POINTS"]) echo 'Atteint'; else echo $content["POINTS"]; ?> </code>
+                                <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $content["POINTS"] ?>"></progress>
                                 <p><?php echo $content["DESCRIPTION"] ?></p>
                             </div>
                             <?php

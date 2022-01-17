@@ -14,7 +14,7 @@ class DonatorController
         else{
             Database::executeUpdate("INSERT INTO `comment` (idea_id, user_id, comment) VALUES ('$ideaID', '$userID', '$comment')");
         }
-        $idea = IdeaModel::fetchIdea($ideaID);
+        $idea = IdeaModel::fetchAllInfoFromIdea($ideaID);
         ViewHelper::display(
             $this,
             'readOne',
@@ -44,15 +44,9 @@ class DonatorController
         $pts = (int)$_POST["pts"];
         $ideaID = $_POST["ideaID"];
         $totalPointsUser = UserModel::fetchUser($_SESSION['id'])['POINTS'];
-        $totalPointsIdea = IdeaModel::fetchTheIdea($ideaID)['TOTAL_POINTS'];
-        $ideaGoal = IdeaModel::fetchTheIdea($ideaID)['GOAL'];
 
         if ($pts > $totalPointsUser) {
             $errors['notenough'] = 'Vous ne possedez pas le nombre de points suffisant !';
-
-        }
-        elseif ($totalPointsIdea + $pts > $ideaGoal) {
-            $errors['toomuchpoints'] = 'Vous ne pouvez pas donner plus de points que nécessaire à cette idée !';
         }
         else {
             Database::executeUpdate("UPDATE IDEA SET TOTAL_POINTS = TOTAL_POINTS + $pts WHERE IDEA_ID = " . $ideaID);
