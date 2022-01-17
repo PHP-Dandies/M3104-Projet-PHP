@@ -99,6 +99,15 @@ class IdeaModel extends AbstractModel{
     }
 
     /**
+     * @throws Exception
+     */
+    public static function fetchContents(int $id) : array
+    {
+        $contents = Database::executeQuery("SELECT * FROM UNLOCKABLE_CONTENT WHERE IDEA_ID = $id;");
+        return empty($contents) ? array() : $contents;
+    }
+
+    /**
      * @return int
      */
     public function getID(): int

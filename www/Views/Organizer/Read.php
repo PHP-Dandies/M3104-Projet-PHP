@@ -8,7 +8,6 @@ if (!empty($campaign)) {
     /** @var CampaignModel $campaign */
     $campaign = CampaignModel::constructFromArray($campaign);
     if ($campaign->getStatus() === 'running') { ?>
-
     <table>
         <caption>Campagne en cours</caption>
         <thead>
@@ -47,7 +46,7 @@ if (!empty($campaign)) {
                         <td><?php echo $idea["TITLE"] ?></td>
                         <td><?php echo $idea["GOAL"] ?></td>
                         <td><?php echo $idea["TOTAL_POINTS"] ?></td>
-                        <td><a href="idea/edit/<?php echo $idea["IDEA_ID"];?>">Modifier</a></td>
+                        <td><a href="organisateur/modifier/<?php echo $idea["IDEA_ID"];?>">Modifier</a></td>
                     </tr>
                     <?php 
                 }
@@ -56,14 +55,17 @@ if (!empty($campaign)) {
 
     </div>
 <?php } else {  // !empty($ideas) ?>
-            <h1>Vous n'avez créée aucune idée</h1>
-            <a href="/idea/create">
-                Créer une idée
-            </a>
+    <h1>Vous n'avez créée aucune idée</h1>
             <?php
-        }
-    } // $campaign->getStatus() === 'running'
-} // !empty($campaign)
-
+        } ?>
+    <a href="/organisateur/creer">
+        Créer une idée
+    </a>
+    <?php } // $campaign->getStatus() === 'running'
+} else { // !empty($campaign) ?>
+    <h1>Pas de campagnes en cours, ni prévues</h1>
+    <a href="/">Retourner à l'accueil</a>
+<?php
+}
 end_page();
 ?>
