@@ -63,6 +63,22 @@ try {
         if (!isset($url[1])) {
             $controller->read();
         }if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])) {
+            if(isset( $_GET['campaignID']))
+            {
+                //faire une boucle for pour parcourir toutes les idée et les comparé
+                $ideas = IdeaModel::fetchIdeas( $_GET['campaignID']);
+                foreach ($ideas as $idea)
+                {
+                    if($idea != $url[2])
+                    {
+                        echo'404';
+                    }
+                }
+                $campaignID = $_GET['campaignID'];
+                var_dump($campaignID);
+                die();
+            }
+
             $controller->readOne($url[2]);
         }
     } else if ($url[0] === 'users' && !isset($url[1])) {

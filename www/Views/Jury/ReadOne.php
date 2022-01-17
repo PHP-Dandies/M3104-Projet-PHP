@@ -30,11 +30,10 @@ navbar();
                     </div>
                     <div class="card" style="margin-top: 5px">
 
-                        <form action="?controller=Jury&action=juryVote&param=<?php echo $idea["IDEA_ID"];?>"method="post">
-                            <input type="hidden" name="ID" value="<?php echo $idea["CAMPAIGN_ID"] ?>">
+                        <form action="?controller=Jury&action=juryVote&param=<?php echo $idea["IDEA_ID"];?>&campaignID=<?php echo $idea["CAMPAIGN_ID"] ?>"method="post">
+                            <input type="hidden" name="campaignID" value="<?php echo $idea["CAMPAIGN_ID"] ?>">
                             <input type="submit" value="Vote">
                         </form>
-
                     </div>
                     <?php
                     if (isset($data["CONTENTS"])) {
