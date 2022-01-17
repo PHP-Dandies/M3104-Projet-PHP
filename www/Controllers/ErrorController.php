@@ -13,4 +13,14 @@ class ErrorController {
             )
         );
     }
+
+    public function error500(string $path) : void{
+        ViewHelper::display(
+            $this,
+            '500',
+            array(
+                'path' => $path
+            )
+        );
+    }
 }

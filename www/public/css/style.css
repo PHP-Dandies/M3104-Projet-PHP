@@ -6,6 +6,7 @@ section {
     background: linear-gradient(to bottom, #f1f4f9, #dff1ff);
 
 }
+
 section .color {
     position: absolute;
     filter: blur(150px);

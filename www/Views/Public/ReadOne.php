@@ -20,7 +20,7 @@ navbar();?>
         <div class="is-vertical-align is-horizontal-align" style="margin-top: 5px; height: 20vh; background-image: url('../Images/0.jpg'); background-position: center; background-size: cover;">
             <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white"><?php echo $idea["TITLE"]?> </h1>
             <?php if ($status === 'deliberation') { ?>
-            <p>Cette idée est courement en délibération</p>
+            <p>Cette idée est courrament en délibération</p>
             <?php } else if ($status === 'over') { ?>
             <p>Cette idée appartient à une campagne terminée</p>
             <?php } ?>
