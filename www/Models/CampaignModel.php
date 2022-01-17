@@ -27,11 +27,22 @@ class CampaignModel extends AbstractModel
             CAMPAIGN_ID = $campaign->ID;
         ");
     }
+    public  static function fetchMaxVoteJury(){
+        $query = Database::executeQuery("SELECT MAX_VOTE_JURY FROM CAMPAIGN WHERE STATUS='deliberation'")[0];
+        $query['MAX_VOTE_JURY'];
+    }
+
+    public  static  function removeMaxVoteJury(){
+        Database::executeUpdate("UPDATE CAMPAIGN SET MAX_VOTE_JURY = MAX_VOTE_JURY - 1 WHERE  = '$password';").
+    }
+
     public static function fetchCampaignInDeliberation() : array
     {
         $result = Database::executeQuery("SELECT * FROM CAMPAIGN WHERE `STATUS` = 'deliberation';");
         return empty($result) ? array() : $result[0];
     }
+
+
 
     /**
      * @throws Exception

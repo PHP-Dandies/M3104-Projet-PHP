@@ -32,6 +32,7 @@ class UserController
 
     public function login()
     {
+        CampaignModel::fetchMaxVoteJury();
         $loginError = null;
 
         $login = $_POST['login'];
