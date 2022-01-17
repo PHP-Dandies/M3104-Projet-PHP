@@ -1,7 +1,7 @@
 <?php
 $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
 include_once $doc_root.'/../Utils/HelperUtils.php';
-start_page("test");
+start_page("Créez votre Idée.");
 navbar();
 ?>
     <section>
@@ -14,7 +14,7 @@ navbar();
             <div class="square" style="--i:4;"></div>
 
             <div class="container2">
-                <form enctype="multipart/form-data" action="../../Scripts/AddIdeaToDb.php" method="post" style="margin: 20px">
+                <form enctype="multipart/form-data" action="/?controller=Idea&action=createIdea" method="post" style="margin: 20px">
                     <h1>Votre Idée</h1>
                     <div class="group">
                         <label for="title">Titre</label>
@@ -31,7 +31,7 @@ navbar();
                     <div class="group file_area" style="margin-bottom: 5px">
                         <input type="hidden" name="MAX_FILE_SIZE" value="100000000" />
                         <label for="image">Image</label>
-                        <input type="file" name="image" required/>
+                        <input type="file" name="image" accept="image/*" required/>
                     </div>
 
                     <div class="group">

@@ -9,6 +9,9 @@ class UserController
     {
     }
 
+    /**
+     * @throws Exception
+     */
     public function login()
     {
         $loginError = null;
@@ -21,7 +24,7 @@ class UserController
             header('Location: /');
             exit();
         }
-        if ($model->isLogin($login)) {
+        if (UserModel::userNameExists($login)) {
             if ($model->isPassword($login, $password)) {
                 $_SESSION['user'] = $login;
                 $_SESSION['id']= UserModel::fetchId($login);
@@ -46,8 +49,8 @@ class UserController
 
     public function logout(){
         session_destroy();
-        header('Location: /'); //#TODO A la place de "SITE_URL" mettre l'accueil ou deconnecter l'utilisateur
-        return;
+        header('Location: /');
+        die();
     }
 
     public function changePassword($password) //#TODO ecrire la méthode

@@ -1,10 +1,7 @@
 <?php
 start_page("test");
 /** @var array $data */
-//$status = $data["STATUS"];
-$status = $data["STATUS"];
 $idea = $data["IDEA"];
-var_dump($idea);
 if (isset($data["COMMENTS"])) {
     $comments = $data["COMMENTS"];
 }
@@ -13,20 +10,16 @@ if (isset($data["CONTENTS"])) {
 }
 echo 'hello';
 navbar();?>
+
+
     <div class="container" style="margin-top: 5px">
         <div class="is-vertical-align is-horizontal-align" style="margin-top: 5px; height: 20vh; background-image: url('../Images/0.jpg'); background-position: center; background-size: cover;">
             <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white"><?php echo $idea["TITLE"]?> </h1>
-            <?php if ($status === 'deliberation') { ?>
-            <p>Cette idée est courement en délibération</p>
-            <?php } else if ($status === 'over') { ?>
-            <p>Cette idée appartient à une campagne terminée</p>
-            <?php } ?>
         </div>
-
         <div>
             <div class="row" style="margin-top: 5px">
                 <div class="col-8">
-                    <p>Mettre image ici</p>
+                    <p>mettre image ici</p>
                     <?php echo $idea["DESCRIPTION"] ?>
                 </div>
                 <div class="col-4">
@@ -35,7 +28,7 @@ navbar();?>
                         <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $idea["GOAL"] ?>"></progress>
                         <p><?php echo $idea["TOTAL_POINTS"] ?> sur <?php echo $idea["GOAL"]?> pts</p>
                     </div>
-                    <?php if ((isset ($_SESSION['role']) && $_SESSION['role'] === DONOR && $status === 'running')) { ?>
+                    <?php if (isset ($_SESSION['role']) and $_SESSION['role'] === DONOR){ ?>
                         <div class="card" style="margin-top: 5px">
                             <form action="?controller=Donator&action=userVote" method="post">
                                 <label>
@@ -64,25 +57,12 @@ navbar();?>
             </div>
             <div class="is_vertical_align" style="margin-top: 5px">
                 <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white">Commentaires</h1>
-                <?php if (isset ($_SESSION['role']) and $_SESSION['role'] === DONOR && $status === 'running'){ ?>
-                <form action="?controller=Public&action=addComment" method="post">
-                    <label>
-                        <input name="comment" placeholder="Laissez un commentaire">
-                    </label>
-                    <input type="submit" class="square">
-                </form>
-                <?php }
-                if (empty($comments)) { ?>
-                <p>Aucun commentaires</p>
-                <?php }
-                foreach ($comments as $comment) { ?>
+                <?php foreach ($comments as $comment) { ?>
                 <div class="is_vertical_align">
                     <p><?php echo $comment["USERNAME"]?></p>
                     <p><?php echo $comment["comment"]?></p>
                 </div>
-                    <?php
-                }
-                ?>
+                <?php } ?>
             </div>
         </div>
     </div>

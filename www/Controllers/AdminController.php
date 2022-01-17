@@ -1,30 +1,34 @@
 <?php
 
+require_once('../Utils/AutoLoader.php');
 
 class AdminController extends AbstractController
 {
     /**
+     * Verifies au moment de la création du controller, si l'utilisateur à les droits d'administrateur
      * @throws Exception
      */
-    /*public function __construct() {
-        if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    public function __construct() {
+        if (!isset($_SESSION['role']) || $_SESSION['role'] !== ADMIN) {
             $controller = new ErrorController();
             $controller->error404('/');
+            die();
         }
-    }*/
+    }
 
     /**
+     * Ajoute un utilisateur avec un nom d'utilisateur aléatoire et un mot de passe aléatoire hashé
      * @throws Exception
      */
     public function createUser() : void {
-        $errors = array();
+        $errors = array(); // eventuelles erreurs seront stockées ici
 
         $user = new UserModel();
 
         $user->setUsername(bin2hex(random_bytes(15)));
 
-        if (UserModel::userNameExists($user->getUsername())) {
-            $errors['username_taken'] = 'Username already taken';
+        while (UserModel::userNameExists($user->getUsername())) {
+            $user->setUsername(bin2hex(random_bytes(15)));
         }
 
         if (empty($errors)) {
@@ -33,15 +37,6 @@ class AdminController extends AbstractController
             if (!UserModel::createUser($user)) {
                 throw new Error('unexpected');
             }
-
-            ViewHelper::display(
-                $this,
-                'ReadUsers',
-                array(
-                    'emails' => UserModel::getAllEmails(),
-                    'users' => UserModel::fetchAll()
-                )
-            );
         }
         ViewHelper::display(
             $this,
@@ -129,7 +124,7 @@ class AdminController extends AbstractController
             $controller = new ErrorController();
             $controller->error404('');
         }
-        $campaign = IdeaModel::fetchIdea($ideaID);
+        $campaign = IdeaModel::fetchAllInfoFromId($ideaID);
 
         ViewHelper::display(
             $this,
@@ -235,7 +230,7 @@ class AdminController extends AbstractController
      */
     public function readModifyIdea($ideaID): void
     {
-        $idea = IdeaModel::fetchIdea($ideaID);
+        $idea = IdeaModel::fetchAllInfoFromId($ideaID);
         ViewHelper::display(
             $this,
             '',
@@ -294,15 +289,16 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @throws ErrorException
-     * @throws Exception
+     * Modifie un utilisateur selon les valeurs dans $_POST,
+     * @throws Error envoyée si l'utilisateur à tenté de rentrer les values $_GET directement à la main, une erreur est donc renvoyée
+     * @throws Exception erreurs sql
      */
     public function editUser() : void
     {
         $errors = array();
 
         if (empty($_POST)) {
-            throw new ErrorException("bad access");
+            throw new Error("bad access");
         }
 
         /** @var UserModel $user */

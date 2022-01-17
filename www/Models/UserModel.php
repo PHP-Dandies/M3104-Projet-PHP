@@ -90,13 +90,19 @@ class UserModel extends AbstractModel
 
     }
 
+    /**
+     * @throws Exception
+     */
     static function fetchId($username) : string
     {
         $query = database::executeQuery("SELECT USER_ID FROM USER WHERE USERNAME ='$username'")[0];
         return $query['USER_ID'];
     }
 
-    static function fetchRole($username) : string
+    /**
+     * @throws Exception
+     */
+    public static function fetchRole(string $username) : string
     {
         $query = database::executeQuery("SELECT ROLE FROM USER WHERE USERNAME ='$username'")[0];
         return $query['ROLE'];

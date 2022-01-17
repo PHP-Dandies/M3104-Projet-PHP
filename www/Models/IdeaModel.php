@@ -14,6 +14,14 @@ class IdeaModel extends AbstractModel{
     private int $userID;
     private int $campaignID;
 
+    /**
+     * @throws Exception
+     */
+    public static function fetchRealizedIdeas(int $campaignID) : array {
+        $result = Database::executeQuery("SELECT * FROM IDEA WHERE REALISED = 1 AND CAMPAIGN_ID = $campaignID");
+        return empty($result) ? array() : $result;
+    }
+
     public static function ideaExists($ideaID) : bool {
         return Database::executeCount("SELECT COUNT(*) TOTAL FROM IDEA WHERE IDEA_ID = $ideaID");
     }
@@ -27,16 +35,25 @@ class IdeaModel extends AbstractModel{
     }
 
     public static function fetchTheIdea($ideaID) : array {
-        return database::executeQuery("SELECT * FROM IDEA WHERE IDEA_ID = $ideaID")[0];
+        $result = database::executeQuery("SELECT * FROM IDEA WHERE IDEA_ID = $ideaID;");
+        return empty($result) ? array() : $result[0];
+    }
+
+    public static function fetchUserIdeas(int $userID) : array {
+        return Database::executeQuery("SELECT * FROM IDEA WHERE USER_ID = $userID");
     }
 
     /**
      * @throws Exception
      */
-    public static function fetchIdea($ideaID) : array {
+    public static function fetchAllInfoFromIdea($ideaID) : array {
         $data = array();
 
-        $data["IDEA"] = Database::executeQuery("SELECT * FROM IDEA WHERE IDEA_ID = $ideaID")[0];
+        $result = self::fetchTheIdea($ideaID);
+        if (empty($result)) {
+            return array();
+        }
+        $data["IDEA"] = $result;
 
         $data["USER"] = Database::executeQuery("SELECT USER.USER_ID, USER.USERNAME FROM USER, IDEA WHERE USER.USER_ID = IDEA.USER_ID")[0];
 
@@ -61,6 +78,24 @@ class IdeaModel extends AbstractModel{
             DELETE FROM IDEA
             WHERE IDEA_ID = $ideaID;
         ");
+    }
+
+    public static function isInDeliberation($idea_id) {
+        $query = "SELECT STATUS FROM CAMPAIGN, IDEA WHERE CAMPAIGN.CAMPAIGN_ID = IDEA.CAMPAIGN_ID AND IDEA_ID = $idea_id;";
+        $result = Database::executeQuery($query)[0];
+
+        return $result["STATUS"] === 'deliberation';
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function isOldCampaign($idea_id) : bool
+    {
+        $query = "SELECT STATUS FROM CAMPAIGN, IDEA WHERE CAMPAIGN.CAMPAIGN_ID = IDEA.CAMPAIGN_ID AND IDEA_ID = $idea_id;";
+        $result = Database::executeQuery($query)[0];
+
+        return $result["STATUS"] === 'over';
     }
 
     /**

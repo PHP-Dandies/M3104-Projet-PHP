@@ -15,6 +15,6 @@ class JuryModel {
     }
 
     public static function getIdea($idea_id) {
-        return IdeaModel::fetchIdea($idea_id);
+        return IdeaModel::fetchAllInfoFromId($idea_id);
     }
 }
