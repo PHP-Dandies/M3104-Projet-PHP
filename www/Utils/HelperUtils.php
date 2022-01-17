@@ -37,6 +37,9 @@ function navbar()
     if(isset ($_SESSION['role']) and $_SESSION['role'] ==='organizer'){
         echo '            <a href="/organisateur"><button class="button success">Espace Organisateur</button></a>'.PHP_EOL;
     }
+    if(isset ($_SESSION['role']) and $_SESSION['role'] ==='jury'){
+        echo '            <a href="/jury"><button class="button success">Espace Jury</button></a>'.PHP_EOL;
+    }
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-center">'.PHP_EOL;
     echo '            <a class="brand" href="/">E-Event.io</a>' .PHP_EOL;

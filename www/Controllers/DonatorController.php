@@ -5,13 +5,18 @@ class DonatorController
     public function userComment(): void
     {
         $errors = array();
-        $comment = (string) $_POST["comment"];
+        $comment = $_POST["comment"];
         $ideaID = $_POST["ideaID"];
         $userID = $_SESSION['id'];
         if ($comment === ''){
             $errors['noComment'] = 'Vous ne pouvez pas publier un message vide !';
         }
         else{
+            if (str_contains($comment, "'" ))
+            {
+                $comment = str_replace("'","`", $comment);
+            }
+
             Database::executeUpdate("INSERT INTO `comment` (idea_id, user_id, comment) VALUES ('$ideaID', '$userID', '$comment')");
         }
         $idea = IdeaModel::fetchAllInfoFromIdea($ideaID);
