@@ -2,6 +2,27 @@
 
 class DonatorController
 {
+    public function userComment(): void
+    {
+        $errors = array();
+        $comment = (string) $_POST["comment"];
+        $ideaID = $_POST["ideaID"];
+        $userID = $_SESSION['id'];
+        if ($comment === ''){
+            $errors['noComment'] = 'Vous ne pouvez pas publier un message vide !';
+        }
+        else{
+            Database::executeUpdate("INSERT INTO `comment` (idea_id, user_id, comment) VALUES ('$ideaID', '$userID', '$comment')");
+        }
+        $idea = IdeaModel::fetchIdea($ideaID);
+        ViewHelper::display(
+            $this,
+            'readOne',
+            array('errors' => $errors,
+                'idea' => $idea)
+        );
+
+    }
     /**
      * Verifies au moment de la création du controller, si l'utilisateur à les droits d'administrateur
      * @throws Exception
@@ -43,4 +64,6 @@ class DonatorController
                 'idea' => $idea)
         );
     }
+
+
 }

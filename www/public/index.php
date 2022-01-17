@@ -28,7 +28,6 @@ try {
     if (isset($_GET['controller'], $_GET['action'])) {
         $controllerName = $_GET["controller"] . 'Controller';
         $controller = new $controllerName();
-
         $actionName = $_GET["action"];
         $controller->$actionName();
     } elseif ($url === '') {

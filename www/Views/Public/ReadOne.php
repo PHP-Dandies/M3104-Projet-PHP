@@ -57,25 +57,34 @@ navbar();?>
                 </div>
             </div>
             <?php if (isset ($_SESSION['role']) and $_SESSION['role'] === DONOR){ ?>
-            <div class="is_vertical_align" style="margin-top: 5px">
-                <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white">Commentaires</h1>
-                <form action="?controller=Public&action=addComment" method="post">
-                    <label>
-                        <input name="comment" placeholder="Laissez un commentaire">
-                    </label>
-                    <input type="submit" class="square">
-                </form>
-                <?php
-                foreach ($comments as $comment) { ?>
-                    <div class="is_vertical_align">
-                        <p><?php echo $comment["USERNAME"]?></p>
-                        <p><?php echo $comment["comment"]?></p>
-                    </div>
+                <div class="is_vertical_align" style="margin-top: 5px">
+                    <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white">Commentaires</h1>
                     <?php
-                }
-                ?>
-            </div>
-    <?php } ?>
+                    if (isset($errors['noComment'])) { ?>
+                        <div>
+                            <p><?php echo $errors['noComment'] ?></p>
+                        </div>
+                    <?php } ?>
+                    <form action="?controller=Donator&action=userComment" method="post">
+                        <label>
+                            <input type="hidden" name="ideaID" value="<?php echo $idea["IDEA_ID"] ?>">
+                        </label>
+                        <label>
+                            <input maxlength="250" name="comment" placeholder="Laissez un commentaire">
+                        </label>
+                        <input type="submit" class="square">
+                    </form>
+                    <?php
+                    foreach ($comments as $comment) { ?>
+                        <div class="card">
+                            <p><?php echo $comment["USERNAME"]?></p>
+                            <p><?php echo $comment["comment"]?></p>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            <?php } ?>
         </div>
     </div>
 <?php
