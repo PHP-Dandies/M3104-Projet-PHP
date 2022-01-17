@@ -16,7 +16,7 @@ for ($i = 0, $iMax = count($campaigns); $i < $iMax; ++$i) {
                     <td>Titre</td>
                     <td>Date de début</td>
                     <td>Date de fin</td>
-                    <td>Date de fin des délibérations</td>
+                    <td>Date fin délib</td>
                     <td>Voir les idées</td>
                     <td>Modifier</td>
                 </tr>
@@ -35,7 +35,7 @@ for ($i = 0, $iMax = count($campaigns); $i < $iMax; ++$i) {
                 <?php } ?>
             </tbody>
         </table>
-        <a href="campagnes/creer"><button>Creer une nouvelle campagne</button></a>
+        <a class="col-12 row is-center" href="campagnes/creer"><button>Creer une nouvelle campagne</button></a>
     </div>
 <?php
 end_page();

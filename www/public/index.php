@@ -39,30 +39,35 @@ try {
         $controller = new AdminController();
         if (!isset($url[1])) {
             $controller->readIndex();
-        } elseif ($url[1] === 'campagnes') {
+        }
+        elseif ($url[1] === 'campagnes') {
             if (!isset($url[2])) {
                 $controller->readCampaigns();
-            } elseif ($url[2] === 'creer' && !isset($url[3])){
-                $controller->readCreateCampaign();
             } elseif (is_numeric($url[2])) {
                 if (!isset($url[3])) {
                     $controller->readIdeas($url[2]);
-                } elseif ($url[3] === 'modifier' && !isset($url[4])) {
+                } else if ($url[3] === 'modifier' && !isset($url[4])) {
                     $controller->readModifyCampaign($url[2]);
-                } elseif (str_contains($url[3], 'idee')) {
-                    if (!isset($url[4])) {
-                        $controller->readIdea(substr($url[3], -1));
-                    } elseif ($url[4] === 'modify' && !isset($url[5])) {
-                        $controller->readModifyIdea(substr($url[3], -1));
-                    }
-                } elseif ($url[3] === 'modifier' && !isset($url[4])) {
-                    $controller->readModifyCampaign($url[2]);
+                } else {
+                    $controller = new ErrorController();
+                    $controller->error404('/');
                 }
             } elseif ($url[2] === 'creer' && !isset($url[3])) {
                 $controller->readCreateCampaign();
+            } else {
+                $controller = new ErrorController();
+                $controller->error404('/');
             }
-        } elseif ($url[1] === 'utilisateurs' && !isset($url[2])) {
-            $controller->readUsers();
+        } elseif ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2])) {
+            if (!isset($url[3])) {
+                $controller->readIdea($url[2]);
+            } else {
+                $controller = new ErrorController();
+                $controller->error404('/');
+            }
+        } else {
+            $controller = new ErrorController();
+            $controller->error404('/');
         }
     } else if ($url[0] === 'login' && !isset($url[1])) {
         $controller = new UserController();

@@ -23,7 +23,7 @@ class IdeaModel extends AbstractModel{
     }
 
     public static function ideaExists($ideaID) : bool {
-        return Database::executeCount("SELECT COUNT(*) TOTAL FROM IDEA WHERE IDEA_ID = $ideaID");
+        return Database::executeCount("SELECT COUNT(*) FROM IDEA WHERE IDEA_ID = $ideaID");
     }
 
     /**

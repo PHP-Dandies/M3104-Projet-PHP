@@ -16,10 +16,10 @@ if (isset($errors)) { ?>
 <?php } ?>
     </div>
 <?php } ?>
-    <div>
+    <div class ="container">
         <form action="?controller=Admin&action=modifyCampaign" method="post">
             <input type="hidden" name="ID" value="<?php echo $campaign->getID() ?>">
-            <label for="title"> Titre actuel : <?php echo $campaign->getTitle();?></label>
+            <label for="title"><strong>Titre actuel : <?php echo $campaign->getTitle();?></strong></label>
             <input id="title"
                    type="text"
                    name="title"
@@ -27,17 +27,17 @@ if (isset($errors)) { ?>
                    placeholder="<?php echo $campaign->getTitle();?>"
                     <?php if ($campaign->isOver()) {echo 'readonly';} ?>>
 
-            <label for="beg_date"> Changer la date de début : </label>
+            <label for="beg_date"><strong>Changer la date de début : </strong></label>
             <input type="date" id="beg_date" name="begdate"
                    value="<?php echo $campaign->getBegDate() ?>" min="<?php echo date('Y-m-d') ?>"
                     <?php if (!$campaign->isScheduled()) {echo 'readonly';}?>>
 
-            <label for="end_date"> Changer la date de fin : </label>
+            <label for="end_date"><strong> Changer la date de fin : </strong></label>
             <input type="date" id="end_date" name="enddate"
                    value="<?php echo $campaign->getEndDate() ?>" min="<?php echo date('Y-m-d') ?>"
                     <?php if ($campaign->isOver() || $campaign->isInDeliberation()) echo 'readonly'?>>
 
-            <label for="delib_date"> Changer la date de fin de délibération : </label>
+            <label for="delib_date"><strong>Changer la date de fin de délibération : </strong></label>
             <input type="date" id="delib_date" name="delibenddate"
                    value="<?php echo $campaign->getDelibEndDate() ?>"
                 <?php if ($campaign->isOver()) echo 'readonly'?>>
