@@ -27,9 +27,9 @@ class PublicController
             $data['option'] = 'none';
             $data['ideas'] = IdeaModel::fetchIdeas((int) $campaign_id);
         }
-        //if (!empty($lastCampaign)) {
-       //    $data['last_campaign_result'] = IdeaModel::fetchRealizedIdeas($lastCampaign['CAMPAIGN_ID']);
-      //  }
+        if (!empty($lastCampaign)) {
+            $data['last_campaign_result'] = IdeaModel::fetchRealizedIdeas($lastCampaign['CAMPAIGN_ID']);
+        }
         if (!empty($campaignInDelib)) {
             $data['ideas_delib'] = IdeaModel::fetchIdeas($campaignInDelib['CAMPAIGN_ID']);
         }
@@ -40,18 +40,30 @@ class PublicController
         );
     }
 
-
     /**
      * @throws Exception
      */
-    public function readIdea ($idea_id){
-     $idea = IdeaModel::fetchIdea($idea_id);
-     ViewHelper::display(
-         $this,
-         'ReadOne',
-         $idea
-     );
+    public function readIdea($idea_id): void
+    {
+        $idea = IdeaModel::fetchAllInfoFromIdea($idea_id);
+        if (empty($idea)) {
+            $controller = new ErrorController();
+            $controller->error404('/');
+        } else {
+            if (IdeaModel::isOldCampaign($idea_id)) {
+                $idea["STATUS"] = 'over';
+            } elseif (IdeaModel::isInDeliberation($idea_id)) {
+                $idea["STATUS"] = 'deliberation';
+            } else {
+                $idea["STATUS"] = 'running';
+            }
 
+            ViewHelper::display(
+                $this,
+                'ReadOne',
+                $idea
+            );
+        }
     }
 
 }
