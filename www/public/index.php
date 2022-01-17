@@ -29,7 +29,6 @@ try {
     if (isset($_GET['controller'], $_GET['action'])) {
         $controllerName = $_GET["controller"] . 'Controller';
         $controller = new $controllerName();
-
         $actionName = $_GET["action"];
         $controller->$actionName();
     } elseif ($url === '') {
@@ -45,8 +44,6 @@ try {
         } elseif ($url[1] === 'campagnes') {
             if (!isset($url[2])) {
                 $controller->readCampaigns();
-            } elseif ($url[2] === 'creer' && !isset($url[3])){
-                $controller->readCreateCampaign();
             } elseif (is_numeric($url[2])) {
                 if (!isset($url[3])) {
                     $controller->readIdeas($url[2]);
@@ -55,7 +52,8 @@ try {
                 } elseif (str_contains($url[3], 'idee')) {
                     if (!isset($url[4])) {
                         $controller->readIdea(substr($url[3], -1));
-                    } elseif ($url[4] === 'modify' && !isset($url[5])) {
+                    }
+                    elseif ($url[4] === 'modifier' && !isset($url[5])) {
                         $controller->readModifyIdea(substr($url[3], -1));
                     }
                 } elseif ($url[3] === 'modifier' && !isset($url[4])) {

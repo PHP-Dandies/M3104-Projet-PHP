@@ -1,5 +1,6 @@
 <?php
 start_page("test");
+
 /** @var array $data */
 //$status = $data["STATUS"];
 $status = $data["STATUS"];
@@ -9,7 +10,7 @@ if (isset($data["COMMENTS"])) {
     $comments = $data["COMMENTS"];
 }
 if (isset($data["CONTENTS"])) {
-    $users = $data["CONTENTS"];
+    $contents = $data["CONTENTS"];
 }
 echo 'hello';
 navbar();?>
@@ -31,9 +32,8 @@ navbar();?>
                 </div>
                 <div class="col-4">
                     <div class="card">
-                        <h3 class="mb-4 font-semibold text-gray-600 dark:text-gray-300">Organisateur : <?php echo $data["USER"]["USERNAME"] ?></h3>
-                        <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $idea["GOAL"] ?>"></progress>
-                        <p><?php echo $idea["TOTAL_POINTS"] ?> sur <?php echo $idea["GOAL"]?> pts</p>
+                        <h3>Organisateur : <?php echo $data["USER"]["USERNAME"] ?></h3>
+                        <p><?php echo $idea["TOTAL_POINTS"] ?>  pts</p>
                     </div>
                     <?php if ((isset ($_SESSION['role']) && $_SESSION['role'] === DONOR && $status === 'running')) { ?>
                         <div class="card" style="margin-top: 5px">
@@ -48,12 +48,13 @@ navbar();?>
                             </form>
                         </div>
                     <?php }
-                    if (isset($data["CONTENTS"])) {
-                        foreach($data["CONTENTS"] as $content) {
+                    if (isset($contents)) {
+                        foreach($contents as $content) {
                             ?>
                             <div class="card" style="margin-top: 5px">
                                 <h4> <?php echo $content["TITLE"] ?> </h4>
                                 <code> <?php if ($content["POINTS"] < $idea["TOTAL_POINTS"]) echo 'Atteint'; else echo $content["POINTS"]; ?> </code>
+                                <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $content["POINTS"] ?>"></progress>
                                 <p><?php echo $content["DESCRIPTION"] ?></p>
                             </div>
                             <?php
@@ -62,28 +63,36 @@ navbar();?>
                     ?>
                 </div>
             </div>
-            <div class="is_vertical_align" style="margin-top: 5px">
-                <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white">Commentaires</h1>
-                <?php if (isset ($_SESSION['role']) and $_SESSION['role'] === DONOR && $status === 'running'){ ?>
-                <form action="?controller=Public&action=addComment" method="post">
-                    <label>
-                        <input name="comment" placeholder="Laissez un commentaire">
-                    </label>
-                    <input type="submit" class="square">
-                </form>
-                <?php }
-                if (empty($comments)) { ?>
-                <p>Aucun commentaires</p>
-                <?php }
-                foreach ($comments as $comment) { ?>
-                <div class="is_vertical_align">
-                    <p><?php echo $comment["USERNAME"]?></p>
-                    <p><?php echo $comment["comment"]?></p>
-                </div>
+            <?php if (isset ($_SESSION['role']) and $_SESSION['role'] === DONOR){ ?>
+                <div class="is_vertical_align" style="margin-top: 5px">
+                    <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white">Commentaires</h1>
                     <?php
-                }
-                ?>
-            </div>
+                    if (isset($errors['noComment'])) { ?>
+                        <div>
+                            <p><?php echo $errors['noComment'] ?></p>
+                        </div>
+                    <?php } ?>
+                    <form action="?controller=Donator&action=userComment" method="post">
+                        <label>
+                            <input type="hidden" name="ideaID" value="<?php echo $idea["IDEA_ID"] ?>">
+                        </label>
+                        <label>
+                            <input maxlength="250" name="comment" placeholder="Laissez un commentaire">
+                        </label>
+                        <input type="submit" class="square">
+                    </form>
+                    <?php
+                    foreach ($comments as $comment) { ?>
+                        <div class="card">
+                            <p><h4 class = "text_success">Commentaire de <?php echo $_SESSION['user']?></h4></p>
+                            <p><?php echo $comment["comment"]?></p>
+                            <br>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            <?php } ?>
         </div>
     </div>
 <?php
