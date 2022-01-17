@@ -43,15 +43,26 @@ class PublicController
     /**
      * @throws Exception
      */
-    public function readIdea($idea_id)
+    public function readIdea($idea_id): void
     {
-        $idea = IdeaModel::fetchIdea($idea_id);
-        ViewHelper::display(
-            $this,
-            'ReadOne',
-            $idea
-        );
+        $idea = IdeaModel::fetchAllInfoFromIdea($idea_id);
+        if (empty($idea)) {
+            $controller = new ErrorController();
+            $controller->error404('/');
+        } else {
+            if (IdeaModel::isOldCampaign($idea_id)) {
+                $idea["STATUS"] = 'over';
+            } elseif (IdeaModel::isInDeliberation($idea_id)) {
+                $idea["STATUS"] = 'deliberation';
+            } else {
+                $idea["STATUS"] = 'running';
+            }
 
+            ViewHelper::display(
+                $this,
+                'ReadOne',
+                $idea
+            );
+        }
     }
-
 }

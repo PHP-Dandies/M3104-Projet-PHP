@@ -14,6 +14,9 @@ class DonatorController
         }
     }
 
+    /**
+     * @throws Exception
+     */
     public function userVote(): void
     {
         $errors = array();
@@ -24,7 +27,7 @@ class DonatorController
         $ideaGoal = IdeaModel::fetchTheIdea($ideaID)['GOAL'];
 
         if ($pts > $totalPointsUser) {
-            $errors['notEnough'] = 'Vous ne possedez pas le nombre de points suffisant !';
+            $errors['notenough'] = 'Vous ne possedez pas le nombre de points suffisant !';
 
         }
         elseif ($totalPointsIdea + $pts > $ideaGoal) {
@@ -35,7 +38,8 @@ class DonatorController
             Database::executeUpdate("UPDATE USER SET POINTS = POINTS - $pts WHERE USER_ID = " . $_SESSION['id']);
             }
 
-        $idea = IdeaModel::fetchIdea($ideaID);
+        $idea = IdeaModel::fetchAllInfoFromIdea($ideaID);
+        $idea['errors'] = $errors;
         ViewHelper::display(
             $this,
             'readOne',

@@ -34,9 +34,9 @@ try {
     } elseif ($url === '') {
         $controller = new PublicController();
         $controller->readIdeas();
-    } elseif (str_contains($url[0], 'idee') && !isset($url[1])) {
+    } elseif (str_contains($url[0], 'idee') && isset($url[1]) && is_numeric($url[1]) && !isset($url[2])) {
         $controller = new  PublicController();
-        $controller->readIdea(substr($url[0], -1));
+        $controller->readIdea($url[1]);
     } elseif ($url[0] === 'admin') {
         $controller = new AdminController();
         if (!isset($url[1])) {

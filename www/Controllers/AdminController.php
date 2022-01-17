@@ -124,7 +124,7 @@ class AdminController extends AbstractController
             $controller = new ErrorController();
             $controller->error404('');
         }
-        $campaign = IdeaModel::fetchIdea($ideaID);
+        $campaign = IdeaModel::fetchAllInfoFromId($ideaID);
 
         ViewHelper::display(
             $this,
@@ -230,7 +230,7 @@ class AdminController extends AbstractController
      */
     public function readModifyIdea($ideaID): void
     {
-        $idea = IdeaModel::fetchIdea($ideaID);
+        $idea = IdeaModel::fetchAllInfoFromId($ideaID);
         ViewHelper::display(
             $this,
             '',
