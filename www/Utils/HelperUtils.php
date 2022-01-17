@@ -2,7 +2,7 @@
 function displayErrors(array $errors) {
     foreach($errors as $error) {?>
         <p><?php echo $error ?></p>
-        <?php
+<?php
     }
 }
 function start_page($title)
@@ -41,6 +41,8 @@ function navbar()
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-center">'.PHP_EOL;
     echo '            <a class="brand" href="/">E-Event.io</a>' .PHP_EOL;
+    echo '        </div>'.PHP_EOL;
+    echo '        <div class="nav-right">'.PHP_EOL;
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-right">'.PHP_EOL;
     if (!isset($_SESSION['id'])) {

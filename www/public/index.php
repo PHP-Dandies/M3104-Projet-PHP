@@ -1,6 +1,13 @@
 <?php
-
 session_start();
+
+var_dump($_SESSION);
+
+const DONOR = 'donor';
+const ADMIN = 'admin';
+const JURY = 'jury';
+const ORGANIZER = 'organizer';
+const _PUBLIC = 'public';
 
 require_once('../Utils/AutoLoader.php');
 
@@ -21,7 +28,6 @@ try {
     if (isset($_GET['controller'], $_GET['action'])) {
         $controllerName = $_GET["controller"] . 'Controller';
         $controller = new $controllerName();
-
         $actionName = $_GET["action"];
         $controller->$actionName();
     } elseif ($url === '') {
@@ -108,9 +114,9 @@ try {
             $controller = new IdeaController();
             $controller->read($url[1]);
         }
-    } else if ($url[0] === 'idea'){ // /idea
+    } else if ($url[0] === 'idee'){ // /idea
         if (!empty($url[1]) && is_numeric($url[1])) {
-            $controller = new  PublicController();
+            $controller = new PublicController();
             $controller->readIdea($url[1]);
         } else if (!empty($url[1]) && $url[1] === 'create') { // /idea/create
             $controller = new IdeaController();
@@ -118,9 +124,9 @@ try {
         } else if (!empty($url[1]) && $url[1] === 'edit' && !empty($url[2]) && is_numeric($url[2])) { // /idea/edit/X
             $controller = new IdeaController();
             $controller->edit($url[2]);
+        } else {
+            echo '404';
         }
-    } else {
-        echo '404';
     }
 } catch (Exception $e) {
     echo $e->getMessage();

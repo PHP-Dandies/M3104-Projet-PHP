@@ -9,6 +9,9 @@ class UserController
     {
     }
 
+    /**
+     * @throws Exception
+     */
     public function login()
     {
         $loginError = null;

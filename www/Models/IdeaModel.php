@@ -30,13 +30,13 @@ class IdeaModel extends AbstractModel{
      * @throws Exception
      */
     public static function fetchIdeas(int $campaignID) : ?array {
-        return Database::executeQuery("SELECT * FROM `IDEA` WHERE CAMPAIGN_ID = "
+        return Database::executeQuery("SELECT * FROM `idea` WHERE CAMPAIGN_ID = "
             . $campaignID . " ORDER BY TOTAL_POINTS DESC;");
     }
 
-public static function fetchTheIdea($ideaID) : array {
-    return database::executeQuery("SELECT * FROM IDEA WHERE IDEA_ID = $ideaID")[0];
-}
+    public static function fetchTheIdea($ideaID) : array {
+        return database::executeQuery("SELECT * FROM IDEA WHERE IDEA_ID = $ideaID")[0];
+    }
 
     /**
      * @throws Exception
