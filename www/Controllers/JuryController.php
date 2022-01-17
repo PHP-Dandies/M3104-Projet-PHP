@@ -31,7 +31,8 @@ class JuryController {
         $viewName = 'Deliberation';
 
         if (empty($ideas)) {
-            $viewName = 'CampaignList'; //CampaignList est placé dans Views/Campagin et non plus dans View/Jury
+            header('Location: /');
+            die();
         }
 
         ViewHelper::display(

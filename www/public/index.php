@@ -64,7 +64,6 @@ try {
             $controller->read();
 
         }if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])) {
-
             $controller->readOne($url[2]);
         }
     } else if ($url[0] === 'users' && !isset($url[1])) {
