@@ -9,6 +9,27 @@ class UserController
     {
     }
 
+    public function changePassword(){
+        $oldPassword = $_POST['oldPassword'];
+        $newPassword = $_POST['newPassword'];
+        $confirmPassword = $_POST['confirmPassword'];
+        $controller = new ErrorController();
+
+        if (UserModel::fetchPassword($oldPassword))
+        {
+            if ($newPassword == $confirmPassword)
+            {
+                UserModel::updatePassword($confirmPassword);
+                header('Location: /');
+                exit();
+            }
+            else
+                $controller->error404('/');
+        }
+        else
+            $controller->error404('/');
+    }
+
     public function login()
     {
         $loginError = null;
@@ -18,17 +39,15 @@ class UserController
         $model = new UserModel();
 
         if(isset($_SESSION['user'])) {
-            echo 'deja connecté avec Utilisateur : ' . $_SESSION['user'];
-            header('Location:  ');
+            header('Location: /');
             exit();
         }
         if ($model->isLogin($login)) {
-
             if ($model->isPassword($login, $password)) {
                 $_SESSION['user'] = $login;
                 $_SESSION['id']= UserModel::getId($login);
                 $_SESSION['role']= UserModel::getRole($login);
-                header('Location: test'); //  #TODO remplacer "test" par le fichier qui accueil l'utilisateur qui se connecte
+                header('Location: /');
                  exit();
             }
             else
@@ -48,7 +67,7 @@ class UserController
 
     public function logout(){
         session_destroy();
-        header('Location: ' . SITE_URL); //#TODO A la place de "SITE_URL" mettre l'accueil ou deconnecter l'utilisateur
+        header('Location: /');
         return;
     }
 
@@ -91,6 +110,15 @@ class UserController
         ViewHelper::display(
         $this,
             'Login',
+            array()
+        );
+    }
+
+    public function indexPassword() : void
+    {
+        ViewHelper::display(
+            $this,
+            'PasswordChange',
             array()
         );
     }

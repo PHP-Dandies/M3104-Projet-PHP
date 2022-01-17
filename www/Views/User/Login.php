@@ -26,7 +26,7 @@ if(isset($loginError))
                         <div class="inputBox">
                             <input type="submit" name="submit" value="submit">
                         </div>
-                        <p class="forget">Mot de passe oublié ? <a href="?controller=User&action=sendEmailAdmin">Clique Ici</a></p>
+                        <p class="forget">Mot de passe oublié ? <a href="?controller=User&action=indexPassword">Clique Ici</a></p>
                     </form>
                 </div>
             </div>

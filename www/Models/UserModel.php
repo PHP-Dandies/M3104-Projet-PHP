@@ -73,6 +73,17 @@ class UserModel
         return $query['EMAIL'];
     }
 
+    static function fetchPassword($password) : bool
+    {
+        $user_id = $_SESSION['id'];
+        return Database::executeCount("SELECT PASSWORD FROM USER WHERE PASSWORD='$password' AND USER_ID = '$user_id';") >1;
+    }
+
+    static function updatePassword($password)
+    {
+        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+        Database::executeUpdate("UPDATE USER SET PASSWORD = '$hashPassword' WHERE PASSWORD = '$password';");
+    }
 
     function isLogin ($username): bool
     {

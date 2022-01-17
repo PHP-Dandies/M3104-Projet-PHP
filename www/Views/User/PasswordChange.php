@@ -14,18 +14,19 @@ navbar();
             <div class="container2">
                 <div class="form">
                     <h2>Mot de passe oublié</h2>
-                    <form>
+                    <form action="?controller=User&action=changePassword" method="post">
                         <label>Ancien Mot de passe</label>
                         <div class="inputBox">
-                            <input type="password" placeholder="Ancien mot de passe">
+                            <input type="password" name="oldPassword" placeholder="Ancien mot de passe">
                         </div><br>
                         <label>Votre nouveau mot de passe</label>
                         <div class="inputBox">
-                            <input type="password" placeholder="Nouveau mot de passe">
+                            <input type="password" name="newPassword" placeholder="Nouveau mot de passe">
                         </div><br>
+                        <?php ?>
                         <label>Confirmation du mot de passe</label>
                         <div class="inputBox">
-                            <input type="password" placeholder="Confirmation du mot de passe">
+                            <input type="password" name="confirmPassword" placeholder="Confirmation du mot de passe">
                         </div>
                         <div class="inputBox">
                             <input type="submit" value="Change">

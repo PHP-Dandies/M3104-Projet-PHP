@@ -51,7 +51,11 @@ try {
     } else if ($url[0] === 'login' && !isset($url[1])) {
         $controller = new UserController();
         $controller->Index();
-    } else if ($url[0] === 'organisateur') {
+    }else if ($url[0] === 'updatePassword' && !isset($url[1])){
+        $controller = new UserController();
+        $controller->indexPassword();
+    }
+    else if ($url[0] === 'organisateur') {
         $controller = new OrganizerController();
         if (!isset($url[1])) {
             $controller->read();
