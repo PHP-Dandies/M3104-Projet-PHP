@@ -26,12 +26,15 @@ function navbar()
 {
     echo '    <nav class="nav">'.PHP_EOL;
 
-    echo '        <div class="nav-left tabs">'.PHP_EOL;
     if (isset ($_SESSION['role']) and $_SESSION['role'] === 'admin') {
+        echo '        <div class="nav-left tabs">'.PHP_EOL;
         echo '              <a class="active" href="/admin"><button class="button success">Espace Administrateur</button></a>'.PHP_EOL;
         echo '            <a class="active" href="/admin/campagnes/creer"><button class="button success">Créer une nouvelle campagne</button></a>'.PHP_EOL;
         echo '             <a class="active" href="/admin/campagnes"> <button class="button success">Voir la liste des campagnes </button></a>'.PHP_EOL;
         echo '              <a class="active" href="/admin/utilisateurs"> <button class="button success">Voir la liste des utilisateurs </button></a>'.PHP_EOL;
+    }
+    if(isset ($_SESSION['role']) and $_SESSION['role'] ==='organizer'){
+        echo '            <a href="/organisateur"><button class="button success">Espace Organisateur</o></A></button></a>'.PHP_EOL;
     }
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-center">'.PHP_EOL;
