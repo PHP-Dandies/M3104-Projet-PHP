@@ -92,7 +92,6 @@ h3,
 h4,
 h5,
 h6 {
-  font-size: inherit;
   font-weight: inherit;
 }
 
@@ -211,17 +210,6 @@ select {
 2. Remove default button styles.
 */
 
-button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
-  -webkit-appearance: button;
-  /* 1 */
-  background-color: transparent;
-  /* 2 */
-  background-image: none;
-  /* 2 */
-}
 
 /*
 Use the modern Firefox focus style for all focusable elements.
@@ -349,14 +337,14 @@ textarea {
 input::-moz-placeholder, textarea::-moz-placeholder {
   opacity: 1;
   /* 1 */
-  color: #9ca3af;
+  color: red;
   /* 2 */
 }
 
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   opacity: 1;
   /* 1 */
-  color: #9ca3af;
+  color: red;
   /* 2 */
 }
 
@@ -364,7 +352,7 @@ input::placeholder,
 textarea::placeholder {
   opacity: 1;
   /* 1 */
-  color: #9ca3af;
+  color: red;
   /* 2 */
 }
 
@@ -630,15 +618,15 @@ section .color {
 }
 
 .form .inputBox input::-moz-placeholder {
-  color: #747B7E;
+  color: red;
 }
 
 .form .inputBox input:-ms-input-placeholder {
-  color: #747B7E;
+  color: red;
 }
 
 .form .inputBox input::placeholder {
-  color: #747B7E;
+  color: red;
 }
 
 .form .inputBox input[type="submit"] {

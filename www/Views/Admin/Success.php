@@ -1,5 +1,4 @@
 <?php
-$doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
 start_page("test");
 navbar();
 /** @var array $data */

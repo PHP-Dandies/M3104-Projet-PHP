@@ -1,6 +1,6 @@
 <?php
 
-require_once('../Utils/AutoLoader.php');
+
 
 class CampaignController extends AbstractController {
     /**

@@ -1,6 +1,5 @@
 <?php
 
-include('../Utils/AutoLoader.php');
 
 class JuryController {
     /**

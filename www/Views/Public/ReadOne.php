@@ -13,25 +13,25 @@ if (isset($data["CONTENTS"])) {
 }
 echo 'hello';
 navbar();?>
-    <div class="container" style="margin-top: 5px">
-        <div class="is-vertical-align is-horizontal-align" style="margin-top: 5px; height: 20vh; background-image: url('../Images/0.jpg'); background-position: center; background-size: cover;">
-            <h1 class="text-uppercase" style="background-color: rgba(160, 160, 160, 0.64); padding: 5px; color: white"><?php echo $idea["TITLE"]?> </h1>
+    <div class="w-2/3 sm:w-2/3 md:w-2/3 lg:w-2/3 xl:w-2/3 mx-auto">
+        <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+            <h4 class="mb-4 font-semibold text-gray-600 dark:text-gray-300"><?php echo $idea["TITLE"]?> </h4>
             <?php if ($status === 'deliberation') { ?>
-            <p>Cette idée est courement en délibération</p>
+            <p class="text-gray-600 dark:text-gray-400">Cette idée est couramment en délibération</p>
             <?php } else if ($status === 'over') { ?>
-            <p>Cette idée appartient à une campagne terminée</p>
+            <p class="text-gray-600 dark:text-gray-400">Cette idée appartient à une campagne terminée</p>
             <?php } ?>
         </div>
 
-        <div>
-            <div class="row" style="margin-top: 5px">
-                <div class="col-8">
-                    <p>Mettre image ici</p>
+        <div class="mx-10 pt-15">
+            <div class="grid gap-6 mb-8 md:grid-cols-2">
+                <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                    <p class="text-gray-600 dark:text-gray-400">Mettre image ici</p>
                     <?php echo $idea["DESCRIPTION"] ?>
                 </div>
                 <div class="col-4">
                     <div class="card">
-                        <h3>Organisateur : <?php echo $data["USER"]["USERNAME"] ?></h3>
+                        <h3 class="mb-4 font-semibold text-gray-600 dark:text-gray-300">Organisateur : <?php echo $data["USER"]["USERNAME"] ?></h3>
                         <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $idea["GOAL"] ?>"></progress>
                         <p><?php echo $idea["TOTAL_POINTS"] ?> sur <?php echo $idea["GOAL"]?> pts</p>
                     </div>

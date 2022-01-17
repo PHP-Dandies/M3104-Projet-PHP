@@ -1,6 +1,6 @@
 <?php
 
-require_once('../Utils/Database.php');
+
 
 class JuryModel {
     /**

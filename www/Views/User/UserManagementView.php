@@ -1,6 +1,5 @@
 <?php
-$doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include '../../Utils/HelperUtils.php';
+
 start_page("test");
 navbar();
 $users = array(array('USER_ID'  => 1, 'USERNAME' => 'toto', 'PASSWORD' => 'password', 'ROLE' => 'admin', 'AVAILABLE_POINTS' => 200, 'EMAIL' => 'test@example.com'),

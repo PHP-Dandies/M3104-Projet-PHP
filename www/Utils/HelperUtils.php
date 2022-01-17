@@ -10,7 +10,7 @@ function start_page($title)
     echo '<!DOCTYPE html>'.PHP_EOL;
     echo '<html lang="fr">'.PHP_EOL;
     echo '<head>'.PHP_EOL;
-    echo '    <meta charset="utf-8">'.PHP_EOL;
+    echo '    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">'.PHP_EOL;
     echo '    <link rel="stylesheet" href="https://unpkg.com/chota@latest">'.PHP_EOL;
     echo '    <link rel="stylesheet" href="/CSS/style.css" type="text/css" media="all">' .PHP_EOL;
     echo '    <link rel="stylesheet" href="/CSS/style2.css" type="text/css" media="all">' .PHP_EOL;

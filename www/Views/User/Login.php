@@ -17,7 +17,7 @@ if(isset($loginError))
                     <h2>Login</h2>
                     <form method="POST" action="?controller=User&action=login">
                         <?php if(!empty($loginError)){ echo $loginError; }?>
-                        <div class="inputBox"   >
+                        <div class="inputBox">
                             <input type="text" name="login" placeholder="Identifiant">
                         </div>
                         <div class="inputBox">
