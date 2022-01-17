@@ -3,9 +3,7 @@ spl_autoload_register(static function ($name) {
     $projectDir = substr(__DIR__, 0, -6);
 
     foreach (glob("../Utils/*.php") as $fileName) {
-//        if (strpos($fileName, 'CustomAutoLoad.php') <= 0) {
             include_once $fileName;
-//        }
     }
 
     $fileName = "";

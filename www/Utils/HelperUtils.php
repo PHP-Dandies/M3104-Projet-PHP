@@ -2,7 +2,7 @@
 function displayErrors(array $errors) {
     foreach($errors as $error) {?>
         <p><?php echo $error ?></p>
-        <?php
+<?php
     }
 }
 function start_page($title)
@@ -33,13 +33,11 @@ function navbar()
         echo '             <a class="active" href="/admin/campagnes"> <button class="button success">Voir la liste des campagnes </button></a>'.PHP_EOL;
         echo '              <a class="active" href="/admin/utilisateurs"> <button class="button success">Voir la liste des utilisateurs </button></a>'.PHP_EOL;
     }
-    elseif (isset($_SESSION['role']) and $_SESSION['role'] === 'organiser') {
-        echo '              <a class="active" href="/organisateur"><button class="button success">Espace Organisateur</button></a>' . PHP_EOL;
-        echo '            <a class="active" href="/organisateur/creer"><button class="button success">Créer un nouvel utilisateur</button></a>' . PHP_EOL;
-    }
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-center">'.PHP_EOL;
     echo '            <a class="brand" href="/">E-Event.io</a>' .PHP_EOL;
+    echo '        </div>'.PHP_EOL;
+    echo '        <div class="nav-right">'.PHP_EOL;
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-right">'.PHP_EOL;
     echo '              <a class="button primary" href="/login">Login</a>' .PHP_EOL;

@@ -13,20 +13,30 @@ class IdeaModel extends AbstractModel{
     private string $picture;
     private int $userID;
     private int $campaignID;
+
+    /**
+     * @throws Exception
+     */
+    public static function fetchRealizedIdeas(int $campaignID) : array {
+        $result = Database::executeQuery("SELECT * FROM IDEA WHERE REALISED = 1 AND CAMPAIGN_ID = $campaignID");
+        return empty($result) ? array() : $result;
+    }
+
     public static function ideaExists($ideaID) : bool {
         return Database::executeCount("SELECT COUNT(*) TOTAL FROM IDEA WHERE IDEA_ID = $ideaID");
     }
-/**
+
+    /**
      * @throws Exception
      */
-    public static function fetchIdeas($campaignID) : ?array {
+    public static function fetchIdeas(int $campaignID) : ?array {
         return Database::executeQuery("SELECT * FROM `idea` WHERE CAMPAIGN_ID = "
-            . $campaignID[0]['CAMPAIGN_ID'] . " ORDER BY TOTAL_POINTS DESC;");
+            . $campaignID . " ORDER BY TOTAL_POINTS DESC;");
     }
 
-public static function fetchTheIdea($ideaID) : array {
-    return database::executeQuery("SELECT * FROM IDEA WHERE IDEA_ID = $ideaID")[0];
-}
+    public static function fetchTheIdea($ideaID) : array {
+        return database::executeQuery("SELECT * FROM IDEA WHERE IDEA_ID = $ideaID")[0];
+    }
 
     /**
      * @throws Exception
@@ -49,6 +59,7 @@ public static function fetchTheIdea($ideaID) : array {
 
         return $data;
     }
+
     /**
      * @throws Exception
      */

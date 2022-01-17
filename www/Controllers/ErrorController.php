@@ -1,5 +1,4 @@
 <?php
-include('../Utils/AutoLoader.php');
 
 class ErrorController {
     /**
