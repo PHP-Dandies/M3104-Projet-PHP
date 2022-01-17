@@ -27,9 +27,9 @@ class PublicController
             $data['option'] = 'none';
             $data['ideas'] = IdeaModel::fetchIdeas((int) $campaign_id);
         }
-        if (!empty($lastCampaign)) {
-           $data['last_campaign_result'] = IdeaModel::fetchRealizedIdeas($lastCampaign['CAMPAIGN_ID']);
-        }
+        //if (!empty($lastCampaign)) {
+       //    $data['last_campaign_result'] = IdeaModel::fetchRealizedIdeas($lastCampaign['CAMPAIGN_ID']);
+      //  }
         if (!empty($campaignInDelib)) {
             $data['ideas_delib'] = IdeaModel::fetchIdeas($campaignInDelib['CAMPAIGN_ID']);
         }

@@ -92,7 +92,7 @@ navbar();?>
                 <?php
                 foreach ($comments as $comment) { ?>
                     <div class="card">
-                        <p><h4 class = "text_success"><?php echo $comment["USERNAME"]?></h4></p>
+                        <p><h4 class = "text_success">Commentaire de <?php echo $_SESSION['user']?></h4></p>
                         <p><?php echo $comment["comment"]?></p>
                         <br>
                     </div>
