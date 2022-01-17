@@ -18,7 +18,16 @@ class JuryController {
 
     public function read(): void
     {
-        $ideas = JuryModel::getIdeas();
+        $campaignInDelib = CampaignModel::fetchCampaignInDeliberation();
+        if (empty($campaignInDelib)) {
+            ViewHelper::display(
+                $this,
+                'Deliberation',
+                array()
+            );
+        }
+
+        $ideas = IdeaModel::fetchIdeasDelib();
         $viewName = 'Deliberation';
 
         if (empty($ideas)) {
@@ -33,30 +42,27 @@ class JuryController {
     }
 
     public function juryVote($id){
-        $campaign = $_POST['campaignID'];
-        $a = JuryModel::getIdeas();  //Compter les IDEA ID si il y en a aucune alors le numéro dans l'url s'est trompé
-        if(JuryModel::getAllIdeas($campaign))
-        {
-            JuryModel::acceptIdea($id);
-            header('Location: /jury');
-            exit();
-        }
-        else {
-            $controller = new ErrorController();
-            $controller->error404('/');
-            die();
-        }
+        IdeaModel::acceptIdea($id);
+        header('Location: /jury');
+        exit();
     }
 
     /**
      * @throws Exception
      */
     public function readOne($id) : void {
-        $idea = JuryModel::getIdea($id);
+        $idea = IdeaModel::fetchAllInfoFromIdea($id);
+        if(empty($idea)) {
+            $controller = new ErrorController();
+            $controller->error404('');
+            exit();
+        }
         ViewHelper::display(
             $this,
             'ReadOne',
-            $idea
+            array(
+                'IDEA' => $idea
+            )
         );
     }
 }

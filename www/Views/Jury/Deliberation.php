@@ -4,10 +4,12 @@ include substr($doc_root, 0, -6).'/Utils/AutoLoader.php';
 start_page("test");
 /** @var array $data */
 $ideas = $data;
+
 navbar();
 ?>
     <div class="container" style="margin-top: 5px">
         <table>
+<!--       si ideas est vide aller a l'acceuil sinon affihe l ereste     -->
             <thead>
             <tr>
                 <th>Voici les idées rangées par ordre de réalisation</th>
