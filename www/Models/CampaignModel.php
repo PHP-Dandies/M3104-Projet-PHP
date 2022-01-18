@@ -120,15 +120,6 @@ class CampaignModel extends AbstractModel
     }
 
     /**
-     * @throws Exception
-     */
-    public static function fetchCampaignInDeliberation() : array
-    {
-        $result = Database::executeQuery("SELECT * FROM CAMPAIGN WHERE `STATUS` = 'deliberation';");
-        return empty($result) ? array() : $result[0];
-    }
-
-    /**
      * @return int
      */
     public function getID(): int

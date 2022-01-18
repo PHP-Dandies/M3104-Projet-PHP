@@ -98,7 +98,10 @@ try {
         $controller = new JuryController();
         if (!isset($url[1])) {
             $controller->read();
-        } else if ()
+        } else {
+            $controller = new ErrorController();
+            $controller->error404('/');
+        }
     } else if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])) {
         $controller = new UserController();
         $controller->read();

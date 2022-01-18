@@ -140,12 +140,6 @@ class UserModel extends AbstractModel
         return Database::executeCount("SELECT COUNT(*) FROM USER WHERE PASSWORD='$password' AND USER_ID = '$user_id';") >1;
     }
 
-    static function updatePassword($password)
-    {
-        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
-        Database::executeUpdate("UPDATE USER SET PASSWORD = '$hashPassword' WHERE PASSWORD = '$password';");
-    }
-
     static  function updatePoint($point)
     {
         Database::executeUpdate("UPDATE USER SET POINTS =$point WHERE ROLE = 'jury';");
