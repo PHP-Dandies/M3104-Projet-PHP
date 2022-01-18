@@ -42,6 +42,11 @@ class UserModel extends AbstractModel
         ");
     }
 
+    public static function createWaitingUser(UserModel $user): bool
+    {
+        return Database::executeUpdate("INSERT INTO `user_waiting`(USERNAME, EMAIL, ROLE) VALUES ('" . $user->getUserName() . "', '" . $user->getEmail(). "', '" . $user->getRole(). "');");
+    }
+
     /**
      * Returns a list of all users
      * @return array
