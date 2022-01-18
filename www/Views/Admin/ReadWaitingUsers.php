@@ -36,6 +36,7 @@ $emails = $data['emails'];
                     </select>
                         <label name="email">Email actuel : <?php echo $user->getEmail() ?></label>
                     <input type="hidden" name="email" value="<?php echo $user->getEmail() ?>">
+                    <input type="hidden" name="userID" value="<?php echo $user->getUserID() ?>">
                     <input value="Créer utilisateur" type="submit" class="square">
                 </form>
             <?php } ?>

@@ -35,6 +35,7 @@ class AdminController extends AbstractController
         $user->setRole($_POST['role']);
         UserModel::createUser($user);
         UserModel::updatePassword($user->getPassword());
+        UserModel::deleteWaitingUser($_POST['userID']);
         ViewHelper::display(
             $this,
             'ReadUsers',
