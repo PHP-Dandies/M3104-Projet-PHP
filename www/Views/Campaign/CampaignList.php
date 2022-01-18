@@ -25,7 +25,6 @@ $Result = database::executeQuery($query);
             <tbody>
             <?php foreach ($Result as $res){?>
             <tr>
-                <td><?php var_dump($res['TITLE']);?> </td>
                 <td><a class="button outline primary">Voir</a></td>
                 <td><a class="button outline primary">Selectionner</a></td>
             </tr>

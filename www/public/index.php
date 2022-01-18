@@ -2,7 +2,6 @@
 
 session_start();
 
-var_dump($_SESSION);
 
 const DONOR = 'donor';
 const ADMIN = 'admin';
