@@ -14,6 +14,8 @@ $emails = $data['emails'];
 /** @var UserModel $user */
 ?>
     <div class="container" style="margin-top: 5px">
+        <a href="?controller=Admin&action=createUser" class="button error">Ajouter Utilisateur</a>
+        <a href="?controller=Admin&action=seeWaitingUser" class="button error">Examiner demandes</a>
         <h1 class="text-center"> Listes des utilisateurs </h1>
             <div class="striped">
                 <?php foreach ($users as $user) { ?><br>
@@ -28,15 +30,15 @@ $emails = $data['emails'];
                     <select name="role" id="role-select" value="">
                         <option value="<?php echo $user->getRole() ?>">Choisissez une option</option>
                         <option value="<?PHP echo ADMIN ?>"><?PHP echo ADMIN ?></option>
-                        <option value="<?PHP echo JURY ?>"><?PHP echo ADMIN ?></option>
-                        <option value="<?PHP echo DONOR ?>"><?PHP echo ADMIN ?></option>
+                        <option value="<?PHP echo JURY ?>"><?PHP echo JURY ?></option>
+                        <option value="<?PHP echo DONOR ?>"><?PHP echo DONOR ?></option>
                         <option value="<?PHP echo ORGANIZER ?>"><?PHP echo ORGANIZER ?></option>
                         <option value="<?PHP echo _PUBLIC ?>"><?PHP echo _PUBLIC ?></option>
                     </select>
                     <?php if ($user->getEmail() === 'none') { ?><br>
                     <label for="email_select">Utilisateur non attribué</label>
                     <select name="email" id="email_select">
-                        <option value="<?php echo $user->getEmail() ?>">Choissiez un email au quel attribuer cet utilisateur</option>
+                        <option value="<?php echo $user->getEmail() ?>">Choissiez un email à attribuer à cet utilisateur</option>
                         <?php
                         foreach ($emails as $email) {
                         if ($email !== '') {
@@ -55,7 +57,6 @@ $emails = $data['emails'];
                 </form>
                 <?php } ?>
         </div>
-        <a href="?controller=Admin&action=createUser" class="button error">Ajouter Utilisateur</a>
     </div>
 <?php
 end_page();

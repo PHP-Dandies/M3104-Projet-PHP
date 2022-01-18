@@ -57,6 +57,10 @@ class UserModel extends AbstractModel
         return Database::executeQuery("SELECT USER_ID AS USERID, USERNAME, PASSWORD, ROLE, EMAIL, POINTS FROM USER");
     }
 
+    public static function fetchAllWaiting(): array {
+        return Database::executeQuery("SELECT USER_ID AS USERID, EMAIL, USERNAME, ROLE FROM USER_WAITING");
+    }
+
     public static function createUser(UserModel $user) : bool
     {
         return Database::executeUpdate("

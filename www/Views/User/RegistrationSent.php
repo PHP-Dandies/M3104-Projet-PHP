@@ -13,7 +13,9 @@ if(isset($loginError))
         <div class="square" style="--i:3;"></div>
         <div class="square" style="--i:4;"></div>
         <div class="container2">
-            <h2>Votre demande a bien été envoyé à un administrateur!</h2>
+            <p class="forget">Votre demande a bien été envoyé à un administrateur!</p>
+            <a href="/">Retour à la page d'acceuil</a>
         </div>
+
     </div>
 </section>

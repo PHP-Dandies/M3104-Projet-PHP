@@ -35,7 +35,7 @@ if(isset($loginError))
                     </select>
                     <br>
                     <div class="inputBox">
-                        <input type="submit" value="Fin">
+                        <input type="submit" value="Envoyer">
                     </div>
                 </form>
             </div>
