@@ -6,10 +6,11 @@ $idea = $data['idea'];
 $content = $data['content'];
 ?>
 <div class="container" style="margin-top: 5px">
+    <?php if ($idea["TOTAL_POINTS"] === 0) { ?>
     <form enctype="multipart/form-data" action="/?controller=Idea&action=editIdea" method="post">
         <input name="id" type="hidden" value="<?php echo $idea["IDEA_ID"] ?>" required>
         <table class="striped">
-            <caption>Modifier mon idée.</caption>
+            <caption><h2>Modifier mon idée</h2></caption>
             <thead>
             <tr>
                 <th>Champ</th>
@@ -26,7 +27,7 @@ $content = $data['content'];
             </tr>
             <tr>
                 <td><label for="goal">Goal</label></td>
-                <td><input type="number" name="goal" value="<?php echo $idea["GOAL"] ?>" required></td>
+                <td><input type="number" name="goal" value="<?php echo $idea["GOAL"] ?>" required min="<?php echo $idea["GOAL"]?>"></td>
             </tr>
             <tr>
                 <td><label for="image">Picture</label></td>
@@ -38,7 +39,11 @@ $content = $data['content'];
         </table>
         <input type="submit" value="Enregistrer" style="margin-top: 5px">
     </form>
+    <?php } else { ?>
+    <h3 class="text-center">Votre idée à reçu des votes, vous ne pouvez plus la modifier</h3>
+    <?php } ?>
     <table>
+        <caption><h3>Liste des buts</h3></caption>
         <thead>
         <tr>
             <td>Nom du But</td>
@@ -59,7 +64,11 @@ $content = $data['content'];
                     <form action="/organisateur/modifier/<?php echo $idea["IDEA_ID"] ?>?controller=Organizer&action=deleteContent" method="post">
                         <input type="hidden" name="iid" value="<?php echo $idea['IDEA_ID'] ?>">
                         <input type="hidden" name="title" value="<?php echo $CONTENT['TITLE'] ?>">
+                        <?php if ($idea["TOTAL_POINTS"] >= $CONTENT["POINTS"]) { ?>
+                        <p class="button error">But atteint</p>
+                        <?php } else  { ?>
                         <input type="submit" value="Supprimmer">
+                        <?php } ?>
                     </form>
                 </td>
             </tr>
@@ -77,7 +86,7 @@ $content = $data['content'];
             <label for="description">Description</label>
             <textarea id="description" name="description" required></textarea>
             <label for="goal">But</label>
-            <input id="goal" type="number" name="goal" required>
+            <input id="goal" type="number" name="goal" required min="<?php echo $idea["TOTAL_POINTS"] + 1; ?>">
             <input type="submit" name="Ajouter" style="margin-top: 5px">
         </div>
     </form>
