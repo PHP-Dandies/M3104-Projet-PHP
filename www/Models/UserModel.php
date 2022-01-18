@@ -27,6 +27,12 @@ class UserModel extends AbstractModel
         return $userList;
     }
 
+    static function updatePassword($password)
+    {
+        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+        Database::executeUpdate("UPDATE USER SET PASSWORD = '$hashPassword' WHERE PASSWORD = '$password';");
+    }
+
     /**
      * @param int $points
      * @return bool
