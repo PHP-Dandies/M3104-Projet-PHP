@@ -26,6 +26,12 @@ class UserModel extends AbstractModel
         return $userList;
     }
 
+    static function updatePassword($password)
+    {
+        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+        Database::executeUpdate("UPDATE USER SET PASSWORD = '$hashPassword' WHERE PASSWORD = '$password';");
+    }
+
     /**
      * @param int $points
      * @return bool
@@ -42,6 +48,11 @@ class UserModel extends AbstractModel
         ");
     }
 
+    public static function createWaitingUser(UserModel $user): bool
+    {
+        return Database::executeUpdate("INSERT INTO `user_waiting`(USERNAME, EMAIL, ROLE) VALUES ('" . $user->getUserName() . "', '" . $user->getEmail(). "', '" . $user->getRole(). "');");
+    }
+
     /**
      * Returns a list of all users
      * @return array
@@ -49,6 +60,10 @@ class UserModel extends AbstractModel
      */
     public static function fetchAll() : array {
         return Database::executeQuery("SELECT USER_ID AS USERID, USERNAME, PASSWORD, ROLE, EMAIL, POINTS FROM USER");
+    }
+
+    public static function fetchAllWaiting(): array {
+        return Database::executeQuery("SELECT USER_ID AS USERID, EMAIL, USERNAME, ROLE FROM USER_WAITING");
     }
 
     public static function createUser(UserModel $user) : bool

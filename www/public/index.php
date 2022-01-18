@@ -2,6 +2,8 @@
 
 session_start();
 
+var_dump($_SESSION);
+
 const DONOR = 'donor';
 const ADMIN = 'admin';
 const JURY = 'jury';
@@ -72,14 +74,15 @@ try {
             $controller = new ErrorController();
             $controller->error404('/');
         }
-    } else if ($url[0] === 'login' && !isset($url[1])) {
+    } else if ($url[0] === 'login') {
         $controller = new UserController();
-        $controller->Index();
-    }else if ($url[0] === 'updatePassword' && !isset($url[1])){
-        $controller = new UserController();
-        $controller->indexPassword();
-    }
-    else if ($url[0] === 'organisateur') {
+        if(!isset($url[1])){
+            $controller->Index();
+        }
+        else if ($url[1] === 'registration'){
+            $controller->registration();
+        }
+    } else if ($url[0] === 'organisateur') {
         $controller = new OrganizerController();
         if (!isset($url[1])) {
             $controller->read();

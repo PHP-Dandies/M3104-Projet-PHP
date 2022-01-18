@@ -49,12 +49,12 @@ class UserController
             header('Location: /');
             exit();
         }
-        if ($model->isLogin($login)) {
+        if (UserModel::userNameExists($login)) {
             if ($model->isPassword($login, $password)) {
                 $_SESSION['user'] = $login;
-                $_SESSION['id']= UserModel::getId($login);
-                $_SESSION['role']= UserModel::getRole($login);
-                header('Location: /');
+                $_SESSION['id']= UserModel::fetchId($login);
+                $_SESSION['role']= UserModel::fetchRole($login);
+                header('Location: /'); //  #TODO remplacer "test" par le fichier qui accueil l'utilisateur qui se connecte
                  exit();
             }
             $loginError = 'Nom d\'utilisateur ou mot de passe incorrect';
@@ -131,6 +131,38 @@ class UserController
         ViewHelper::display(
             $this,
             'PasswordChange',
+            array()
+        );
+    }
+
+    public function askRegistration() : void {
+        $errors = array(); // eventuelles erreurs seront stockées ici
+        $user = new UserModel();
+        $user->setUsername($_POST['username']);
+        $user->setRole($_POST['role']);
+        $user->setEmail($_POST['email']);
+        if (empty($errors)) {
+            UserModel::createWaitingUser($user);
+        }
+        ViewHelper::display(
+            $this,
+            'RegistrationSent',
+            array(
+            )
+        );
+    }
+
+
+    public function registration() : void
+    {
+        if(!empty($_SESSION)) {
+            header('Location: /');
+            exit();
+        }
+
+        ViewHelper::display(
+            $this,
+            'Registration',
             array()
         );
     }

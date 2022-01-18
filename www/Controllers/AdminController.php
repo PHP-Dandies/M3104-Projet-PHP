@@ -16,6 +16,35 @@ class AdminController extends AbstractController
         }
     }
 
+    public function seeWaitingUser(): void{
+        ViewHelper::display(
+            $this,
+            'ReadWaitingUsers',
+            array(
+                'emails' => UserModel::getAllEmails(),
+                'users' => UserModel::fetchAllWaiting(),
+            )
+        );
+    }
+
+    public function createUserFromWaitingUser(): void {
+        $user = new UserModel();
+        $user->setUsername($_POST['username']);
+        $user->setEmail($_POST['email']);
+        $user->setPassword($_POST['password']);
+        $user->setRole($_POST['role']);
+        UserModel::createUser($user);
+        UserModel::updatePassword($user->getPassword());
+        ViewHelper::display(
+            $this,
+            'ReadUsers',
+            array(
+                'emails' => UserModel::getAllEmails(),
+                'users' => UserModel::fetchAll(),
+            )
+        );
+    }
+
     /**
      * Ajoute un utilisateur avec un nom d'utilisateur aléatoire et un mot de passe aléatoire hashé
      * @throws Exception
