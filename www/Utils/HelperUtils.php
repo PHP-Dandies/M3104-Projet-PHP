@@ -10,15 +10,17 @@ function start_page($title)
     echo '<!DOCTYPE html>'.PHP_EOL;
     echo '<html lang="fr">'.PHP_EOL;
     echo '<head>'.PHP_EOL;
-    echo '    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">'.PHP_EOL;
+    echo '    <meta charset="utf-8">'.PHP_EOL;
+    echo '    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">'.PHP_EOL;
     echo '    <link rel="stylesheet" href="https://unpkg.com/chota@latest">'.PHP_EOL;
     echo '    <link rel="stylesheet" href="/CSS/style.css" type="text/css" media="all">' .PHP_EOL;
     echo '    <link rel="stylesheet" href="/CSS/style2.css" type="text/css" media="all">' .PHP_EOL;
-    echo '    <link rel="stylesheet" href="/CSS/taillwindre.css" type="text/css" media="all">'.PHP_EOL;
-    echo '    <link href="https://unpkg.com/tailwindcss@0.3.0/dist/tailwind.min.css" rel="stylesheet">'.PHP_EOL;
+    /*echo '    <link rel="stylesheet" href="/CSS/taillwindre.css" type="text/css" media="all">'.PHP_EOL;*/
+    echo '    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">'.PHP_EOL;
+    /*echo '    <link href="https://unpkg.com/tailwindcss@0.3.0/dist/tailwind.min.css" rel="stylesheet">'.PHP_EOL;*/
     echo '    <title>'.$title.'</title>'.PHP_EOL;
     echo '</head>'.PHP_EOL;
-    echo '<body style="min-height: 100vh">'.PHP_EOL;
+    echo '    <body style="min-height: 100vh; max-width: 100%">'.PHP_EOL;
 }
 
 function returnButton($path) {
@@ -64,6 +66,6 @@ function end_page()
 {
     echo '    <footer>'.PHP_EOL;
     echo '    </footer>'.PHP_EOL;
-    echo '</body>'.PHP_EOL;
+    echo '    </body>'.PHP_EOL;
     echo '</html>'.PHP_EOL;
 }

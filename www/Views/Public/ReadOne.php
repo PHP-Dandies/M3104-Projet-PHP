@@ -5,7 +5,7 @@ start_page("test");
 //$status = $data["STATUS"];
 $status = $data["STATUS"];
 $idea = $data["IDEA"];
-var_dump($idea);
+//var_dump($idea);
 if (isset($data["COMMENTS"])) {
     $comments = $data["COMMENTS"];
 }
@@ -30,7 +30,7 @@ navbar();?>
                     <p class="text-gray-600 dark:text-gray-400">Mettre image ici</p>
                     <?php echo $idea["DESCRIPTION"] ?>
                 </div>
-                <div class="col-4">
+                <div class="col-4">x
                     <div class="card">
                         <h3>Organisateur : <?php echo $data["USER"]["USERNAME"] ?></h3>
                         <p><?php echo $idea["TOTAL_POINTS"] ?>  pts</p>

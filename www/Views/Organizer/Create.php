@@ -4,7 +4,7 @@ include_once $doc_root.'/../Utils/HelperUtils.php';
 start_page("Créez votre Idée.");
 navbar();
 ?>
-<section>
+<section n>
     <div class="box">
 
         <div class="square" style="--i:0;"></div>
@@ -24,8 +24,8 @@ navbar();
                     <label for="caption">Description</label>
                     <input type="text" id="caption" name="description" required>
                 </div>
-                <div class="group file_area" style="margin-bottom: 5px">
-                    <input type="hidden" name="MAX_FILE_SIZE" value="100000000" />
+                <div class="group" style="margin-bottom: 5px">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="100000000"/>
                     <label for="image">Image</label>
                     <input type="file" name="image" accept="image/*" required/>
                 </div>

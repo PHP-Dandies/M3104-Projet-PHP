@@ -4,7 +4,11 @@
   "description": "exemple variableNumeroUn",
   "main": "index.js",
   "scripts": {
-    "build-css": "tailwindcss build www/public/css/style.css -o www/public/css/style.css"
+    "build-css": " npx tailwindcss build www/public/css/style.css -o www/public/css/style.css",
+    "autoprefixer": "postcss www/public/css/style.css -u autoprefixer --no-map -o www/public/css/style.css",
+    "minify": "postcss www/public/css/style.css -u cssnano --no-map -o www/public/css/style.css",
+    "build": "npm run build-css && npm run autoprefixer",
+    "production": "npm run build-css && npm run autoprefixer && npm run minify"
   },
   "repository": {
     "type": "git",
@@ -18,6 +22,9 @@
   },
   "homepage": "https://github.com/PHP-Dandies/M3104-Projet-PHP#readme",
   "dependencies": {
+    "autoprefixer": "^10.4.2",
+    "cssnano": "^5.0.15",
+    "postcss-cli": "^9.1.0",
     "tailwindcss": "^3.0.15"
   }
 }

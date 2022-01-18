@@ -26,7 +26,7 @@ class JuryController {
      */
     public function readOne($id) : void {
         $idea = JuryModel::getIdea($id);
-        var_dump($idea);
+        //var_dump($idea);
         ViewHelper::display(
             $this,
             'ReadOne',
