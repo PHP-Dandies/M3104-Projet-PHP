@@ -166,4 +166,17 @@ class UserController
             array()
         );
     }
+    public function PasswordChange() : void
+    {
+        if(!empty($_SESSION)) {
+            header('Location: /');
+            exit();
+        }
+
+        ViewHelper::display(
+            $this,
+            'PasswordChange',
+            array()
+        );
+    }
 }
