@@ -14,7 +14,9 @@ if (isset($data['last_campaign_result'])) {
 if (isset($data['ideas_delib'])) {
     $currentDeliberation = $data['ideas_delib'];
 }
-$option = $data['option'];
+if (isset($data['option'])) {
+    $option = $data['option'];
+}
 ?>
     <div class="container" style="margin-top: 5px">
         <details class=dropdown>
@@ -27,9 +29,14 @@ $option = $data['option'];
         </details>
         <?php if (!empty($ideas)) { ?>
         <table>
+            <caption class="text-center">Liste des idées disponibles</caption>
             <thead>
                 <tr>
-                    <th class="text-center">Liste des idées disponibles</th>
+                    <th>Image</th>
+                    <th>Titre</th>
+                    <th>But</th>
+                    <th>Points</th>
+                    <th>Voir</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,18 +56,21 @@ $option = $data['option'];
         </table>
         <?php } else {
             if ($option === 'none') { ?>
-        <p>Pas d'idées dans le campagne en cours</p>
-            <?php } else if ($option === 'next_campaign') { ?>
-        <p>Pas de campagnes en cours, prochaine campagne prévue le : <?php echo $nextCampaign["BEG_DATE"] ?> </p>
+        <p>Pas d'idées dans la campagne en cours</p>
             <?php } else if ($option === 'no_campaigns_scheduled') { ?>
         <p>Pas de campagnes prévues, restez à l'écoute...</p>
+            <?php } else if ($option === 'campaign_scheduled') { ?>
+        <p>Pas de campagne en cours... prochaine campagne prévue le <?php echo $nextCampaign["BEG_DATE"] ?></p>
             <?php }
         } ?>
         <?php if (isset($currentDeliberation) && !empty($currentDeliberation)) { ?>
-        <table>
+        <table style="margin-top: 2em">
+            <caption>Liste des idées couramment en délibération</caption>
             <thead>
                 <tr>
-                    <th class="text-center">Liste des idées courament en délibération</th>
+                    <th>Titre</th>
+                    <th>Status</th>
+                    <th>Voir</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,7 +78,7 @@ $option = $data['option'];
             foreach ($currentDeliberation as $idea) { ?>
                 <tr>
                     <td><?php echo $idea["TITLE"] ?></td>
-                    <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>
+                    <td>Status : <?php echo $idea["REALISED"] == 1 ? 'Acceptée' : 'En délibération' ?></td>
                     <td><a href="idee/<?php echo $idea["IDEA_ID"] ?>">Voir</a></td>
                 </tr>
                 <?php
@@ -77,10 +87,12 @@ $option = $data['option'];
             </tbody>
         </table>
         <?php } if (!empty($lastCampaignResults)) { ?>
-        <table>
+        <table style="margin-top: 2em">
+            <caption>Liste des idées acceptées durant la dernière campagne</caption>
             <thead>
                 <tr>
-                    <th class="text-center">Liste des idées acceptées durant la dernière campagne</th>
+                    <th>Titre</th>
+                    <th>Voir</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,7 +100,6 @@ $option = $data['option'];
             foreach ($lastCampaignResults as $idea) { ?>
                 <tr>
                     <td><?php echo $idea["TITLE"] ?></td>
-                    <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>
                     <td><a href="idee/<?php echo $idea["IDEA_ID"] ?>">Voir</a></td>
                 </tr>
                 <?php

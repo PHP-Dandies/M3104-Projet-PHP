@@ -21,6 +21,7 @@ class PublicController
                 $data['option'] = 'no_campaigns_scheduled';
             } else {
                 $data['next_campaign'] = $next_campaigns[0];
+                $data['option'] = 'campaign_scheduled';
             }
         } else {
             $campaign_id = $campaign['CAMPAIGN_ID'];
@@ -31,7 +32,14 @@ class PublicController
             $data['last_campaign_result'] = IdeaModel::fetchRealizedIdeas($lastCampaign['CAMPAIGN_ID']);
         }
         if (!empty($campaignInDelib)) {
-            $data['ideas_delib'] = IdeaModel::fetchIdeas($campaignInDelib['CAMPAIGN_ID']);
+            $ideas = IdeaModel::fetchIdeas($campaignInDelib['CAMPAIGN_ID']);
+            $ideas_delib = array();
+            foreach ($ideas as $idea) {
+                if ($idea["GOAL"] <= $idea["TOTAL_POINTS"]) {
+                    $ideas_delib[] = $idea;
+                }
+            }
+            $data['ideas_delib'] = $ideas_delib;
         }
         ViewHelper::display(
             $this,
