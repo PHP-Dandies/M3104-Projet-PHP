@@ -65,7 +65,7 @@ if (isset($data['option'])) {
         } ?>
         <?php if (isset($currentDeliberation) && !empty($currentDeliberation)) { ?>
         <table style="margin-top: 2em">
-            <caption>Liste des idées couramment en délibération</caption>
+            <caption>Liste des idées actuellement en délibération</caption>
             <thead>
                 <tr>
                     <th>Titre</th>
