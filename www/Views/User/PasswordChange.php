@@ -1,8 +1,9 @@
 <?php
-$doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-include $doc_root . '/Utils/HelperUtils.php';
 start_page("test");
 navbar();
+/** @var array $data */
+if(isset($loginError))
+    $loginError = $data["loginError"];
 ?>
     <section>
         <div class="box">
@@ -13,7 +14,7 @@ navbar();
             <div class="square" style="--i:4;"></div>
             <div class="container2">
                 <div class="form">
-                    <h2>Mot de passe oublié</h2>
+                    <h2>Changer le mot de passe</h2>
                     <form action="?controller=User&action=changePassword" method="post">
                         <label>Ancien Mot de passe</label>
                         <div class="inputBox">

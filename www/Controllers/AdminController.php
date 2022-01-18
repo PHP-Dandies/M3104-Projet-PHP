@@ -35,6 +35,7 @@ class AdminController extends AbstractController
         $user->setRole($_POST['role']);
         UserModel::createUser($user);
         UserModel::updatePassword($user->getPassword());
+        UserModel::deleteWaitingUser($_POST['userID']);
         ViewHelper::display(
             $this,
             'ReadUsers',
@@ -43,6 +44,11 @@ class AdminController extends AbstractController
                 'users' => UserModel::fetchAll(),
             )
         );
+    }
+
+    public function randomPassword() : string{
+        return bin2hex(random_bytes(15));
+
     }
 
     /**

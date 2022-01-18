@@ -103,7 +103,27 @@ class UserModel extends AbstractModel
         return $user;
 
     }
+    /**
+     * @throws Exception
+     */
+    public static function deleteWaitingUser(int $userID): bool
+    {
+        return Database::executeUpdate("
+            DELETE FROM user_waiting
+            WHERE USER_ID = $userID;
+        ");
+    }
 
+    /**
+     * @throws Exception
+     */
+    public static function deleteUser(int $userID): bool
+    {
+        return Database::executeUpdate("
+            DELETE FROM user
+            WHERE USER_ID = $userID;
+        ");
+    }
     /**
      * @throws Exception
      */

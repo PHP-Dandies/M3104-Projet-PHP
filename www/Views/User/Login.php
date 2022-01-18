@@ -27,7 +27,8 @@ if(isset($loginError))
                             <input  type="submit" name="submit" value="submit"></a>
                         </div>
                         <p class="forget">Faire une demande de création de compte : <a href="/login/registration">Clique ici</a> </p>
-                        <p class="forget">Mot de passe oublié ? <a href="/login/PasswordChangeView.php">Clique Ici</a></p>
+                        <p class="forget">Changer le mot de passe <a href="/login/PasswordChange">Clique Ici</a></p>
+                        <p class="forget">Mot de passe oublié <a href="/login/PasswordOublie">Clique Ici</a></p>
                     </form>
                     <a href="/">Retour à la page d'acceuil</a>
                 </div>
