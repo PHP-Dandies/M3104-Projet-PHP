@@ -130,9 +130,6 @@ class OrganizerController {
      * @throws Exception
      */
     public function addContent() {
-        $doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
-        include_once $doc_root . '/../Utils/Database.php';
-
         if (!isset($_POST)) {
             $controller = new ErrorController();
             $controller->error404('/organisateur');
