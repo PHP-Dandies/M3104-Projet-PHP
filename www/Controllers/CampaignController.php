@@ -7,7 +7,7 @@ class CampaignController extends AbstractController {
      * @throws Exception
      */
     public function read() : void{
-        $campaigns = CampaignModel::get_campaigns();
+        $campaigns = CampaignModel::fetchcampaigns();
         ViewHelper::display(
             $this,
             'Read',

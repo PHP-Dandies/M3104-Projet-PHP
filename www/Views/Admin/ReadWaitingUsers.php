@@ -23,8 +23,9 @@ $emails = $data['emails'];
                     <label for="username_input">Nom d'utilisateur souhaité : <?php echo $user->getUsername() ?></label>
                     <input type="text" id="username_input" name="username" value="<?php echo $user->getUsername() ?>"
                            placeholder="<?php echo $user->getUsername() ?>">
-                    <label for="password_input"> Lui attribuer un mot de passe: </label>
-                    <input type="text" id="password_input" name="password">
+                    <label for="password_input"> Lui attribuer un mot de passe (ou laisser celui attribué automatiquement): </label>
+                    <input type="text" id="password_input" name="password" value="<?php $controller = new AdminController(); echo $controller->randomPassword();?>"
+                    placeholder="<?php $controller = new AdminController(); echo $controller->randomPassword();?>">
                     <label for="role-select">Role désiré: <?php echo $user->getRole() ?></label>
                     <select name="role" id="role-select" value="">
                         <option value="<?php echo $user->getRole() ?>">Choisissez une option</option>
@@ -36,6 +37,7 @@ $emails = $data['emails'];
                     </select>
                         <label name="email">Email actuel : <?php echo $user->getEmail() ?></label>
                     <input type="hidden" name="email" value="<?php echo $user->getEmail() ?>">
+                    <input type="hidden" name="userID" value="<?php echo $user->getUserID() ?>">
                     <input value="Créer utilisateur" type="submit" class="square">
                 </form>
             <?php } ?>

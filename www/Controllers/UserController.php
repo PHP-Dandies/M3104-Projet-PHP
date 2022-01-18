@@ -39,6 +39,7 @@ class UserController
      */
     public function login()
     {
+        UserModel::countJury();
         $loginError = null;
 
         $login = $_POST['login'];
@@ -54,7 +55,7 @@ class UserController
                 $_SESSION['user'] = $login;
                 $_SESSION['id']= UserModel::fetchId($login);
                 $_SESSION['role']= UserModel::fetchRole($login);
-                header('Location: /'); //  #TODO remplacer "test" par le fichier qui accueil l'utilisateur qui se connecte
+                header('Location: /');
                  exit();
             }
             $loginError = 'Nom d\'utilisateur ou mot de passe incorrect';
@@ -152,6 +153,27 @@ class UserController
         );
     }
 
+    /**
+     * @throws Exception
+     */
+    public function askRegistrationForgotten() : void {
+        $oldID = UserModel::fetchId($_POST['username']);
+        UserModel::deleteUser($oldID);
+        $errors = array(); // eventuelles erreurs seront stockées ici
+        $user = new UserModel();
+        $user->setUsername($_POST['username']);
+        $user->setRole($_POST['role']);
+        $user->setEmail($_POST['email']);
+        if (empty($errors)) {
+            UserModel::createWaitingUser($user);
+        }
+        ViewHelper::display(
+            $this,
+            'RegistrationSent',
+            array(
+            )
+        );
+    }
 
     public function registration() : void
     {
@@ -163,6 +185,32 @@ class UserController
         ViewHelper::display(
             $this,
             'Registration',
+            array()
+        );
+    }
+    public function PasswordChange() : void
+    {
+        if(!empty($_SESSION)) {
+            header('Location: /');
+            exit();
+        }
+
+        ViewHelper::display(
+            $this,
+            'PasswordChange',
+            array()
+        );
+    }
+    public function PasswordForgotten() : void
+    {
+        if(!empty($_SESSION)) {
+            header('Location: /');
+            exit();
+        }
+
+        ViewHelper::display(
+            $this,
+            'PasswordForgotten',
             array()
         );
     }
