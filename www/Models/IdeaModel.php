@@ -23,7 +23,7 @@ class IdeaModel extends AbstractModel{
     }
 
     public static function ideaExists($ideaID) : bool {
-        return Database::executeCount("SELECT COUNT(*) TOTAL FROM IDEA WHERE IDEA_ID = $ideaID");
+        return Database::executeCount("SELECT COUNT(*) FROM IDEA WHERE IDEA_ID = $ideaID");
     }
 
     /**
@@ -96,6 +96,15 @@ class IdeaModel extends AbstractModel{
         $result = Database::executeQuery($query)[0];
 
         return $result["STATUS"] === 'over';
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function fetchContents(int $id) : array
+    {
+        $contents = Database::executeQuery("SELECT * FROM UNLOCKABLE_CONTENT WHERE IDEA_ID = $id;");
+        return empty($contents) ? array() : $contents;
     }
 
     /**

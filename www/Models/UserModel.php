@@ -275,6 +275,7 @@ class UserModel extends AbstractModel
         $data = file('../Assets/emails');
 
         foreach ($data as $line) {
+            $line = rtrim($line);
             $emails[] = $line;
         }
 

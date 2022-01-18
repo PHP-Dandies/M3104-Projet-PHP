@@ -22,7 +22,7 @@ function start_page($title)
 }
 
 function returnButton($path) {
-    echo "  <a href=\"$path\">Retour</a>";
+    echo "  <a href=\"$path\">Retour</a>" . PHP_EOL;
 }
 
 function navbar()

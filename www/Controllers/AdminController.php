@@ -64,7 +64,7 @@ class AdminController extends AbstractController
                     $this,
                     'Error',
                     array(
-                        'path' => '.',
+                        'path' => '/admin/campaign',
                         'error' => $error
                     )
                 );
@@ -77,7 +77,7 @@ class AdminController extends AbstractController
             $this,
             'Success',
             array(
-                'path' => '.'
+                'path' => '/admin/campagnes'
             )
         );
     }
@@ -106,6 +106,10 @@ class AdminController extends AbstractController
     public function readIdeas(int $campaignID): void
     {
         $campaign = IdeaModel::fetchIdeas($campaignID);
+        if (empty($campaign)) {
+            $controller = new ErrorController();
+            $controller->error404('/');
+        }
         ViewHelper::display(
             $this,
             'ReadIdeas',
@@ -123,9 +127,9 @@ class AdminController extends AbstractController
         if (!IdeaModel::ideaExists($ideaID)) {
             $controller = new ErrorController();
             $controller->error404('');
+            die();
         }
-        $campaign = IdeaModel::fetchAllInfoFromId($ideaID);
-
+        $campaign = IdeaModel::fetchAllInfoFromIdea($ideaID);
         ViewHelper::display(
             $this,
             'ReadIdea',
@@ -230,7 +234,7 @@ class AdminController extends AbstractController
      */
     public function readModifyIdea($ideaID): void
     {
-        $idea = IdeaModel::fetchAllInfoFromId($ideaID);
+        $idea = IdeaModel::fetchAllInfoFromIdea($ideaID);
         ViewHelper::display(
             $this,
             '',
