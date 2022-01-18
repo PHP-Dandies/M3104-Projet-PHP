@@ -30,9 +30,12 @@ class UserController
             $controller->error404('/');
     }
 
+    public  function setVoteJury(){
+        UserModel::updatePoint(intdiv((int)CampaignModel::fetchMaxVoteJury(),UserModel::countJury()));
+    }
+
     public function login()
     {
-        CampaignModel::fetchMaxVoteJury();
         $loginError = null;
 
         $login = $_POST['login'];

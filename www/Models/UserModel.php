@@ -76,13 +76,35 @@ class UserModel
     static function fetchPassword($password) : bool
     {
         $user_id = $_SESSION['id'];
-        return Database::executeCount("SELECT PASSWORD FROM USER WHERE PASSWORD='$password' AND USER_ID = '$user_id';") >1;
+        return Database::executeCount("SELECT COUNT(*) FROM USER WHERE PASSWORD='$password' AND USER_ID = '$user_id';") >1;
     }
 
     static function updatePassword($password)
     {
         $hashPassword = password_hash($password, PASSWORD_DEFAULT);
         Database::executeUpdate("UPDATE USER SET PASSWORD = '$hashPassword' WHERE PASSWORD = '$password';");
+    }
+
+    static  function updatePoint($point)
+    {
+        Database::executeUpdate("UPDATE USER SET POINTS =$point WHERE ROLE = 'jury';");
+    }
+    static  function removePoint()
+    {
+        $userID = $_SESSION['id'];
+        Database::executeUpdate("UPDATE USER SET POINTS = POINTS - 1 WHERE USER_ID = '$userID'");
+    }
+
+    static function fetchPoint()
+    {
+        $userID = $_SESSION['id'];
+        return Database::executeQuery("SELECT POINTS FROM USER WHERE USER_ID = '$userID'")[0]['POINTS'];
+    }
+
+    static function countJury(){
+
+        return Database::executeCount("SELECT COUNT(*) FROM USER WHERE ROLE = 'jury';");
+
     }
 
     function isLogin ($username): bool

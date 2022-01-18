@@ -43,9 +43,24 @@ class JuryController {
     }
 
     public function juryVote($id){
-        IdeaModel::acceptIdea($id);
-        header('Location: /jury');
-        exit();
+        if(UserModel::fetchPoint() != 0)
+        {
+            UserModel::removePoint();
+            IdeaModel::acceptIdea($id);
+            header('Location: /jury');
+            exit();
+        }
+        else
+        {
+            ViewHelper::display(
+                $this,
+                'ReadOne',
+                array(
+                    'ERROR' => 'Vous avez utilisé tous vos votes, merci de votre participation !'
+                )
+            );
+        }
+
     }
 
     /**
