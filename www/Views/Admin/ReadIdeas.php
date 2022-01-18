@@ -21,7 +21,8 @@ if (empty($ideas)) {
             <?php
             foreach ($ideas as $idea) { ?>
                 <tr>
-                    <td>Mettre image ici</td>
+                    <td><p><img src="<?php echo $idea["PICTURE"] ?>" alt="l'image n'à pas pu être affichée"></p>
+                        <h3>Description</h3></td>
                     <td><?php echo $idea["TITLE"] ?></td>
                     <td>Goal : <?php echo $idea["GOAL"] ?></td>
                     <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>

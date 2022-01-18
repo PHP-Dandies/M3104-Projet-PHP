@@ -24,7 +24,8 @@ navbar();?>
         <div>
             <div class="row" style="margin-top: 5px">
                 <div class="col-8">
-                    <p>mettre image ici</p>
+                    <p><img src="<?php echo $idea["PICTURE"] ?>" alt="l'image n'à pas pu être affichée"></p>
+                    <h3>Description</h3>
                     <?php echo $idea["DESCRIPTION"] ?>
                 </div>
                 <div class="col-4">

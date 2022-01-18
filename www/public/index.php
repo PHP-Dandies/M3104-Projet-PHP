@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 const DONOR = 'donor';
@@ -25,9 +26,10 @@ try {
     }
     if (isset($_GET['controller'], $_GET['action'])) {
         $controllerName = $_GET["controller"] . 'Controller';
-        $controller = new $controllerName();
-
         $actionName = $_GET["action"];
+
+        $_GET = array();
+        $controller = new $controllerName();
         $controller->$actionName();
     } elseif ($url === '') {
         $controller = new PublicController();

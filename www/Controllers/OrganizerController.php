@@ -111,7 +111,7 @@ class OrganizerController {
             }
         };
 
-        if ($cid == -1) {
+        if ($cid === -1) {
             header('Location: /');
             die();
         }

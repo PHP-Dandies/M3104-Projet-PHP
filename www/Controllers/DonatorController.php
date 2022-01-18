@@ -26,7 +26,6 @@ class DonatorController
             array('errors' => $errors,
                 'idea' => $idea)
         );
-
     }
     /**
      * Verifies au moment de la création du controller, si l'utilisateur à les droits d'administrateur

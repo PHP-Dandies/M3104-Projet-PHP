@@ -36,7 +36,7 @@ $option = $data['option'];
             <?php
             foreach ($ideas as $idea) { ?>
                 <tr>
-                    <td>Mettre image ici</td>
+                    <td><img src="<?php echo $idea["PICTURE"] ?>" alt="l'image n'à pas pu être affichée"></td>
                     <td><?php echo $idea["TITLE"] ?></td>
                     <td>Goal : <?php echo $idea["GOAL"] ?></td>
                     <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>
