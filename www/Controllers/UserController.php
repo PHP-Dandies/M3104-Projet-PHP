@@ -46,11 +46,11 @@ class UserController
             header('Location: /');
             exit();
         }
-        if ($model->isLogin($login)) {
-            if ($model->isPassword($login, $password)) {
+        if ($model->ExistLogin($login)) {
+            if ($model->ExistPassword($login, $password)) {
                 $_SESSION['user'] = $login;
-                $_SESSION['id']= UserModel::getId($login);
-                $_SESSION['role']= UserModel::getRole($login);
+                $_SESSION['id']= UserModel::fetchId($login);
+                $_SESSION['role']= UserModel::fetchRole($login);
                 header('Location: /');
                  exit();
             }
@@ -75,16 +75,15 @@ class UserController
         return;
     }
 
-    public function sendEmailAdmin($username, $userEmail)
+    public function sendEmailAdmin($username, $userEmail, $password)
     {
-       $email = UserModel::getEmailAdmin();
+       $email = UserModel::fetchEmailAdmin();
        mail($email,
-           'Change Password',
-           'You have to change' . $username . '\'s password. Send it at : ' . $userEmail . '.');
-
+           'Changer le mot de passe',
+           'Vous devez changer le mot de passe de l\'utilisateur : ' . $username . '. Envoyer le à : ' . $userEmail . ' avec le mot de passe : '. $password .'.');
     }
 
-    public function RegisterLoginEmail()
+    public function indexRegisterLoginEmail()
     {
         header('Location : AskLoginEmail');
         exit();

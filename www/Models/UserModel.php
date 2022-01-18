@@ -7,7 +7,7 @@ class UserModel
     {
     }
 
-    function getAllUsers()
+    function fetchAllUsers()
     {
         $query = database::executeQuery('SELECT * FROM USER;');
         $userList = NAN;
@@ -24,8 +24,7 @@ class UserModel
         return $userList;
     }
 
-
-    function getUserWithId($id): User
+    function fetchUserWithId($id): User
     {
         $query = database::executeQuery("SELECT * FROM USER WHERE USER_ID='$id';")[0];
         $user = new User($query['USER_ID'],
@@ -37,7 +36,7 @@ class UserModel
         return $user;
     }
 
-    function getUserByUsername ($username): User
+    function fetchUserByUsername ($username): User
     {
         $query = database::executeQuery("SELECT * FROM USER WHERE USERNAME = '$username' ;")[0];
         $user = new User($query['USER_ID'],
@@ -49,25 +48,25 @@ class UserModel
         return $user;
 
     }
-    static function getId($username) : string
+    static function fetchId($username) : string
     {
         $query = database::executeQuery("SELECT USER_ID FROM USER WHERE USERNAME ='$username'")[0];
         return $query['USER_ID'];
     }
 
-    static function getRole($username) : string
+    static function fetchRole($username) : string
     {
         $query = database::executeQuery("SELECT ROLE FROM USER WHERE USERNAME ='$username'")[0];
         return $query['ROLE'];
     }
 
-    static function getEmailAdmin(): string
+    static function fetchEmailAdmin(): string
     {
         $query = database::executeQuery("SELECT EMAIL FROM USER WHERE ROLE='ADMIN';")[0];
         return $query['EMAIL'];
     }
 
-    static function getEmailUser($username): string
+    static function fetchEmailUser($username): string
     {
         $query = database::executeQuery("SELECT EMAIL FROM USER WHERE USER='$username';")[0];
         return $query['EMAIL'];
@@ -107,12 +106,12 @@ class UserModel
 
     }
 
-    function isLogin ($username): bool
+    function ExistLogin ($username): bool
     {
         return database::executeCount("SELECT COUNT(*) FROM USER WHERE USERNAME = '$username';") >= 1;
     }
 
-    function isPassword ($username, $password): bool
+    function ExistPassword ($username, $password): bool
     {
         return password_verify($password, database::executeQuery("SELECT PASSWORD FROM USER WHERE USERNAME='$username';")[0]["PASSWORD"]);
     }
