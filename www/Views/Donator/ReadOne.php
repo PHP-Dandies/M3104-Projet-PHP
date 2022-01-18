@@ -58,7 +58,7 @@ navbar();?>
                             ?>
                             <div class="card" style="margin-top: 5px">
                                 <h4> <?php echo $content["TITLE"] ?> </h4>
-                                <code> <?php if ($content["POINTS"] < $idea["TOTAL_POINTS"]) echo 'Atteint'; else echo $content["POINTS"]; ?> </code>
+                                <code> <?php if ($content["POINTS"] < $idea["TOTAL_POINTS"]) echo 'Atteint'; else echo 'Objectif de : ' . $content["POINTS"]; ?> </code>
                                 <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $content["POINTS"] ?>"></progress>
                                 <p><?php echo $content["DESCRIPTION"] ?></p>
                             </div>
