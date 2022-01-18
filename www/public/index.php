@@ -2,6 +2,7 @@
 
 session_start();
 
+
 const DONOR = 'donor';
 const ADMIN = 'admin';
 const JURY = 'jury';

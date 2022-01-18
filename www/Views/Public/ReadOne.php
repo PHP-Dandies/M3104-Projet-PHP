@@ -5,7 +5,6 @@ start_page("test");
 //$status = $data["STATUS"];
 $status = $data["STATUS"];
 $idea = $data["IDEA"];
-var_dump($idea);
 if (isset($data["COMMENTS"])) {
     $comments = $data["COMMENTS"];
 }
@@ -36,7 +35,8 @@ navbar();?>
                 <div class="col-4">
                     <div class="card">
                         <h3>Organisateur : <?php echo $data["USER"]["USERNAME"] ?></h3>
-                        <p><?php echo $idea["TOTAL_POINTS"] ?>  pts</p>
+                        <progress value="<?php echo $idea["TOTAL_POINTS"] ?>" max="<?php echo $idea["GOAL"] ?>"></progress>
+                        <p><?php echo $idea["TOTAL_POINTS"] ?> sur <?php echo $idea["GOAL"]?> pts</p>
                     </div>
                     <?php if ((isset ($_SESSION['role']) && $_SESSION['role'] === DONOR && $status === 'running')) { ?>
                         <div class="card" style="margin-top: 5px">
