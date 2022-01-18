@@ -17,7 +17,6 @@ $emails = $data['emails'];
         <a href="?controller=Admin&action=createUser" class="button error">Ajouter Utilisateur</a>
         <a href="?controller=Admin&action=seeWaitingUser" class="button error">Examiner demandes</a>
         <h1 class="text-center"> Listes des utilisateurs </h1>
-            <a class="col-12 row is-center button error" href="?controller=Admin&action=createUser">Ajouter Utilisateur</a>
             <div class="row is-center" class="striped">
                 <?php foreach ($users as $user) { ?><br>
                 <form style="padding: 1em" class="row is-center" class="row" method="post" action="?controller=Admin&action=editUser">
@@ -38,18 +37,15 @@ $emails = $data['emails'];
                     </select>
                     <?php if ($user->getEmail() === 'none') { ?><br>
                     <label for="email_select">Utilisateur non attribué</label>
-                    <select name="email" id="email_select">
-                        <option value="<?php echo $user->getEmail() ?>">Choisissez un email à attribuer à cet utilisateur</option>
-                        <label for="email_select"><strong>Utilisateur non attribué</strong></label>
                     <select class="bd-dark text-center" name="email" id="email_select">
                         <option value="<?php echo $user->getEmail() ?>">Choissiez un email au quel attribuer cet utilisateur</option>
                         <?php
                         foreach ($emails as $email) {
-                        if ($email !== '') {
-                        ?>
-<option value="<?php echo $email; ?>"><?php echo $email; ?></option>
-                        <?php
-                        }
+                            if ($email !== '') {
+                                ?>
+                                <option value="<?php echo $email; ?>"><?php echo $email; ?></option>
+                                <?php
+                            }
                         }
                         ?>
                     </select>
