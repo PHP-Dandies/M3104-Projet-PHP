@@ -27,6 +27,9 @@ class AdminController extends AbstractController
         );
     }
 
+    /**
+     * @throws Exception
+     */
     public function createUserFromWaitingUser(): void {
         $user = new UserModel();
         $user->setUsername($_POST['username']);
@@ -36,6 +39,12 @@ class AdminController extends AbstractController
         UserModel::createUser($user);
         UserModel::updatePassword($user->getPassword());
         UserModel::deleteWaitingUser($_POST['userID']);
+        $content = 'Voici les identifiants de votre nouveau compte '
+            . ' nom d\'utilisateur : ' .  $user->getUsername()
+            . ' mot de passe : ' . $user->getPassword()
+            . ' role : ' . $user->getRole()
+            . ' Merci et bonne nuit';
+        mail($user->getEmail(), 'Nouveau compte', $content);
         ViewHelper::display(
             $this,
             'ReadUsers',
