@@ -5,6 +5,7 @@ function displayErrors(array $errors) {
 <?php
     }
 }
+
 function start_page($title)
 {
     echo '<!DOCTYPE html>'.PHP_EOL;
@@ -15,7 +16,7 @@ function start_page($title)
     echo '    <link rel="stylesheet" href="/css/style.css" type="text/css" media="all">'.PHP_EOL;
     echo '    <title>'.$title.'</title>'.PHP_EOL;
     echo '</head>'.PHP_EOL;
-    echo '<body style="min-height: 100vh">'.PHP_EOL;
+    echo '<body style="min-height: 100vh" class="set">'.PHP_EOL;
 }
 
 function returnButton($path) {
@@ -39,9 +40,7 @@ function navbar()
     }
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-center">'.PHP_EOL;
-    echo '            <a class="brand" href="/">E-Event.io</a>' .PHP_EOL;
-    echo '        </div>'.PHP_EOL;
-    echo '        <div class="nav-right">'.PHP_EOL;
+    echo '            <a class="text-center" href="/"><img class="text-center" src="../public/images/unknown.png" alt="nom trouvé"/></a>' .PHP_EOL;
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-right">'.PHP_EOL;
     if(!empty($_SESSION)){

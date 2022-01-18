@@ -16,8 +16,10 @@ if (isset($data['ideas_delib'])) {
 }
 $option = $data['option'];
 ?>
+
+<section>
     <div class="container" style="margin-top: 5px">
-        <details class=dropdown>
+        <details class="text-center">
             <summary class="button success">A propos ↓</summary>
             <div class=card>
                 Bienvenue sur E-event_io ! Un site fabuleux où il fait bon vivre. C'est du remplissage parce que j'ai
@@ -26,27 +28,40 @@ $option = $data['option'];
             </div>
         </details>
         <?php if (!empty($ideas)) { ?>
-        <table>
-            <thead>
-                <tr>
-                    <th class="text-center">Liste des idées disponibles</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-            foreach ($ideas as $idea) { ?>
-                <tr>
-                    <td><img src="<?php echo $idea["PICTURE"] ?>" alt="l'image n'à pas pu être affichée"></td>
-                    <td><?php echo $idea["TITLE"] ?></td>
-                    <td>Goal : <?php echo $idea["GOAL"] ?></td>
-                    <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>
-                    <td><a href="idee/<?php echo $idea["IDEA_ID"] ?>">Voir</a></td>
-                </tr>
+        <h1>Liste des idées disponibles</h1>
+        <div class="tbl-header">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Nom</th>
+                        <th>Point</th>
+                        <th>Point actuel</th>
+                        <th>Idées</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
                 <?php
-            }
-            ?>
-            </tbody>
-        </table>
+                foreach ($ideas as $idea) { ?>
+                    <tr>
+                        <td><img src="<?php echo $idea["PICTURE"] ?>" alt="l'image n'à pas pu être affichée"></td>
+                        <td><?php echo $idea["TITLE"] ?></td>
+                        <td>Goal : <?php echo $idea["GOAL"] ?></td>
+                        <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>
+                        <td><button><a href="idee/<?php echo $idea["IDEA_ID"] ?>">Voir</a></button></td>
+                    </tr>
+                    <?php
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
         <?php } else {
             if ($option === 'none') { ?>
         <p>Pas d'idées dans le campagne en cours</p>
@@ -57,47 +72,78 @@ $option = $data['option'];
             <?php }
         } ?>
         <?php if (isset($currentDeliberation) && !empty($currentDeliberation)) { ?>
-        <table>
-            <thead>
-                <tr>
-                    <th class="text-center">Liste des idées courament en délibération</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-            foreach ($currentDeliberation as $idea) { ?>
-                <tr>
-                    <td><?php echo $idea["TITLE"] ?></td>
-                    <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>
-                    <td><a href="idee/<?php echo $idea["IDEA_ID"] ?>">Voir</a></td>
-                </tr>
+<section>
+   <div class="container" style="margin-top: 5px">
+       <h1>Liste des idées courament en délibération</h1>
+        <div class="tbl-header">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Point actuel</th>
+                        <th>Idées</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
                 <?php
-            }
-            ?>
-            </tbody>
-        </table>
+                foreach ($currentDeliberation as $idea) { ?>
+                    <tr>
+                        <td><?php echo $idea["TITLE"] ?></td>
+                        <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>
+                        <td><button><a href="idee/<?php echo $idea["IDEA_ID"] ?>">Voir</a></button></td>
+                    </tr>
+                    <?php
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
+   </div>
+</section>
+<section>
+    <div class="container" style="margin-top: 5px">
+        <h1>Liste des idées acceptées durant la dernière campagne</h1>
         <?php } if (!empty($lastCampaignResults)) { ?>
-        <table>
-            <thead>
-                <tr>
-                    <th class="text-center">Liste des idées acceptées durant la dernière campagne</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-            foreach ($lastCampaignResults as $idea) { ?>
-                <tr>
-                    <td><?php echo $idea["TITLE"] ?></td>
-                    <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>
-                    <td><a href="idee/<?php echo $idea["IDEA_ID"] ?>">Voir</a></td>
-                </tr>
-                <?php
-            }
-            ?>
-            </tbody>
-        </table>
-        <?php } ?>
+            <div class="tbl-header">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Point Actuel</th>
+                            <th>Idées</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content">
+                <table>
+                    <tbody>
+                    <?php
+                    foreach ($lastCampaignResults as $idea) { ?>
+                        <tr>
+                            <td><?php echo $idea["TITLE"] ?></td>
+                            <td>Current Points : <?php echo $idea["TOTAL_POINTS"] ?></td>
+                            <td><button><a href="idee/<?php echo $idea["IDEA_ID"] ?>">Voir</a></button></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            <?php } ?>
+            </div>
     </div>
+</section>
+    <script>
+        $(window).on("load resize ", function (){
+            var scrollWidth = $('.tbl-content').width() - $('.tbl-content').width();
+            $('.tbl-header').css({'padding-right':scrollWidth});
+        })
+    </script>
 <?php
 end_page();
 ?>
