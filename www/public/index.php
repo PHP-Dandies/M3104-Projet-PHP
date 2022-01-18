@@ -85,6 +85,9 @@ try {
         else if ($url[1] === 'PasswordChange'){
             $controller->PasswordChange();
         }
+        else if ($url[1] === 'PasswordOublie'){
+            $controller->PasswordForgotten();
+        }
     } else if ($url[0] === 'organisateur') {
         $controller = new OrganizerController();
         if (!isset($url[1])) {

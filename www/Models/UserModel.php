@@ -117,6 +117,16 @@ class UserModel extends AbstractModel
     /**
      * @throws Exception
      */
+    public static function deleteUser(int $userID): bool
+    {
+        return Database::executeUpdate("
+            DELETE FROM user
+            WHERE USER_ID = $userID;
+        ");
+    }
+    /**
+     * @throws Exception
+     */
     static function fetchId($username) : string
     {
         $query = database::executeQuery("SELECT USER_ID FROM USER WHERE USERNAME ='$username'")[0];
