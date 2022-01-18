@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-var_dump($_SESSION);
-
 const DONOR = 'donor';
 const ADMIN = 'admin';
 const JURY = 'jury';
@@ -66,6 +64,8 @@ try {
                 $controller = new ErrorController();
                 $controller->error404('/');
             }
+        } elseif ($url[1] === 'utilisateurs' && !isset($url[2])) {
+            $controller->readUsers();
         } else {
             $controller = new ErrorController();
             $controller->error404('/');

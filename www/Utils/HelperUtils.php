@@ -30,9 +30,6 @@ function navbar()
 
     if (isset ($_SESSION['role']) and $_SESSION['role'] === 'admin') {
         echo '              <a class="active" href="/admin"><button class="button success">Espace Administrateur</button></a>'.PHP_EOL;
-        echo '            <a class="active" href="/admin/campagnes/creer"><button class="button success">Créer une nouvelle campagne</button></a>'.PHP_EOL;
-        echo '             <a class="active" href="/admin/campagnes"> <button class="button success">Voir la liste des campagnes </button></a>'.PHP_EOL;
-        echo '              <a class="active" href="/admin/utilisateurs"> <button class="button success">Voir la liste des utilisateurs </button></a>'.PHP_EOL;
     }
     if(isset ($_SESSION['role']) and $_SESSION['role'] ==='organizer'){
         echo '            <a href="/organisateur"><button class="button success">Espace Organisateur</button></a>'.PHP_EOL;
@@ -47,8 +44,12 @@ function navbar()
     echo '        <div class="nav-right">'.PHP_EOL;
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-right">'.PHP_EOL;
-    echo '              <a class="button primary" href="/login">Login</a>' .PHP_EOL;
-    echo '              <a href="?controller=User&action=logout"><button class="button error">Logout</button></a>'.PHP_EOL;
+    if(!empty($_SESSION)){
+        echo '              <a href="?controller=User&action=logout"><button class="button error">Logout</button></a>'.PHP_EOL;
+    }
+    if(empty($_SESSION)){
+        echo '              <a class="button primary" href="/login">Login</a>' .PHP_EOL;
+    }
     echo '        </div>'.PHP_EOL;
     echo '    </nav>'.PHP_EOL;
 }

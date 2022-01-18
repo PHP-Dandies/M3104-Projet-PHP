@@ -29,7 +29,7 @@ $option = $data['option'];
         <table>
             <thead>
                 <tr>
-                    <th class="text-center">Liste des idées disponibles <?php var_dump($_SESSION); ?></th>
+                    <th class="text-center">Liste des idées disponibles</th>
                 </tr>
             </thead>
             <tbody>
