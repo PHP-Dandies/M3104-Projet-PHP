@@ -76,6 +76,7 @@ class UserModel extends AbstractModel
         );");
     }
 
+
     /**
      * @throws Exception
      */
@@ -177,9 +178,7 @@ class UserModel extends AbstractModel
     }
 
     static function countJury(){
-
         return Database::executeCount("SELECT COUNT(*) FROM USER WHERE ROLE = 'jury';");
-
     }
 
     /**

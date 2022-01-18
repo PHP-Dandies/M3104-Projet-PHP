@@ -68,6 +68,7 @@ class JuryController {
      */
     public function readOne($id) : void {
         $idea = IdeaModel::fetchAllInfoFromIdea($id);
+        $campaign = CampaignModel::fetchCampaignInDeliberation();
         if(empty($idea)) {
             $controller = new ErrorController();
             $controller->error404('');
@@ -77,7 +78,8 @@ class JuryController {
             $this,
             'ReadOne',
             array(
-                'IDEA' => $idea
+                'IDEA' => $idea,
+                'CAMPAIGN' => $campaign
             )
         );
     }

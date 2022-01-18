@@ -18,6 +18,11 @@ if (isset($data['CONTENTS'])){
 if(isset($data['ERROR'])){
     $errorVote = $data['ERROR'];
 }
+if(isset($data['CAMPAIGN']))
+{
+    $campaing = $data['CAMPAIGN'];
+}
+
 navbar();
 if(!empty($data['IDEA']))
 {
@@ -38,11 +43,11 @@ if(!empty($data['IDEA']))
                     <div class="card">
                         <h3>Organisateur : <?php echo $data['IDEA']['USER']['USERNAME'] ?></h3>
                         <progress value="<?php echo $idea['TOTAL_POINTS'] ?>" max="<?php echo $idea['GOAL'] ?>"></progress>
-                        <p><?php echo $idea['TOTAL_POINTS'] ?> sur <?php echo $idea['GOAL']?> pts</p>
+                        <p><?php echo $idea['VOTE_JURY'] ?> sur <?php echo UserModel::countJury()?> pts</p>
                     </div>
 
                     <div class="card" style="margin-top: 5px">
-                        <?php if($idea['REALIZED']==0){?>
+                        <?php if($idea['REALISED']==0){?>
                         <form action="?controller=Jury&action=juryVote&param=<?php echo $idea['IDEA_ID'];?>&campaignID=<?php echo $idea['CAMPAIGN_ID'] ?>" method="post">
                             <input type="hidden" name="campaignID" value="<?php echo $idea['CAMPAIGN_ID'] ?>">
                             <input type="submit" value="Vote">

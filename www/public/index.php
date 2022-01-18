@@ -28,9 +28,16 @@ try {
     if (isset($_GET['controller'], $_GET['action'])) {
         $controllerName = $_GET["controller"] . 'Controller';
         $actionName = $_GET["action"];
-
-        $_GET = array();
         $controller = new $controllerName();
+        $_GET = array();
+        if(isset($_GET['param']))
+        {
+            $parameter = $_GET['param'];
+            $actionName = $_GET['action'];
+            $controller->$actionName($parameter);
+            exit();
+        }
+
         $controller->$actionName();
     } elseif ($url === '') {
         $controller = new PublicController();
@@ -76,7 +83,7 @@ try {
     } else if ($url[0] === 'login') {
         $controller = new UserController();
         if(!isset($url[1])){
-            $controller->Index();
+            $controller->index();
         }
         else if ($url[1] === 'registration'){
             $controller->registration();
@@ -102,8 +109,11 @@ try {
     } else if ($url[0] === 'jury') {
         $controller = new JuryController();
         if (!isset($url[1])) {
-            $controller->read();
-        } else {
+        $controller->read();
+        }if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])) {
+            $controller->readOne($url[2]);
+        }
+         else {
             $controller = new ErrorController();
             $controller->error404('/');
         }

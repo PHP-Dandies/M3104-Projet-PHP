@@ -39,6 +39,7 @@ class UserController
      */
     public function login()
     {
+        UserModel::countJury();
         $loginError = null;
 
         $login = $_POST['login'];
@@ -54,7 +55,7 @@ class UserController
                 $_SESSION['user'] = $login;
                 $_SESSION['id']= UserModel::fetchId($login);
                 $_SESSION['role']= UserModel::fetchRole($login);
-                header('Location: /'); //  #TODO remplacer "test" par le fichier qui accueil l'utilisateur qui se connecte
+                header('Location: /');
                  exit();
             }
             $loginError = 'Nom d\'utilisateur ou mot de passe incorrect';
