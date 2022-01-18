@@ -92,6 +92,38 @@ class UserController
         );
     }
 
+    public function askRegistration() : void {
+        $errors = array(); // eventuelles erreurs seront stockées ici
+        $user = new UserModel();
+        $user->setUsername($_POST['username']);
+        $user->setRole($_POST['role']);
+        $user->setEmail($_POST['email']);
+        if (empty($errors)) {
+            UserModel::createWaitingUser($user);
+        }
+        ViewHelper::display(
+            $this,
+            'RegistrationSent',
+            array(
+            )
+        );
+    }
+
+
+    public function registration() : void
+    {
+        if(!empty($_SESSION)) {
+            header('Location: /');
+            exit();
+        }
+
+        ViewHelper::display(
+            $this,
+            'Registration',
+            array()
+        );
+    }
+
 
 // A supprimer si la nouvelle méthode marche
 

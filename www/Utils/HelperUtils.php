@@ -47,8 +47,12 @@ function navbar()
     echo '        <div class="nav-right">'.PHP_EOL;
     echo '        </div>'.PHP_EOL;
     echo '        <div class="nav-right">'.PHP_EOL;
-    echo '              <a class="button primary" href="/login">Login</a>' .PHP_EOL;
-    echo '              <a href="?controller=User&action=logout"><button class="button error">Logout</button></a>'.PHP_EOL;
+    if(!empty($_SESSION)){
+        echo '              <a href="?controller=User&action=logout"><button class="button error">Logout</button></a>'.PHP_EOL;
+    }
+    if(empty($_SESSION)){
+        echo '              <a class="button primary" href="/login">Login</a>' .PHP_EOL;
+    }
     echo '        </div>'.PHP_EOL;
     echo '    </nav>'.PHP_EOL;
 }

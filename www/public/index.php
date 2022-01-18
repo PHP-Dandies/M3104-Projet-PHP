@@ -64,9 +64,14 @@ try {
         } elseif ($url[1] === 'utilisateurs' && !isset($url[2])) {
             $controller->readUsers();
         }
-    } else if ($url[0] === 'login' && !isset($url[1])) {
+    } else if ($url[0] === 'login') {
         $controller = new UserController();
-        $controller->Index();
+        if(!isset($url[1])){
+            $controller->Index();
+        }
+        else if ($url[1] === 'registration'){
+            $controller->registration();
+        }
     } else if ($url[0] === 'organisateur') {
         $controller = new OrganizerController();
         if (!isset($url[1])) {
