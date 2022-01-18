@@ -75,7 +75,11 @@ try {
     } else if ($url[0] === 'login' && !isset($url[1])) {
         $controller = new UserController();
         $controller->Index();
-    } else if ($url[0] === 'organisateur') {
+    }else if ($url[0] === 'updatePassword' && !isset($url[1])){
+        $controller = new UserController();
+        $controller->indexPassword();
+    }
+    else if ($url[0] === 'organisateur') {
         $controller = new OrganizerController();
         if (!isset($url[1])) {
             $controller->read();
@@ -88,21 +92,11 @@ try {
             $controller->error404('/');
         }
     } else if ($url[0] === 'jury') {
-        if (!isset($_SESSION['user'])) {
-            $controller = new JuryController();
-            if (!isset($url[1])) {
-                //mettre ici le /jury/ideeX pour acceder a une idée en partculier
-                $controller->read();
-            }
-            else if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])) {
-                $controller->readOne($url[2]);
-            }
-            else {
-                echo 'Erreur';
-                exit();
-            }
-        }
-    } else if ($url[0] === 'users' && !isset($url[1])) {
+        $controller = new JuryController();
+        if (!isset($url[1])) {
+            $controller->read();
+        } else if ()
+    } else if ($url[1] === 'idee' && isset($url[2]) && is_numeric($url[2]) && !isset($url[3])) {
         $controller = new UserController();
         $controller->read();
     } else {

@@ -5,6 +5,7 @@ start_page("test");
 /** @var array $data */
 $ideas = $data;
 navbar();
+if(!empty($ideas)){
 ?>
     <div class="container" style="margin-top: 5px">
         <table>
@@ -30,5 +31,11 @@ navbar();
         </table>
     </div>
 <?php
+            }
+else{
+    header('Location: /');
+    exit();
+}
 end_page();
+
 ?>

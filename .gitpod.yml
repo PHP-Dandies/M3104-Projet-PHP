@@ -1,13 +1,12 @@
-
 ports:
-- port: 8080
-  onOpen: open-preview
+  - port: 8080
+    onOpen: open-preview
 tasks:
-- name: LAMP
-  init: docker run -p "8080:80" -v ${PWD}/www:/App mattrayner/lamp:latest-2004-php8
+  - name: LAMP
+    init: docker run -p "8080:80" -v ${PWD}/www:/App mattrayner/lamp:latest-2004-php8
 
-- name: perms
-  init: sudo chmod 777 -R www
+  - name: perms
+    init: sudo chmod 777 -R www
 
 vscode:
   extensions:

@@ -6,13 +6,33 @@ class JuryController {
     /**
      * @throws Exception
      */
+
+    public function __construct()
+    {
+        $controller = new ErrorController();
+        if(!isset($_SESSION['role']) || $_SESSION['role'] != 'jury'){
+            $controller->error404('/');
+            die();
+        }
+    }
+
     public function read(): void
     {
-        $ideas = JuryModel::getIdeas();
+        $campaignInDelib = CampaignModel::fetchCampaignInDeliberation();
+        if (empty($campaignInDelib)) {
+            ViewHelper::display(
+                $this,
+                'Deliberation',
+                array()
+            );
+        }
+
+        $ideas = IdeaModel::fetchIdeasDelib();
         $viewName = 'Deliberation';
 
         if (empty($ideas)) {
-            $viewName = 'JuryView';
+            header('Location: /');
+            die();
         }
 
         ViewHelper::display(
@@ -22,16 +42,43 @@ class JuryController {
         );
     }
 
+    public function juryVote($id){
+        if(UserModel::fetchPoint() != 0)
+        {
+            UserModel::removePoint();
+            IdeaModel::acceptIdea($id);
+            header('Location: /jury');
+            exit();
+        }
+        else
+        {
+            ViewHelper::display(
+                $this,
+                'ReadOne',
+                array(
+                    'ERROR' => 'Vous avez utilisé tous vos votes, merci de votre participation !'
+                )
+            );
+        }
+
+    }
+
     /**
      * @throws Exception
      */
     public function readOne($id) : void {
-        $idea = JuryModel::getIdea($id);
-        var_dump($idea);
+        $idea = IdeaModel::fetchAllInfoFromIdea($id);
+        if(empty($idea)) {
+            $controller = new ErrorController();
+            $controller->error404('');
+            exit();
+        }
         ViewHelper::display(
             $this,
             'ReadOne',
-            $idea
+            array(
+                'IDEA' => $idea
+            )
         );
     }
 }

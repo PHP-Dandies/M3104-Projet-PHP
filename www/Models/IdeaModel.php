@@ -43,6 +43,14 @@ class IdeaModel extends AbstractModel{
         return Database::executeQuery("SELECT * FROM IDEA WHERE USER_ID = $userID");
     }
 
+    public static function  fetchIdeasDelib() : array {
+        $query = "SELECT CAMPAIGN_ID FROM CAMPAIGN WHERE `STATUS` = 'deliberation';";
+        $campaign = Database::executeQuery($query);
+
+        return Database::executeQuery("SELECT * FROM `idea` WHERE CAMPAIGN_ID = "
+            . $campaign[0]['CAMPAIGN_ID'] . " ORDER BY TOTAL_POINTS DESC;");
+    }
+
     /**
      * @throws Exception
      */
@@ -67,6 +75,10 @@ class IdeaModel extends AbstractModel{
         $data["CONTENTS"] = Database::executeQuery("SELECT * FROM UNLOCKABLE_CONTENT WHERE IDEA_ID = $ideaID");
 
         return $data;
+    }
+
+    public  static function acceptIdea($id){
+        Database::executeUpdate("UPDATE IDEA SET REALIZED = '1' WHERE IDEA_ID = $id ;");
     }
 
     /**
@@ -250,5 +262,6 @@ class IdeaModel extends AbstractModel{
     {
         $this->campaignID = $campaignID;
     }
+
 
 }

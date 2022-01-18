@@ -9,6 +9,31 @@ class UserController
     {
     }
 
+    public function changePassword(){
+        $oldPassword = $_POST['oldPassword'];
+        $newPassword = $_POST['newPassword'];
+        $confirmPassword = $_POST['confirmPassword'];
+        $controller = new ErrorController();
+
+        if (UserModel::fetchPassword($oldPassword))
+        {
+            if ($newPassword == $confirmPassword)
+            {
+                UserModel::updatePassword($confirmPassword);
+                header('Location: /');
+                exit();
+            }
+            else
+                $controller->error404('/');
+        }
+        else
+            $controller->error404('/');
+    }
+
+    public  function setVoteJury(){
+        UserModel::updatePoint(intdiv((int)CampaignModel::fetchMaxVoteJury(),UserModel::countJury()));
+    }
+
     /**
      * @throws Exception
      */
@@ -20,16 +45,16 @@ class UserController
         $password = $_POST['password'];
         $model = new UserModel();
 
-        if(!empty($_SESSION)) {
+        if(isset($_SESSION['user'])) {
             header('Location: /');
             exit();
         }
-        if (UserModel::userNameExists($login)) {
+        if ($model->isLogin($login)) {
             if ($model->isPassword($login, $password)) {
                 $_SESSION['user'] = $login;
-                $_SESSION['id']= UserModel::fetchId($login);
-                $_SESSION['role']= UserModel::fetchRole($login);
-                header('Location: /'); //  #TODO remplacer "test" par le fichier qui accueil l'utilisateur qui se connecte
+                $_SESSION['id']= UserModel::getId($login);
+                $_SESSION['role']= UserModel::getRole($login);
+                header('Location: /');
                  exit();
             }
             $loginError = 'Nom d\'utilisateur ou mot de passe incorrect';
@@ -53,10 +78,19 @@ class UserController
         die();
     }
 
-    public function changePassword($password) //#TODO ecrire la méthode
+    public function sendEmailAdmin($username, $userEmail)
     {
-        //changer le password
-        // Mano le fait
+       $email = UserModel::getEmailAdmin();
+       mail($email,
+           'Change Password',
+           'You have to change' . $username . '\'s password. Send it at : ' . $userEmail . '.');
+
+    }
+
+    public function RegisterLoginEmail()
+    {
+        header('Location : AskLoginEmail');
+        exit();
     }
 
     public function read() : void {
@@ -92,16 +126,12 @@ class UserController
         );
     }
 
-
-// A supprimer si la nouvelle méthode marche
-
-//
-//    public function test() : void
-//    {
-//        ViewHelper::display(
-//            $this,
-//            'ModificationReussie',
-//            array()
-//        );
-//    }
+    public function indexPassword() : void
+    {
+        ViewHelper::display(
+            $this,
+            'PasswordChange',
+            array()
+        );
+    }
 }

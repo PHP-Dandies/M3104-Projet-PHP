@@ -1,5 +1,4 @@
 <?php
-$doc_root = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
 
 class UserModel extends AbstractModel
 {
@@ -106,6 +105,52 @@ class UserModel extends AbstractModel
     {
         $query = database::executeQuery("SELECT ROLE FROM USER WHERE USERNAME ='$username'")[0];
         return $query['ROLE'];
+    }
+
+    static function getEmailAdmin(): string
+    {
+        $query = database::executeQuery("SELECT EMAIL FROM USER WHERE ROLE='ADMIN';")[0];
+        return $query['EMAIL'];
+    }
+
+    static function getEmailUser($username): string
+    {
+        $query = database::executeQuery("SELECT EMAIL FROM USER WHERE USER='$username';")[0];
+        return $query['EMAIL'];
+    }
+
+    static function fetchPassword($password) : bool
+    {
+        $user_id = $_SESSION['id'];
+        return Database::executeCount("SELECT COUNT(*) FROM USER WHERE PASSWORD='$password' AND USER_ID = '$user_id';") >1;
+    }
+
+    static function updatePassword($password)
+    {
+        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+        Database::executeUpdate("UPDATE USER SET PASSWORD = '$hashPassword' WHERE PASSWORD = '$password';");
+    }
+
+    static  function updatePoint($point)
+    {
+        Database::executeUpdate("UPDATE USER SET POINTS =$point WHERE ROLE = 'jury';");
+    }
+    static  function removePoint()
+    {
+        $userID = $_SESSION['id'];
+        Database::executeUpdate("UPDATE USER SET POINTS = POINTS - 1 WHERE USER_ID = '$userID'");
+    }
+
+    static function fetchPoint()
+    {
+        $userID = $_SESSION['id'];
+        return Database::executeQuery("SELECT POINTS FROM USER WHERE USER_ID = '$userID'")[0]['POINTS'];
+    }
+
+    static function countJury(){
+
+        return Database::executeCount("SELECT COUNT(*) FROM USER WHERE ROLE = 'jury';");
+
     }
 
     /**
