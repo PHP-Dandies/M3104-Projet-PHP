@@ -46,6 +46,11 @@ class AdminController extends AbstractController
         );
     }
 
+    public function randomPassword() : string{
+        return bin2hex(random_bytes(15));
+
+    }
+
     /**
      * Ajoute un utilisateur avec un nom d'utilisateur aléatoire et un mot de passe aléatoire hashé
      * @throws Exception
